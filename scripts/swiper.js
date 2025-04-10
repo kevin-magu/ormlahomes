@@ -48,14 +48,6 @@ function initializeSwiper(swiperContainer) {
   updateButtonVisibility(swiper);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Initialize Swipers on all containers with the class 'mySwiper'
-  const swipers = document.querySelectorAll('.mySwiper');
-  
-  swipers.forEach(swiperContainer => {
-    initializeSwiper(swiperContainer);
-  });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const allSwipers = document.querySelectorAll('.mySwiper, .feedback-swiper');

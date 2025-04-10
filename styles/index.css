@@ -216,4 +216,66 @@
     width: 100%;
     border-radius: 2px;
     cursor: pointer;
+    background-color: #283561;
+    color: white;
+}
+
+footer{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 60px;
+    gap: 40px;
+    color: #283561;
+}
+footer .row1{
+    display: flex;
+    gap: 80px;
+}
+footer .column{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+footer .column3{
+    display: flex;
+    gap: 30px;
+    font-size: 26px;
+}
+footer .column2 a{
+    text-decoration: none;
+    color: #283561;
+}
+
+
+footer .fa-instagram{
+    color: #BC0BAD;
+}
+footer .fa-facebook{
+    color: blue;
+}
+footer .fa-tiktok{
+    color: black;
+}
+footer .fa-youtube{
+    color: #F70000;
+}
+footer .fa-whatsapp{
+    color: green;
+}
+footer .column4{
+    font-size: 38px;
+    font-family: "Cinzel", serif;
+    font-weight: bold;
+    color: #283561;
+}
+footer hr{
+    color: #283561;
+}
+footer .row2{
+    gap: 10px;
+}
+footer .row2 a{
+    color: #F70000;
+    font-weight: bold;
 }

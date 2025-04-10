@@ -223,11 +223,39 @@ $result = $conn->query($sql);
         </div>
         <form action="">
             <input type="text" placeholder="Email">
-            <textarea name="" id="" placeholder="Your feedback here"></textarea>
+            <textarea name="" id="" placeholder="Give us your honest feedback about our services"></textarea>
             <button type="submit" class="a-button">Submit</button>
         </form>
     </div>
 </section>
+
+<footer class="margin-top50">
+    <div class="row1">
+        <div class="column1 column">
+            <b>Contact Us</b>
+            <p><i class="fa-solid fa-envelope"></i> info@orlmahomes.com</p>
+            <p><i class="fa-solid fa-phone"></i> +254 796 257 269</p>
+            <p><i class="fa-solid fa-location-dot"></i>  Syokimau</p>
+        </div>
+        <div class="column2 column">
+            <b>Quick Links</b>
+            <a href="">Buy a home</a>
+            <a href="">Rentals</a>
+            <a href="">Sell your home</a>
+            <a href="">Terms of services</a>
+        </div>
+        <div class="column3">
+            <a href=""><i class="fa-brands fa-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <a href=""><i class="fa-brands fa-tiktok"></i></a>
+            <a href=""><i class="fa-brands fa-youtube"></i></a>
+            <a href=""><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="column4"><p>ORLMA HOMES & PROPERTIES</p></div>
+    </div>
+    <hr>
+    <div class="row2 display-flex"><p>&copy; 2025 Orlma Homes & Properties. All rights reserved.</p> <p>Designed and Programmed by <a href="https://github.com/kevin-magu/"> Algorithm X Systems</a></p></div>
+</footer>
 
 
     <!-- Scripts -->
