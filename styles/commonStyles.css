@@ -1,0 +1,248 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Montserrat", sans-serif;
+    background-color: #faf9f8;
+}
+.justify-centre{
+    display: flex;
+    justify-content: center;
+}
+.margin-top30{
+    margin-top: 30px;
+}
+.margin-bottom30{
+    margin-bottom: 30px;
+}
+.margin-top40{
+    margin-top: 40px;
+}
+.margin-bottom40{
+    margin-bottom: 40px;
+}
+.margin-top50{
+    margin-top: 50px;
+}
+.margin-bottom50{
+    margin-bottom: 50px;
+}
+.margin-right30{
+    margin-right: 30px;
+}
+.margin-left30{
+    margin-left: 30px;
+}
+.margin-right40{
+    margin-right: 40px;
+}
+.margin-left40{
+    margin-left: 40px;
+}
+.margin-right50{
+    margin-right: 50px;
+}
+.margin-left50{
+    margin-left: 50px;
+}
+
+.display-flex{
+    display: flex;
+    align-items: center;
+}
+
+button{
+    width: fit-content;
+    padding: 8px;
+    border-radius: 5px;
+}
+.section-title-size{
+    font-size: 42px;
+}
+.subtitle-size{
+    font-size: 28px;
+}
+.context-size{
+    font-size: 18px;
+}
+
+.a-button{
+    padding: 10px;
+    border: solid 1px #283561;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.styled-heading{
+    position: absolute;
+    color: #283561;
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    width: fit-content;
+}
+.styled-heading::before{
+    content: '|';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #283561;
+    background-color: #283561;
+    height: fit-content;
+    width: 5px;
+    position: absolute;
+    left: -10px;
+}
+
+
+
+/*NAV BAR*/
+nav{
+    height: 90px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    color: #283561;
+    justify-content: space-between;
+    padding: 50px;
+}
+nav .nav-logo{
+    height: 80px;
+    width: 80px;
+    background: url(../images/company-logo.png);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+nav .copany-name{
+    font-family: "Cinzel", serif;
+    font-weight: bold;
+}
+nav ul{
+    display: flex;
+    gap: 15px;
+    flex-grow: 1;
+    justify-content: flex-end;
+    font-size: 18px;
+}
+nav ul a{
+    margin-right: 30px;
+    list-style: none;
+    text-decoration: none;
+    color: #283561;
+    font-weight: bold;
+    position: relative;
+}
+nav ul a:hover::after{
+    content: '';
+    width: 100%;
+    position: absolute;
+    height: 2px;
+    background-color: #911d4e;
+    bottom: -5px; 
+    left: 50%;
+    border-radius: 3px;
+    transform: translateX(-50%);
+}
+
+/*property card*/
+.property-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 40px 0;
+    
+}
+.cards-container a{
+    text-decoration: none;
+}
+
+
+/* Property Card Styling */
+.property-card {
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px; /* This will allow 4 cards per row */
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    color: #283561;
+}
+
+
+.property-card h3 {
+    font-size: 1.25rem;
+    margin: 10px 0px 10px 0px;
+}
+
+.property-card p {
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+/* Swiper Styling */
+.swiper {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+.image-slide {
+    width: 100%;
+    height: 250px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    position: relative;
+}
+.image-slide .fa-heart{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+.image-slide .fa-heart:hover{
+    transform: scale(1.1);
+}
+
+.card-square{
+    width: 15px;
+    height: 15px;
+    border: 2px solid #283561;
+}
+
+.homesize{
+    gap: 10px;
+}
+
+.swiper-pagination {
+    bottom: 10px;
+}
+
+
+/* General style for both next and prev buttons */
+  
+  /* Style the arrow icons */
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    color: black;
+    font-size: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transform: scale(0.4);
+    display: none;
+  }
+
+.property-card:hover .swiper-button-prev::after,
+.property-card:hover .swiper-button-next::after {
+  display: flex;
+}

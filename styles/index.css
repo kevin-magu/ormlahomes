@@ -1,0 +1,219 @@
+.section1{
+    padding: 50px;
+}
+.section1 .banner{
+    width: 100%;
+    height: 400px;
+    background-color: #283561;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: url(../images/banner-bg.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.section1 .banner-context{
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    background-color: #283561;
+    padding: 5px;
+}
+.section2{
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.section2 .section2-title{
+    font-size: 42px;
+    color: #283561;
+    font-weight: bold;
+}
+.section2 .section2-context{
+    width: 60%;
+    text-align: center;
+}
+
+/*listing card*/
+/* Section Styling */
+.section3{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.section4 .styled-heading{
+    top: 30px;
+    left: 110px;
+}
+.section4,.section5{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.transparent-p{
+    font-size: 40px;
+    color: #283561;
+}
+.transparent-p2{
+    font-size: 24px;
+}
+.transparent-b{
+    margin-left: 10px;
+    color: #911d4e;
+}
+
+.transparent-card-container{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.transparent-card{
+    width: 400px;
+    height: fit-content;
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    gap: 10px;
+    border-radius: 5px;
+}
+.transparent-card p{
+    text-align: center;
+}
+.transparent-card .title{
+    color: #911d4e;
+    font-weight: bold;
+}
+
+.transparent-card .picture{
+    height: 100px;
+    width: 100px;
+}
+.transparent-card .picture1{
+    background: url(../images/profile.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.transparent-card .picture2{
+    background: url(../images/sell.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.transparent-card .picture3{
+    background: url(../images/rent.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/*section6*/
+.section6 {
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .section6 .container {
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* increased total columns for wider large image */
+    gap: 10px;
+  }
+  
+  .photo.large {
+    grid-column: span 2; /* now takes 3/5 of the grid width */
+    grid-row: span 2;
+  }
+  
+  .photo img {
+    width: 100%;
+    height: 220px; /* reduced height for all images */
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+  .section6 img{
+    transition: 0.2s linear;
+  }
+  .section6 img:hover{
+    cursor: pointer;
+    transform: translateY(-5px);
+  }
+  
+  .photo.large img {
+    height: 460px; /* taller but not too extreme */
+  }
+  
+  .section6 .title{
+    font-family: "Cinzel", serif;
+    font-size: 34px;
+    font-weight: bold;
+  }
+  .section6 .amenities{
+    display: flex;
+    gap: 20px;
+  }
+  
+  .section7 .rating-card{
+    height: fit-content;
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    background-color: white;
+  }
+
+.section7 .cards-container{
+    margin-left: 70px;
+    gap: 30px;
+}
+.section7 .p{
+    text-align: center;
+}
+.section7 .stars{
+    color: gold;
+}
+
+.section7 .styled-heading{
+    position: relative;
+    margin-left: 120px;
+}
+.section7 .rating-card .stars{
+    display: flex;
+}
+.section7 form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.section7 form input,textarea{
+    width: 350px;
+    outline: none;
+    padding: 5px;
+}
+
+.section7 form input{
+    height: 40px;
+}
+
+.section7 form textarea{
+    height: 100px;
+}
+.section7 form button{
+    width: 100%;
+    border-radius: 2px;
+    cursor: pointer;
+}
