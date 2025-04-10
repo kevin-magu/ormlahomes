@@ -9,9 +9,11 @@
 <!-- icons -->
     <script src="https://kit.fontawesome.com/e4c074505f.js" crossorigin="anonymous"></script>
     <!-- icons -->
-<nav>
-     <div class="nav-logo"></div>
-     <p class="copany-name">ORLMA HOMES & PROPERTIES</p>
+<nav id="page-top">
+    <a href="/orlmahomes" class="nav-logo-container">
+        <div class="nav-logo"></div>
+        <p class="copany-name">ORLMA HOMES & PROPERTIES</p>
+    </a>
      <ul>
          <a href=""><li>Buy</li></a>
          <a href=""><li>Rent</li></a>
