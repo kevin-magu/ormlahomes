@@ -222,8 +222,8 @@ $result = $conn->query($sql);
                 </p>
         </div>
         <form action="">
-            <input type="text">
-            <textarea name="" id=""></textarea>
+            <input type="text" placeholder="Email">
+            <textarea name="" id="" placeholder="Your feedback here"></textarea>
             <button type="submit" class="a-button">Submit</button>
         </form>
     </div>
