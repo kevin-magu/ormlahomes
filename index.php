@@ -172,7 +172,7 @@
 
     <!-- Feedback Section -->
     <?php
-        $sql = "SELECT name, text, rating FROM feeback LIMIT 6";
+        $sql = "SELECT name, text, rating FROM feeback LIMIT 2";
         $result = $conn->query($sql);
     ?>
     <section class="section7">
@@ -189,10 +189,13 @@
                     </p>
                 </div>
             <?php endwhile; ?>
-            <form action="" method="POST">
-                <input type="text" placeholder="Email" />
-                <textarea placeholder="Give us your honest feedback about our services"></textarea>
+            <form id="feedbackForm">
+                <input type="text" name="email" placeholder="Email" required />
+                <input type="text" name="name" placeholder="Name" required />
+                <input type="number" name="rating" placeholder="Rating out of 5" min="1" max="5" required />
+                <textarea name="feedbackText" placeholder="Give us your honest feedback about our services" required></textarea>
                 <button type="submit" class="a-button">Submit</button>
+                <div id="responseMessage"></div>
             </form>
         </div>
     </section>
@@ -235,5 +238,6 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/swiper.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

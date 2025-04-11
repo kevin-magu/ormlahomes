@@ -179,6 +179,7 @@
 .section7 .cards-container{
     margin-left: 70px;
     gap: 30px;
+    align-items: first baseline;
 }
 .section7 .p{
     text-align: center;
@@ -198,11 +199,14 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: white;
+    padding: 10px;
 }
 .section7 form input,textarea{
     width: 350px;
     outline: none;
     padding: 5px;
+    border-radius: 3px;
 }
 
 .section7 form input{
@@ -210,12 +214,13 @@
 }
 
 .section7 form textarea{
-    height: 100px;
+    height: 70px;
 }
 .section7 form button{
     width: 100%;
-    border-radius: 2px;
+    border-radius: 5px;
     cursor: pointer;
     background-color: #283561;
     color: white;
+
 }
