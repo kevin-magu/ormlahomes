@@ -15,7 +15,7 @@
         <p class="copany-name">ORLMA HOMES & PROPERTIES</p>
     </a>
      <ul>
-         <a href=""><li>Buy</li></a>
+         <a href="./buy"><li>Buy</li></a>
          <a href=""><li>Rent</li></a>
          <a href=""><li>Sell</li></a>
          <a href=""><li>About us</li></a>

@@ -202,6 +202,9 @@
     background-color: white;
     padding: 10px;
 }
+#responseMessage{
+    width: 200px;
+}
 .section7 form input,textarea{
     width: 350px;
     outline: none;

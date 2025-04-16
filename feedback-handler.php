@@ -1,32 +1,40 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-include './includes/connection.php'; // replace with actual file
+include './includes/connection.php';
 
-// Sanitize input
-$name = htmlspecialchars(trim($_POST['name'] ?? ''));
-$email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
-$rating = (int)($_POST['rating'] ?? 0);
-$feedbackText = htmlspecialchars(trim($_POST['feedbackText'] ?? ''));
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
 
-// Basic validation
-if (!$name || !filter_var($email, FILTER_VALIDATE_EMAIL) || $rating < 1 || $rating > 5 || !$feedbackText) {
-    http_response_code(400);
-    echo "Invalid input. Please fill out all fields correctly.";
+// Get form data with defaults
+$name = isset($_POST['name']) ? trim($_POST['name']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$rating = isset($_POST['rating']) ? (int)$_POST['rating'] : null; // Use null instead of 0
+$feedbackText = isset($_POST['feedbackText']) ? trim($_POST['feedbackText']) : '';
+
+// Allow empty name since it's not required in the form
+if (empty($email) || !isset($_POST['rating']) || $rating < 1 || $rating > 5 || empty($feedbackText)) {
+    echo "Please fill all required fields.";
     exit;
 }
 
-// Secure insert using prepared statement
-$stmt = $conn->prepare("INSERT INTO feeback (name, email, text, rating) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("sssi", $name, $email, $feedbackText, $rating);
-
-if ($stmt->execute()) {
-    echo "Thank you for your feedback!";
-} else {
-    http_response_code(500);
-    echo "Failed to submit feedback.";
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid email format.";
+    exit;
 }
 
-$stmt->close();
-$conn->close();
+// Prepare and execute SQL query
+try {
+    $stmt = $conn->prepare("INSERT INTO feedback (name, email, rating, feedback_text) VALUES (:name, :email, :rating, :feedback_text)");
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
+    $stmt->bindParam(':feedback_text', $feedbackText);
+    $stmt->execute();
+    echo "Feedback submitted successfully!";
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+// Close connection
+$conn = null;
 ?>

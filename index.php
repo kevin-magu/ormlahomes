@@ -172,7 +172,7 @@
 
     <!-- Feedback Section -->
     <?php
-        $sql = "SELECT name, text, rating FROM feeback LIMIT 2";
+        $sql = "SELECT name, feedback_text, rating FROM feeback LIMIT 2";
         $result = $conn->query($sql);
     ?>
     <section class="section7">
@@ -180,7 +180,7 @@
         <div class="cards-container display-flex margin-left50 margin-top40">
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="rating-card">
-                    <p class="feedback-text"><?php echo htmlspecialchars($row['text']); ?></p>
+                    <p class="feedback-text"><?php echo htmlspecialchars($row['feedback_text']); ?></p>
                     <p class="name">--- <?php echo htmlspecialchars($row['name']); ?></p>
                     <p class="stars justify-centre">
                         <?php for ($i = 0; $i < $row['rating']; $i++): ?>
@@ -188,54 +188,25 @@
                         <?php endfor; ?>
                     </p>
                 </div>
-            <?php endwhile; ?>
+            <?php endwhile; $conn->close(); ?>
+            
             <form id="feedbackForm">
+                <input type="text" name="name" placeholder="Your Name">
                 <input type="text" name="email" placeholder="Email" required />
-                <input type="text" name="name" placeholder="Name" required />
-                <input type="number" name="rating" placeholder="Rating out of 5" min="1" max="5" required />
+                <input type="number" name="rating" placeholder="Rating out of 5" required />
                 <textarea name="feedbackText" placeholder="Give us your honest feedback about our services" required></textarea>
                 <button type="submit" class="a-button">Submit</button>
                 <div id="responseMessage"></div>
             </form>
+            
+
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="margin-top50">
-        <a href="#page-top" class="move-up"><i class="fa-solid fa-arrow-up"></i></a>
-        <div class="row1">
-            <div class="column1 column">
-                <b>Contact Us</b>
-                <p><i class="fa-solid fa-envelope"></i> info@orlmahomes.com</p>
-                <p><i class="fa-solid fa-phone"></i> +254 796 257 269</p>
-                <p><i class="fa-solid fa-location-dot"></i> Syokimau</p>
-            </div>
-            <div class="column2 column">
-                <b>Quick Links</b>
-                <a href="">Buy a home</a>
-                <a href="">Rentals</a>
-                <a href="">Sell your home</a>
-                <a href="">Terms of services</a>
-            </div>
-            <div class="column3">
-                <a href=""><i class="fa-brands fa-facebook"></i></a>
-                <a href=""><i class="fa-brands fa-instagram"></i></a>
-                <a href=""><i class="fa-brands fa-tiktok"></i></a>
-                <a href=""><i class="fa-brands fa-youtube"></i></a>
-                <a href=""><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-            <div class="column4">
-                <p>ORLMA HOMES & PROPERTIES</p>
-            </div>
-        </div>
-        <hr />
-        <div class="row2 display-flex">
-            <p>&copy; 2025 Orlma Homes & Properties. All rights reserved.</p>
-            <p>Designed and Programmed by <a href="https://github.com/kevin-magu/" target="_blank">Algorithm X Systems</a></p>
-        </div>
-    </footer>
-
+    <?php include './includes/footer.php' ?>
+    
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/swiper.js"></script>
     <script src="./scripts/index.js"></script>
