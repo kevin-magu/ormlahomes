@@ -1,8 +1,4 @@
-  <!-- fonts CINZEL-->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <!-- fonts MONTSERATT -->
+<!-- fonts MONTSERATT -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -15,7 +11,7 @@
         <p class="copany-name">ORLMA HOMES & PROPERTIES</p>
     </a>
      <ul>
-         <a href="./buy"><li>Buy</li></a>
+         <a href="buy.php"><li>Buy</li></a>
          <a href=""><li>Rent</li></a>
          <a href=""><li>Sell</li></a>
          <a href=""><li>About us</li></a>
