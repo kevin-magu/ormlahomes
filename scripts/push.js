@@ -1,27 +1,14 @@
-$(document).ready(function () {
-    $('#userForm').on('submit', function (e) {
-        e.preventDefault(); // Prevent normal form submission
+document.getElementById('userForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-        var username = $('username').val();
-        var password = $('#password').val();
+    const form = e.target;
+    const formData = new FormData(form);
 
-        var formData = {
-            username: username,
-            password: password
-        };
-
-        console.log("Sending:", formData);
-
-        $.ajax({
-            url: 'push.php',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function (response) {
-            $('#response').html(response)
-                
-            },
-          
-        });
+    const response = await fetch('./takedata', {
+      method: 'POST',
+      body: formData
     });
-});
+
+    const result = await response.text();
+    document.getElementById('response').textContent = result;
+  });

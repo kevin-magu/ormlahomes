@@ -1,3 +1,8 @@
+body{
+    position: relative;
+}
+
+
 .filter-container{
     gap: 40px;
     align-items: center;
@@ -48,5 +53,7 @@
 .property-cards-container{
     display: flex;
     flex-wrap: wrap;
+    height: fit-content;
+    flex: 1;
     
 }

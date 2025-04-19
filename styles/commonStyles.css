@@ -3,13 +3,20 @@
     padding: 0;
     box-sizing: border-box;
 }
-html{
-    scroll-behavior: smooth;
-}
-body{
+
+html,body{
     font-family: "Montserrat", sans-serif;
     background-color: #faf9f8;
+    position: relative;
+    scroll-behavior: smooth;
 }
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+}
+
 .justify-centre{
     display: flex;
     justify-content: center;
@@ -265,6 +272,8 @@ footer{
     padding: 60px;
     gap: 40px;
     color: #283561;
+    
+    width: 100%;
 }
 footer .move-up{
     position: absolute;

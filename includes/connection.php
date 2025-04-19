@@ -7,7 +7,7 @@ $database = "ormaTest";
 
 
 $conn = mysqli_connect($server,$username,$password,$database);
-
+$testval = "test variable";
 if($conn){
     echo "";
 }
