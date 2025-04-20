@@ -58,9 +58,10 @@
         }
 
         function renderPropertyCard($property, $images, $isRental = false) {
+            $token = base64_encode("property_" . $property['id']);
             ?>
             <div class="cards-container">
-                <a href="">
+            <a href="property?ref=<?= urlencode($token) ?>">
                     <div class="property-card">
                         <?php renderImageSlider($images); ?>
                         <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -72,7 +73,7 @@
                         <?php endif; ?>
                         <p>Ksh <?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?><?php echo $isRental ? ' /month' : ''; ?></p>
                         <p><i class="fa-solid fa-location-dot"></i>
-                            <?php echo htmlspecialchars($property['description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                     </div>
                 </a>
             </div>

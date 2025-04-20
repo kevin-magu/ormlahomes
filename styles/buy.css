@@ -2,58 +2,9 @@ body{
     position: relative;
 }
 
-
-.filter-container{
-    gap: 40px;
-    align-items: center;
-}
-
-.p-filter-container{
-    gap: 40px;
-    font-weight: 500;
-    color: #911d4e;
-    background-color: white;
-    padding: 20px;
-    border-radius: 40px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-}
-.p-filter-container p{
-    width: fit-content;
-}
-.p-filter-container p:hover{
-    text-decoration: underline;
-    cursor: pointer;
-    opacity: 70%;
-}
-.filter-container select {
-    color: #911d4e;
-    width: 200px;
-    font-weight: 500;
-    height: 40px;
-    border-radius: 40px;
-    background-color: white;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-    border: none;
-    padding: 10px;
-    outline: none;
-    cursor: pointer;
-}
-.filter-container button{
-    padding: 10px;
-    border-radius: 40px;
-    background-color: white;
-    border: 1px #911d4e solid;
-    color: #911d4e;
-    cursor: pointer;
-}
-.filter-container button:hover{
-    background-color: #911d4e;
-    color: white;
-}
 .property-cards-container{
     display: flex;
     flex-wrap: wrap;
     height: fit-content;
     flex: 1;
-    
 }

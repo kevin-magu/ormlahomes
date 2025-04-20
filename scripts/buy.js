@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const applyFilterBtn = document.getElementById("applyFilter");
     const propertyPrice = document.getElementById("propertyPrice");
     const propertyTypes = document.getElementById("propertyTypes");
+    const propertyLocation = document.getElementById("propertyLocation");
     const resultContainer = document.getElementById("propertyResults");
 
     let selectedType = null;
@@ -18,18 +19,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     applyFilterBtn.addEventListener("click", function () {
         const price = propertyPrice.value;
+        const location = propertyLocation.value;
 
         fetch("./filterProperties", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 type: selectedType,
-                price: price
+                price: price,
+                location: location
             })
         })
         .then(res => res.text())
         .then(html => {
             resultContainer.innerHTML = html;
+
+            // ✅ Reinitialize swiper after injecting new DOM content
+            if (typeof window.reinitializeAllSwipers === 'function') {
+                window.reinitializeAllSwipers();
+            } else {
+                console.warn("Swiper reinit function not found!");
+            }
         })
         .catch(err => console.error("Fetch Error:", err));
     });

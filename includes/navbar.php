@@ -11,9 +11,11 @@
         <p class="copany-name">ORLMA HOMES & PROPERTIES</p>
     </a>
      <ul>
-         <a href="buy.php"><li>Buy</li></a>
-         <a href=""><li>Rent</li></a>
-         <a href=""><li>Sell</li></a>
+         <a href="residentials"><li>Residential</li></a>
+         <a href=""><li>Commercial</li></a>
+         <a href=""><li>Industrial</li></a>
+         <a href=""><li>Lands</li></a>
+         <a href=""><li>Sell with us</li></a>
          <a href=""><li>About us</li></a>
          <a href=""><li><i class="fa-solid fa-user"></i></li></a>
          <a href=""><li><i class="fa-solid fa-house"></i></li></a>

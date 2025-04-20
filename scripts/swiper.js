@@ -3,12 +3,11 @@ function initializeSwiper(swiperContainer) {
   const nextButton = swiperContainer.querySelector('.swiper-button-next');
   const prevButton = swiperContainer.querySelector('.swiper-button-prev');
 
-  // 👇 Set slidesPerView based on the class
   const isFeedbackSwiper = swiperContainer.classList.contains('feedback-swiper');
 
   const swiper = new Swiper(swiperContainer, {
     loop: true,
-    slidesPerView: isFeedbackSwiper ? 2 : 1,  // ✅ Only .feedback-swiper shows 2
+    slidesPerView: isFeedbackSwiper ? 2 : 1,
     spaceBetween: isFeedbackSwiper ? 2 : 20,
     navigation: {
       nextEl: nextButton,
@@ -48,10 +47,18 @@ function initializeSwiper(swiperContainer) {
   updateButtonVisibility(swiper);
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
+// Define the reinit function globally so other scripts can use it
+function reinitializeAllSwipers() {
   const allSwipers = document.querySelectorAll('.mySwiper, .feedback-swiper');
   allSwipers.forEach(swiperContainer => {
     initializeSwiper(swiperContainer);
   });
+}
+
+// Expose globally
+window.reinitializeAllSwipers = reinitializeAllSwipers;
+
+// Also run on initial load
+document.addEventListener("DOMContentLoaded", () => {
+  reinitializeAllSwipers();
 });

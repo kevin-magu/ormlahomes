@@ -1,4 +1,6 @@
 <?php
+// Set content type early
+header("Content-Type: text/html");
 
 // Block direct access unless it's a POST request with JSON
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || strpos($_SERVER["CONTENT_TYPE"], 'application/json') === false) {
@@ -8,16 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || strpos($_SERVER["CONTENT_TYPE"], 'a
 }
 
 include './includes/connection.php';
-header("Content-Type: text/html");
 
+// Read and decode incoming JSON data
 $data = json_decode(file_get_contents("php://input"), true);
 $type = $data['type'] ?? '';
 $price = $data['price'] ?? '';
+$location = $data['location'] ?? '';
 
+
+// Function to render a single property card with Swiper and link
 function renderPropertyCard($property, $images) {
+    $token = base64_encode("property_" . $property['id']);
     ?>
     <div class="cards-container">
-        <a href="">
+        <a href="property?ref=<?= urlencode($token) ?>">
             <div class="property-card">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">
@@ -25,7 +31,7 @@ function renderPropertyCard($property, $images) {
                             <?php while ($image = $images->fetch_assoc()): ?>
                                 <div class="swiper-slide">
                                     <div class="image-slide"
-                                         style="background-image: url('<?php echo htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
+                                         style="background-image: url('<?= htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
                                         <i class="fa-solid fa-heart"></i>
                                     </div>
                                 </div>
@@ -36,32 +42,40 @@ function renderPropertyCard($property, $images) {
                         <div class="swiper-pagination"></div>
                     </div>
                 </section>
-                <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                <h3><?= htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
                 <div class="display-flex homesize">
                     <p class="card-square"></p>
-                    <p><?php echo htmlspecialchars($property['homeSize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
+                    <p><?= htmlspecialchars($property['homeSize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
                 </div>
-                <p>Ksh <?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?></p>
-                <p><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($property['description'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p>Ksh <?= number_format((int)$property['price']); ?></p>
+                <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         </a>
     </div>
     <?php
 }
 
-// Build base query
+
+// Base query
 $sql = "SELECT * FROM properties WHERE listing_type = 'sale'";
 $params = [];
 $types = "";
 
-// Apply property type filter if not "all"
+// Filter by type
 if ($type && strtolower($type) !== 'all') {
     $sql .= " AND property_type = ?";
     $params[] = $type;
     $types .= "s";
 }
 
-// Apply price filter
+// Filter by location
+if ($location && strtolower($location) !== 'all') {
+    $sql .= " AND location = ?";
+    $params[] = $location;
+    $types .= "s";
+}
+
+// Filter by price
 if ($price) {
     switch ($price) {
         case 'below1m':
@@ -85,7 +99,6 @@ if ($price) {
     }
 }
 
-// Execute query
 $stmt = $conn->prepare($sql);
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params);
@@ -93,9 +106,10 @@ if (!empty($params)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Fetch and render
+
 $imageQuery = "SELECT * FROM property_images WHERE property_id = ?";
 
+// Render results
 if ($result->num_rows > 0) {
     while ($property = $result->fetch_assoc()) {
         $imgStmt = $conn->prepare($imageQuery);
@@ -107,4 +121,6 @@ if ($result->num_rows > 0) {
 } else {
     echo '<p class="no-results-message" style="text-align:center; font-size:18px; margin-top:40px;">No results found</p>';
 }
+
+$conn->close();
 ?>
