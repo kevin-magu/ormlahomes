@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const price = propertyPrice.value;
         const location = propertyLocation.value;
 
-        fetch("./filterProperties", {
+        fetch("./filterResidentialProperties", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
