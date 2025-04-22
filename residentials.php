@@ -24,7 +24,7 @@ include './includes/navbar.php';
 <body>
 <div class="page-container">
 <div class="sticky-top">
-    <p class="justify-centre buy-page-title margin-top30">Buy a Home Your Family Will Love.</p>
+    <p class="justify-centre buy-page-title margin-top30">Buy or Rent a Home Your Family Will Love.</p>
 <div class="filter-container justify-centre margin-top30 dipslay-flex">
     <div class="p-filter-container disp justify-centre dipslay-flex" id="propertyTypes">
         <p data-type="all">All</p>
@@ -33,8 +33,13 @@ include './includes/navbar.php';
         <p data-type="Duplex">Duplex</p>
         <p data-type="Vacation Home">Vacation Home</p>
         <p data-type="Townhouse">Townhouse</p>
-        <p data-type="Studio Apartment">Studio Apartment</p>
-        
+
+        <select name="listingType" id="listingType">
+            <option value="">All categories</option>
+            <option value="sale">For sale</option>
+            <option value="rental">Rentals</option>
+        </select>
+
         <select name="propertyPrice" id="propertyPrice">
             <option value="">All prices</option>
             <option value="below1m">Below Ksh 1M</option>
@@ -72,7 +77,9 @@ include './includes/navbar.php';
                         <div class="swiper-slide">
                             <div class="image-slide"
                                  style="background-image: url('<?php echo htmlspecialchars($image['image_url']); ?>');">
+                                 <i class="fa-solid fa-heart"></i>
                             </div>
+                            
                         </div>
                     <?php endwhile; ?>
                 </div>
@@ -98,10 +105,12 @@ include './includes/navbar.php';
                 <div class="property-card">
                     <?php echo renderImageSlider($images); ?>
                     <h3><?= htmlspecialchars($property['property_type']) ?></h3>
+                    <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
                     <div class="display-flex homesize">
                         <p class="card-square"></p>
-                        <p><?= htmlspecialchars($property['homeSize']) ?> SQFT</p>
+                        <p><?= htmlspecialchars($property['homeSize']) ?> SQFT</p>    
                     </div>
+                    
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
                     <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
                 </div>
@@ -111,7 +120,7 @@ include './includes/navbar.php';
     }
     
 
-    $stmt = $conn->prepare("SELECT * FROM properties WHERE listing_type = 'sale'");
+    $stmt = $conn->prepare("SELECT * FROM properties");
     $stmt->execute();
     $result = $stmt->get_result();
 

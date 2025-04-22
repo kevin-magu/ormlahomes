@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("hello world");
-
     const applyFilterBtn = document.getElementById("applyFilter");
     const propertyPrice = document.getElementById("propertyPrice");
     const propertyTypes = document.getElementById("propertyTypes");
     const propertyLocation = document.getElementById("propertyLocation");
+    const listingType = document.getElementById("listingType");
     const resultContainer = document.getElementById("propertyResults");
 
     let selectedType = null;
@@ -20,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     applyFilterBtn.addEventListener("click", function () {
         const price = propertyPrice.value;
         const location = propertyLocation.value;
+        const listing = listingType.value;
 
         fetch("./filterResidentialProperties", {
             method: "POST",
@@ -27,14 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify({
                 type: selectedType,
                 price: price,
-                location: location
+                location: location,
+                listingType: listing
             })
         })
         .then(res => res.text())
         .then(html => {
             resultContainer.innerHTML = html;
 
-            // ✅ Reinitialize swiper after injecting new DOM content
             if (typeof window.reinitializeAllSwipers === 'function') {
                 window.reinitializeAllSwipers();
             } else {

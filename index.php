@@ -103,10 +103,10 @@
     <!-- Sales Section -->
     <section class="section3 justify-centre">
         <div class="property-cards-wrapper">
-            <?php renderProperties($conn, 'sale', 12); ?>
+            <?php renderProperties($conn, 'For sale', 12); ?>
         </div>
         <div class="justify-centre">
-            <a href="./buy" class="a-button">View More Listings</a>
+            <a href="./residentials" class="a-button">View More Listings</a>
         </div>
     </section>
 

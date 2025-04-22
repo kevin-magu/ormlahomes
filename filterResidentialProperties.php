@@ -1,8 +1,6 @@
 <?php
-// Set content type early
 header("Content-Type: text/html");
 
-// Block direct access unless it's a POST request with JSON
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || strpos($_SERVER["CONTENT_TYPE"], 'application/json') === false) {
     http_response_code(403);
     echo "Access Denied.";
@@ -11,14 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || strpos($_SERVER["CONTENT_TYPE"], 'a
 
 include './includes/connection.php';
 
-// Read and decode incoming JSON data
 $data = json_decode(file_get_contents("php://input"), true);
 $type = $data['type'] ?? '';
 $price = $data['price'] ?? '';
 $location = $data['location'] ?? '';
+$listingType = $data['listingType'] ?? '';
 
-
-// Function to render a single property card with Swiper and link
+// Function to render property cards
 function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
     ?>
@@ -43,6 +40,7 @@ function renderPropertyCard($property, $images) {
                     </div>
                 </section>
                 <h3><?= htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                <div class="listing-type"><?= htmlspecialchars($property['listing_type'], ENT_QUOTES, 'UTF-8'); ?></div>
                 <div class="display-flex homesize">
                     <p class="card-square"></p>
                     <p><?= htmlspecialchars($property['homeSize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
@@ -55,13 +53,12 @@ function renderPropertyCard($property, $images) {
     <?php
 }
 
-
-// Base query
-$sql = "SELECT * FROM properties WHERE listing_type = 'sale'";
+// Base query with hardcoded broad_category = 'residential'
+$sql = "SELECT * FROM properties WHERE broad_category = 'residential'";
 $params = [];
 $types = "";
 
-// Filter by type
+// Filter by property type
 if ($type && strtolower($type) !== 'all') {
     $sql .= " AND property_type = ?";
     $params[] = $type;
@@ -75,7 +72,14 @@ if ($location && strtolower($location) !== 'all') {
     $types .= "s";
 }
 
-// Filter by price
+// Filter by listing type
+if ($listingType && strtolower($listingType) !== 'all') {
+    $sql .= " AND listing_type = ?";
+    $params[] = $listingType;
+    $types .= "s";
+}
+
+// Filter by price range
 if ($price) {
     switch ($price) {
         case 'below1m':
@@ -106,10 +110,8 @@ if (!empty($params)) {
 $stmt->execute();
 $result = $stmt->get_result();
 
-
+// Render each property
 $imageQuery = "SELECT * FROM property_images WHERE property_id = ?";
-
-// Render results
 if ($result->num_rows > 0) {
     while ($property = $result->fetch_assoc()) {
         $imgStmt = $conn->prepare($imageQuery);
