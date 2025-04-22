@@ -12,13 +12,28 @@
     </a>
      <ul>
          <a href="residentials"><li>Residential</li></a>
-         <a href=""><li>Commercial</li></a>
-         <a href=""><li>Industrial</li></a>
-         <a href=""><li>Lands</li></a>
-         <a href=""><li>Sell with us</li></a>
-         <a href=""><li>About us</li></a>
-         <a href=""><li><i class="fa-solid fa-user"></i></li></a>
-         <a href=""><li><i class="fa-solid fa-house"></i></li></a>
-         <a href=""><li><i class="fa-solid fa-phone"></i></li></a>
+         <a href="commercials"><li>Commercial</li></a>
+         <a href="industrials"><li>Industrial</li></a>
+         <a href="lands"><li>Lands</li></a>
+         <a href="sell"><li>Sell with us</li></a>
+         <a href="about-us"><li>About us</li></a>
+         <a href="profile"><li><i class="fa-solid fa-user"></i></li></a>
+         <a href="favourive"><li><i class="fa-solid fa-house"></i></li></a>
+         <a href="call-us"><li><i class="fa-solid fa-phone"></i></li></a>
      </ul>
  </nav>
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const links = document.querySelectorAll("nav ul a"); // Select all <a> tags inside the <nav> element
+    const currentPath = window.location.pathname; // Get the current URL path
+
+    links.forEach(link => {
+        // Check if the current link's href matches the current URL path
+        if (currentPath.includes(link.getAttribute("href"))) {
+            link.classList.add("nav-active"); // Add the 'nav-active' class to the matched link
+        }
+    });
+});
+
+ </script>

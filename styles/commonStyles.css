@@ -12,6 +12,7 @@ html,body{
 }
 ::selection {
     background-color: #911d4e;
+    color: white;
   }
   
 
@@ -160,17 +161,13 @@ nav ul a{
     font-weight: 500;
     position: relative;
 }
-nav ul a:hover::after{
-    content: '';
-    width: 100%;
-    position: absolute;
-    height: 2px;
-    background-color: #911d4e;
-    bottom: -5px; 
-    left: 50%;
-    border-radius: 3px;
-    transform: translateX(-50%);
+
+
+nav ul a.nav-active {
+    text-decoration: underline;
+    color: #911d4e; 
 }
+
 
 /*property card*/
 .property-cards-wrapper {

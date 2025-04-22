@@ -21,10 +21,10 @@ ini_set('display_errors', 1);
     <div id="error-messages" style="color: red;"></div>
     
     <!-- Property upload form -->
-    <form id="uploadForm" action="./upload-handler" method="POST" enctype="multipart/form-data">
+      <div class="form-group margin-top50">
+    <form id="uploadForm" action="./upload-handler" method="POST" enctype="multipart/form-data" class="margin-top50">
       
       <!-- Property Type -->
-      <div class="form-group">
         <label for="propertyType">Property Type:</label>
         <select name="propertyType" id="propertyType" required>
           <option value="">Select Property Type</option>
@@ -48,7 +48,8 @@ ini_set('display_errors', 1);
       <div class="form-group">
         <input type="text" name="price" placeholder="Price (e.g., Ksh 12,000,000)" required>
       </div>
-
+      <input type="text" name="price" placeholder="Location" required>
+      <input type="text" name="price" placeholder="property size" required>
       <!-- Description -->
       <div class="form-group">
         <textarea name="description" placeholder="Property Description" required></textarea>
