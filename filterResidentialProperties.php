@@ -43,7 +43,7 @@ function renderPropertyCard($property, $images) {
                 <div class="listing-type"><?= htmlspecialchars($property['listing_type'], ENT_QUOTES, 'UTF-8'); ?></div>
                 <div class="display-flex homesize">
                     <p class="card-square"></p>
-                    <p><?= htmlspecialchars($property['homeSize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
+                    <p><?= htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
                 </div>
                 <p>Ksh <?= number_format((int)$property['price']); ?></p>
                 <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>

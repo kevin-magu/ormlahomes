@@ -36,7 +36,7 @@ include './includes/navbar.php';
 
         <select name="listingType" id="listingType">
             <option value="">All categories</option>
-            <option value="sale">For sale</option>
+            <option value="For sale">For sale</option>
             <option value="rental">Rentals</option>
         </select>
 
@@ -108,7 +108,7 @@ include './includes/navbar.php';
                     <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
                     <div class="display-flex homesize">
                         <p class="card-square"></p>
-                        <p><?= htmlspecialchars($property['homeSize']) ?> SQFT</p>    
+                        <p><?= htmlspecialchars($property['propertySize']) ?> SQFT</p>    
                     </div>
                     
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
@@ -120,13 +120,14 @@ include './includes/navbar.php';
     }
     
 
-    $stmt = $conn->prepare("SELECT * FROM properties");
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT * FROM properties WHERE broad_category = 'residential'");
+$stmt->execute();
+$result = $stmt->get_result();
 
-    while ($property = $result->fetch_assoc()) {
-        echo renderPropertyCard($property, $conn);
-    }
+while ($property = $result->fetch_assoc()) {
+    echo renderPropertyCard($property, $conn);
+}
+
 
     $conn = null;
     ?>

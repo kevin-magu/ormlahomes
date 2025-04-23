@@ -24,18 +24,19 @@ include './includes/navbar.php';
 <body>
 <div class="page-container">
 <div class="sticky-top">
-    <p class="justify-centre buy-page-title margin-top30">Find the best space to set up your business.</p>
+    <p class="justify-centre buy-page-title margin-top30">Find the perfect space to setup your business.</p>
 <div class="filter-container justify-centre margin-top30 dipslay-flex">
     <div class="p-filter-container disp justify-centre dipslay-flex" id="propertyTypes">
         <p data-type="all">All</p>
-        <p data-type="office spaces">Office Spaces</p>
-        <p data-type="malls">malls</p>
-        <p data-type="hotels & Restaurants">hotels & Restaurants</p>
-        <p data-type="mixed use">Mixed use</p>
+        <p data-type="Apartment">Apartment</p>
+        <p data-type="Condo">Condo</p>
+        <p data-type="Duplex">Duplex</p>
+        <p data-type="Vacation Home">Vacation Home</p>
+        <p data-type="Townhouse">Townhouse</p>
 
         <select name="listingType" id="listingType">
             <option value="">All categories</option>
-            <option value="sale">For sale</option> 
+            <option value="For sale">For sale</option>
             <option value="rental">Rentals</option>
         </select>
 
@@ -107,7 +108,7 @@ include './includes/navbar.php';
                     <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
                     <div class="display-flex homesize">
                         <p class="card-square"></p>
-                        <p><?= htmlspecialchars($property['homeSize']) ?> SQFT</p>    
+                        <p><?= htmlspecialchars($property['propertySize']) ?> SQFT</p>    
                     </div>
                     
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
@@ -119,13 +120,14 @@ include './includes/navbar.php';
     }
     
 
-    $stmt = $conn->prepare("SELECT * FROM properties");
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT * FROM properties WHERE broad_category = 'residential'");
+$stmt->execute();
+$result = $stmt->get_result();
 
-    while ($property = $result->fetch_assoc()) {
-        echo renderPropertyCard($property, $conn);
-    }
+while ($property = $result->fetch_assoc()) {
+    echo renderPropertyCard($property, $conn);
+}
+
 
     $conn = null;
     ?>
@@ -134,7 +136,7 @@ include './includes/navbar.php';
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./scripts/swiper.js"></script>
-<script src="./scripts/residentials.js"></script>
+<script src="./scripts/commercials.js"></script>
 <?php include './includes/footer.php' ?>
 </div>
 </body>

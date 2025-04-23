@@ -68,7 +68,7 @@
                         <?php if (!$isRental): ?>
                             <div class="display-flex homesize">
                                 <p class="card-square"></p>
-                                <p><?php echo htmlspecialchars($property['homeSize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
+                                <p><?php echo htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
                             </div>
                         <?php endif; ?>
                         <p>Ksh <?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?><?php echo $isRental ? ' /month' : ''; ?></p>
