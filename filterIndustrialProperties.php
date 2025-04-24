@@ -54,7 +54,7 @@ function renderPropertyCard($property, $images) {
 }
 
 // Base query with hardcoded broad_category = 'residential'
-$sql = "SELECT * FROM properties WHERE broad_category = 'commercial'";
+$sql = "SELECT * FROM properties WHERE broad_category = 'industrial'";
 $params = [];
 $types = "";
 
@@ -121,7 +121,7 @@ if ($result->num_rows > 0) {
         renderPropertyCard($property, $images);
     }
 } else {
-    echo '<p class="no-results-message" style="text-align:center; font-size:18px; margin-top:40px;">No listings found :(</p>';
+    echo '<p class="no-results-message" style="text-align:center; font-size:18px; margin-top:40px;">No listing found</p>';
 }
 
 $conn->close();

@@ -24,15 +24,15 @@ include './includes/navbar.php';
 <body>
 <div class="page-container">
 <div class="sticky-top">
-    <p class="justify-centre buy-page-title margin-top30">Find the perfect space to setup your business.</p>
+    <p class="justify-centre buy-page-title margin-top30">FInd the best place to set up your warehouse.</p>
 <div class="filter-container justify-centre margin-top30 dipslay-flex">
     <div class="p-filter-container disp justify-centre dipslay-flex" id="propertyTypes">
         <p data-type="all">All</p>
-        <p data-type="Office Space">Office Space</p>
-        <p data-type="retail units">Retail units</p>
-        <p data-type="malls">Malls</p>
-        <p data-type="restaurants & hotels ">Restaurants & Hotels</p>
-        <p data-type="mixed use">Mixed use</p>
+        <p data-type="Warehouses">Warehouses</p>
+        <p data-type="Factories">Factories</p>
+        <p data-type="Manufacturing plants">Manufacturing plants</p>
+        <p data-type="Distribution centers">Distribution centers</p>
+        <p data-type="Storage facilities">Storage facilities</p>
 
         <select name="listingType" id="listingType">
             <option value="">All categories</option>
@@ -120,7 +120,7 @@ include './includes/navbar.php';
     }
     
 
-    $stmt = $conn->prepare("SELECT * FROM properties WHERE broad_category = 'commercial'");
+    $stmt = $conn->prepare("SELECT * FROM properties WHERE broad_category = 'industrial'");
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -136,7 +136,7 @@ while ($property = $result->fetch_assoc()) {
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./scripts/swiper.js"></script>
-<script src="./scripts/commercials.js"></script>
+<script src="./scripts/industrial.js"></script>
 <?php include './includes/footer.php' ?>
 </div>
 </body>

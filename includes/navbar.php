@@ -13,7 +13,7 @@
      <ul>
          <a href="residentials"><li>Residential</li></a>
          <a href="commercials"><li>Commercial</li></a>
-         <a href="industrials"><li>Industrial</li></a>
+         <a href="industrial"><li>Industrial</li></a>
          <a href="lands"><li>Lands</li></a>
          <a href="sell"><li>Sell with us</li></a>
          <a href="about-us"><li>About us</li></a>

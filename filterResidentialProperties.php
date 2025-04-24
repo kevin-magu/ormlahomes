@@ -121,7 +121,7 @@ if ($result->num_rows > 0) {
         renderPropertyCard($property, $images);
     }
 } else {
-    echo '<p class="no-results-message" style="text-align:center; font-size:18px; margin-top:40px;">No results found</p>';
+    echo '<p class="no-results-message" style="text-align:center; font-size:18px; margin-top:40px;">No listing found</p>';
 }
 
 $conn->close();
