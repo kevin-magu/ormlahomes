@@ -10,6 +10,37 @@ html,body{
     position: relative;
     scroll-behavior: smooth;
 }
+body {
+    font-size-adjust: 0.5; /* Helps Firefox scale closer to other browsers */
+}
+/* For Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f0f0f0;
+    transition: background-color 0.3s ease;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+  
+  /* For Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f0f0f0;
+  }
+  
 ::selection {
     background-color: #911d4e;
     color: white;
@@ -72,6 +103,8 @@ button{
     width: fit-content;
     padding: 8px;
     border-radius: 5px;
+    cursor: pointer;
+
 }
 .section-title-size{
     font-size: 42px;

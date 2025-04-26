@@ -9,6 +9,7 @@ include './includes/navbar.php';
     <meta charset="UTF-8">
     <title>Buy Properties</title>
     <link rel="stylesheet" href="./styles/commonStyles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="./styles/buy.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://kit.fontawesome.com/6a82c0f93a.js" crossorigin="anonymous"></script>
