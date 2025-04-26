@@ -22,11 +22,11 @@ include './includes/navbar.php';
 
             <div class="section-2 display-flex justify-centre">
                 <form id="registrationForm" class="display-flex justify-centre">
-                    <input type="text" id="registerEmail" name="email" placeholder="Your Email">
-                    <input type="text" id="registerPassword" name="password" placeholder="Your Password">
+                    <input type="text" id="loginEmail" name="email" placeholder="Your Email">
+                    <input type="text" id="loginPassword" name="password" placeholder="Your Password">
                     <button class="a-button" id="submitBtn" type="submit">Login</button>
 
-                    <div id="registrationResult"></div>
+                    <div id="loginResult"></div>
                 </form>
             </div>
         </div>
@@ -36,6 +36,6 @@ include './includes/navbar.php';
 <?php include './includes/footer.php' ?>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./scripts/swiper.js"></script>
-<script src="./scripts/register.js"></script>
+<script src="./scripts/login.js"></script>
 </body>
 </html>
