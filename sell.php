@@ -20,7 +20,6 @@
                 <div id="preview" class="preview-area"></div>
                 <!-- Main Category Selector -->
                 <select id="mainCategory">
-                    <option value="">-- Select Category --</option>
                     <option value="residential">Residential</option>
                     <option value="commercial">Commercial</option>
                     <option value="industrial">Industrial</option>
@@ -58,17 +57,16 @@
                     <option>Development land</option>
                 </select>
 
+                <input type="text" class="property-input" placeholder="Location">
+                <input type="text" class="property-input" placeholder="Google map link">
+                <input type="text" class="property-input" placeholder="Cost in Kes">
+                <input type="text" class="property-input" placeholder="Mortgage rate if applicable">
+                <input type="text" class="property-input" placeholder="No of bedrooms">
+                <input type="text" class="property-input" placeholder="No of bathrooms">
+                <input type="text" class="property-input" placeholder="Amenities eg Swimming pool, Gym, Clubhouse e.t.c">
+                <input type="text" class="property-input" placeholder="Nearby accessibilities like schools">
+                <textarea class="property-input" placeholder="A short description of the house"></textarea>
 
-                <input type="text" name="" placeholder="Property Type">
-                <input type="text" name="" placeholder="Location">
-                <input type="text" name="" placeholder="Google map link">
-                <input type="text" name="" placeholder="Cost in Kes">
-                <input type="text" name="" placeholder="Mortgage rate if applicable">
-                <input type="text" name="" placeholder="No of bedrooms">
-                <input type="text" name="" placeholder="No of bathrooms">
-                <input type="text" name="" placeholder="Amenities eg Swimming pool, Gym, Clubhouse e.t.c">
-                <input type="text" name="" placeholder="Nearby accessibilities like schools">
-                <textarea name="" id="" placeholder="A short description of the house"></textarea>
                 <div class="button-container display-flex">
                     <button>Upload</button>
                     <a href="">Report a problem</a>

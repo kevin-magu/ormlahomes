@@ -39,23 +39,43 @@ function updatePreview() {
 
 // ---- Category Select & Dynamic Subcategory Display ----
 document.addEventListener("DOMContentLoaded", function () {
-    const mainCategory = document.getElementById("mainCategory");
-    const subcategories = document.querySelectorAll(".subcategory");
+  const mainCategory = document.getElementById("mainCategory");
+  const subcategories = document.querySelectorAll(".subcategory");
+  const allInputs = document.querySelectorAll(".property-input");
 
-    mainCategory.addEventListener("change", function () {
-        const selected = mainCategory.value;
+  mainCategory.addEventListener("change", function () {
+      const selected = mainCategory.value;
 
-        // Hide all subcategory selects
-        subcategories.forEach(select => {
-            select.style.display = "none";
-        });
+      // Hide all subcategories first
+      subcategories.forEach(select => {
+          select.style.display = "none";
+      });
 
-        // Show the one matching the selected category
-        if (selected) {
-            const matchingSelect = document.getElementById(selected + "Options");
-            if (matchingSelect) {
-                matchingSelect.style.display = "block";
-            }
-        }
-    });
+      // Show the one matching the selected category
+      if (selected) {
+          const matchingSelect = document.getElementById(selected + "Options");
+          if (matchingSelect) {
+              matchingSelect.style.display = "block";
+          }
+      }
+
+      // Handle hiding/showing inputs depending on category
+      if (selected === "lands") {
+          allInputs.forEach(input => {
+              const fieldsToHide = ["No of bedrooms", "No of bathrooms", "Amenities eg Swimming pool, Gym, Clubhouse e.t.c"];
+              const placeholder = input.getAttribute("placeholder");
+
+              if (fieldsToHide.includes(placeholder)) {
+                  input.style.display = "none";
+              } else {
+                  input.style.display = "block";
+              }
+          });
+      } else {
+          // For other categories, show everything
+          allInputs.forEach(input => {
+              input.style.display = "block";
+          });
+      }
+  });
 });
