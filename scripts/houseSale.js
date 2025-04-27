@@ -1,3 +1,4 @@
+// ---- File Upload & Preview ----
 const dropZone = document.getElementById("dropZone");
 const fileInput = document.getElementById("fileInput");
 const preview = document.getElementById("preview");
@@ -35,3 +36,26 @@ function updatePreview() {
     reader.readAsDataURL(file);
   }
 }
+
+// ---- Category Select & Dynamic Subcategory Display ----
+document.addEventListener("DOMContentLoaded", function () {
+    const mainCategory = document.getElementById("mainCategory");
+    const subcategories = document.querySelectorAll(".subcategory");
+
+    mainCategory.addEventListener("change", function () {
+        const selected = mainCategory.value;
+
+        // Hide all subcategory selects
+        subcategories.forEach(select => {
+            select.style.display = "none";
+        });
+
+        // Show the one matching the selected category
+        if (selected) {
+            const matchingSelect = document.getElementById(selected + "Options");
+            if (matchingSelect) {
+                matchingSelect.style.display = "block";
+            }
+        }
+    });
+});

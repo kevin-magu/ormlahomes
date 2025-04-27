@@ -4,7 +4,7 @@ form{
 
 
   input[type="text"],
-  textarea {
+  textarea, select {
     width: 100%;
     padding: 14px;
     margin: 10px 0;
@@ -12,6 +12,7 @@ form{
     background-color: none;
     border-radius: 8px;
     font-size: 20px;
+    cursor: poi;
   }
   
 input{
@@ -19,8 +20,12 @@ input{
   height: 60px;
 }
   input[type="text"]:focus,
-  textarea:focus {
+  textarea:focus,select:focus {
     outline: none;
+  }
+ 
+  select option{
+    border-radius: 6px;
   }
 
 textarea{

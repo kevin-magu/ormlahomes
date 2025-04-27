@@ -18,7 +18,47 @@
                     <input type="file" name="images[]" id="fileInput" accept="image/*" multiple required>
                 </div>
                 <div id="preview" class="preview-area"></div>
-                <input type="text" name="" placeholder="Category">
+                <!-- Main Category Selector -->
+                <select id="mainCategory">
+                    <option value="">-- Select Category --</option>
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="industrial">Industrial</option>
+                    <option value="lands">Lands</option>
+                </select>
+                
+                <!-- Subcategory Selects -->
+                <select id="residentialOptions" class="subcategory" style="display:none;">
+                    <option>Apartment</option>
+                    <option>Condo</option>
+                    <option>Duplex</option>
+                    <option>Vacation Home</option>
+                    <option>Townhouse</option>
+                </select>
+                
+                <select id="commercialOptions" class="subcategory" style="display:none;">
+                    <option>Office Space</option>
+                    <option>Retail Units</option>
+                    <option>Malls</option>
+                    <option>Restaurants & Hotels</option>
+                    <option>Mixed use</option>
+                </select>
+                
+                <select id="industrialOptions" class="subcategory" style="display:none;">
+                    <option>Warehouse</option>
+                    <option>Factories</option>
+                    <option>Manufacturing plants</option>
+                    <option>Distribution centers</option>
+                    <option>Storage facilities</option>
+                </select>
+                
+                <select id="landsOptions" class="subcategory" style="display:none;">
+                    <option>Vacant lot</option>
+                    <option>Agricultural land</option>
+                    <option>Development land</option>
+                </select>
+
+
                 <input type="text" name="" placeholder="Property Type">
                 <input type="text" name="" placeholder="Location">
                 <input type="text" name="" placeholder="Google map link">
