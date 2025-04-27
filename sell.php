@@ -1,12 +1,4 @@
-<?php
-session_start(); // Start session to access session data
 
-// Check if user is logged in by checking the session or token
-if (!isset($_SESSION['user_id'])) { // Or check for a token in the session, depending on your login system
-    header('Location: login.php'); // Redirect to the login page
-    exit();
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -98,6 +90,33 @@ if (!isset($_SESSION['user_id'])) { // Or check for a token in the session, depe
         </div>
 
     <?php include './includes/footer.php' ?>
+    <script>
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                // If no token, redirect to login page
+                window.location.href = './login.php';
+            } else {
+                // Send the token with the request to validate
+                fetch('./validate_token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token // Send token as Authorization header
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        // If validation fails, redirect to login page
+                        window.location.href = '/login.php';
+                    } else {
+                        // Token is valid, show the Sell page content
+                    }
+                });
+            }
+
+    </script>
     <script src="./scripts/houseSale.js"></script>
 </body>
 </html>
