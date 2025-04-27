@@ -79,3 +79,20 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const textarea = document.getElementById("propertyDescription");
+  const counter = document.getElementById("charCounter");
+  const maxChars = 700;
+
+  textarea.addEventListener("input", function() {
+      const currentLength = textarea.value.length;
+
+      if (currentLength > maxChars) {
+          textarea.value = textarea.value.substring(0, maxChars);
+      }
+
+      counter.textContent = `${textarea.value.length} / ${maxChars}`;
+  });
+});

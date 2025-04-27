@@ -1,10 +1,15 @@
+.select-container{
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+
 form{
   width: 60%;
 }
 
-
   input[type="text"],
-  textarea, select {
+  textarea {
     width: 100%;
     padding: 14px;
     margin: 10px 0;
@@ -12,7 +17,6 @@ form{
     background-color: none;
     border-radius: 8px;
     font-size: 20px;
-    cursor: poi;
   }
   
 input{
@@ -23,6 +27,16 @@ input{
   textarea:focus,select:focus {
     outline: none;
   }
+  select,option{
+    width: 30%;
+    cursor: pointer;
+    padding: 14px;
+    margin: 10px 0;
+    border: none;
+    background-color: none;
+    border-radius: 8px;
+    font-size: 20px;
+  }
  
   select option{
     border-radius: 6px;
@@ -30,6 +44,7 @@ input{
 
 textarea{
   height: 400px;
+  font-family: "Montserrat", sans-serif;
 }
 
   .drop-zone {
@@ -70,7 +85,6 @@ textarea{
   .button-container{
     gap: 30px;
     color: #283561;
+
   }
-  .button-container a{
-    color: #283561;
-  }
+  
