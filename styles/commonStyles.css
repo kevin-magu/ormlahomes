@@ -462,3 +462,12 @@ footer .row2 a{
     background-color: #911d4e;
     color: white;
 }
+button {
+    background-color: #911d4e;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }

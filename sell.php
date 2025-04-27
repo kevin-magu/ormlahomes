@@ -29,6 +29,11 @@
                 <input type="text" name="" placeholder="Amenities eg Swimming pool, Gym, Clubhouse e.t.c">
                 <input type="text" name="" placeholder="Nearby accessibilities like schools">
                 <textarea name="" id="" placeholder="A short description of the house"></textarea>
+                <div class="button-container display-flex">
+                    <button>Upload</button>
+                    <a href="">Report a problem</a>
+                    <a href="">Request help</a>
+                </div>
             </form>
         </div>
 

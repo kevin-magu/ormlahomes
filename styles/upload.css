@@ -11,6 +11,7 @@ form{
     border: none;
     background-color: none;
     border-radius: 8px;
+    font-size: 20px;
   }
   
 input{
@@ -60,13 +61,11 @@ textarea{
     border: 1px solid #ddd;
   }
   
-  button {
-    background-color: #007BFF;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-  }
   
+  .button-container{
+    gap: 30px;
+    color: #283561;
+  }
+  .button-container a{
+    color: #283561;
+  }
