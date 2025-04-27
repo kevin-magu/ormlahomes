@@ -14,10 +14,21 @@
         <div class="form-container display-flex justify-centre ">
             <form upload>
                 <div class="form-group drop-zone margin-top50 display-flex justify-centre" id="dropZone">
-                    <span>Drag & drop images here or click to select (max 5MB each)</span>
+                    <span>Drag & drop images of your property here or click to select. (max 5MB each)</span>
                     <input type="file" name="images[]" id="fileInput" accept="image/*" multiple required>
                 </div>
                 <div id="preview" class="preview-area"></div>
+                <input type="text" name="" placeholder="Category">
+                <input type="text" name="" placeholder="Property Type">
+                <input type="text" name="" placeholder="Location">
+                <input type="text" name="" placeholder="Google map link">
+                <input type="text" name="" placeholder="Cost in Kes">
+                <input type="text" name="" placeholder="Mortgage rate if applicable">
+                <input type="text" name="" placeholder="No of bedrooms">
+                <input type="text" name="" placeholder="No of bathrooms">
+                <input type="text" name="" placeholder="Amenities eg Swimming pool, Gym, Clubhouse e.t.c">
+                <input type="text" name="" placeholder="Nearby accessibilities like schools">
+                <textarea name="" id="" placeholder="A short description of the house"></textarea>
             </form>
         </div>
 

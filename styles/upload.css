@@ -1,26 +1,40 @@
 form{
-  width: 70%;
+  width: 60%;
 }
 
 
   input[type="text"],
   textarea {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    border: none;
+    background-color: none;
+    border-radius: 8px;
   }
   
+input{
+  border-bottom: 0.5px solid #283561;
+  height: 60px;
+}
+  input[type="text"]:focus,
+  textarea:focus {
+    outline: none;
+  }
+
+textarea{
+  height: 400px;
+}
+
   .drop-zone {
-    border: 2px dashed #ccc;
+    border: 2px dashed #afa2a2;
     border-radius: 6px;
     padding: 20px;
     text-align: center;
-    color: #911d4e;
+    color: #283561;
     cursor: pointer;
     margin-bottom: 10px;
-    background-color: #fafafa;
+    background-color: #d1d4e0;
     position: relative;
     height: 300px;
     width: 100%;
