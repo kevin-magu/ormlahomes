@@ -24,6 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
             resultContainer.style.color = data.success ? "green" : "red";
 
             if (data.success) {
+                // Store the token in localStorage
+                localStorage.setItem("token", data.token);
+
+                // Optionally store the username if available
+                localStorage.setItem("userName", email); // You can store the user's actual name if returned from backend
+
+                // Redirect to the homepage or dashboard after a successful login
                 setTimeout(() => {
                     window.location.href = "./index"; // Adjust destination as needed
                 }, 1000);

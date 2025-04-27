@@ -25,7 +25,7 @@ include './includes/navbar.php';
 <body>
 <div class="page-container">
 <div class="sticky-top">
-    <p class="justify-centre buy-page-title margin-top30">Find the perfect space to setup your business.</p>
+    <p class="justify-centre all-pages-title margin-top30">Find the perfect space to setup your business.</p>
 <div class="filter-container justify-centre margin-top30 dipslay-flex">
     <div class="p-filter-container disp justify-centre dipslay-flex" id="propertyTypes">
         <p data-type="all">All</p>
