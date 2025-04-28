@@ -109,7 +109,7 @@
                 .then(data => {
                     if (!data.success) {
                         // If validation fails, redirect to login page
-                        window.location.href = '/login.php';
+                        window.location.href = './login.php';
                     } else {
                         // Token is valid, show the Sell page content
                     }
