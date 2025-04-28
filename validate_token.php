@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start session at the top
+
 include './includes/connection.php'; // Database connection
 
 header('Content-Type: application/json');
@@ -19,17 +21,19 @@ if (!$token) {
     exit();
 }
 
-// Query the database to verify token validity
-$query = $conn->prepare("SELECT * FROM tokens WHERE token = ? AND expires_at > NOW()");
+// Query the database to verify token validity and get the associated user
+$query = $conn->prepare("SELECT user_id FROM tokens WHERE token = ? AND expires_at > NOW()");
 $query->bind_param("s", $token);
 $query->execute();
 $result = $query->get_result();
 
 if ($result->num_rows === 0) {
-    // If no valid token is found
+    // No valid token found
     echo json_encode(['success' => false, 'message' => 'Invalid or expired token.']);
 } else {
     // Token is valid
+    $row = $result->fetch_assoc();
+    $_SESSION['user_id'] = $row['user_id']; // Save user_id into session
     echo json_encode(['success' => true, 'message' => 'Token valid.']);
 }
 

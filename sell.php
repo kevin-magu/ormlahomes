@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,113 +8,94 @@
     <title>Sell</title>
 </head>
 <body>
-    <?php include './includes/navbar.php' ?>
+    <?php include './includes/navbar.php'; ?>
 
-        <p class="justify-centre all-pages-title margin-top30">We sell your property on your behalf.</p>
-        <div class="form-container display-flex justify-centre">
-            <form >
-                <div class="form-group drop-zone margin-top50 display-flex justify-centre" id="dropZone">
-                    <span>Drag & drop images of your property here or click to select. (max 5MB each)</span>
-                    <input type="file" name="images[]" id="fileInput" accept="image/*" multiple required>
-                </div>
+    <p class="justify-centre all-pages-title margin-top30">We sell your property on your behalf.</p>
 
-                <div id="preview" class="preview-area"></div>
+    <div class="form-container display-flex justify-centre">
+        <form id="sellForm" method="POST" action="./sellProcessing.php" enctype="multipart/form-data">
+            <!-- File Upload -->
+            <div class="form-group drop-zone margin-top50 display-flex justify-centre" id="dropZone">
+                <span>Drag & drop images of your property here or click to select (max 5MB each).</span>
+                <input type="file" name="images[]" id="fileInput" accept="image/*" multiple required>
+            </div>
 
-                <div class="select-container display-flex">
+            <div id="preview" class="preview-area"></div>
 
-                <select id="listingType" class="listingtype">
-                    <option>For Sale</option>
-                    <option>Rental</option>
+            <!-- Category and Subcategory Selection -->
+            <div class="select-container display-flex">
+                <select id="listingType" name="listingType" class="listingtype" required>
+                    <option value="">Listing Type</option>
+                    <option value="for_sale">For Sale</option>
+                    <option value="rental">Rental</option>
                 </select>
 
-                <!-- Main Category Selector -->
-                <select id="mainCategory">
+                <select id="mainCategory" name="mainCategory" required>
+                    <option value="">Category</option>
                     <option value="residential">Residential</option>
                     <option value="commercial">Commercial</option>
                     <option value="industrial">Industrial</option>
                     <option value="lands">Lands</option>
                 </select>
-                
+
                 <!-- Subcategory Selects -->
-                <select id="residentialOptions" class="subcategory" style="display:none;">
-                    <option>Apartment</option>
-                    <option>Condo</option>
-                    <option>Duplex</option>
-                    <option>Vacation Home</option>
-                    <option>Townhouse</option>
-                </select>
-                
-                <select id="commercialOptions" class="subcategory" style="display:none;">
-                    <option>Office Space</option>
-                    <option>Retail Units</option>
-                    <option>Malls</option>
-                    <option>Restaurants & Hotels</option>
-                    <option>Mixed use</option>
-                </select>
-                
-                <select id="industrialOptions" class="subcategory" style="display:none;">
-                    <option>Warehouse</option>
-                    <option>Factories</option>
-                    <option>Manufacturing plants</option>
-                    <option>Distribution centers</option>
-                    <option>Storage facilities</option>
-                </select>
-                
-                <select id="landsOptions" class="subcategory" style="display:none;">
-                    <option>Vacant lot</option>
-                    <option>Agricultural land</option>
-                    <option>Development land</option>
+                <select id="residentialOptions" name="subcategory" class="subcategory" style="display:none;">
+                    <option value="apartment">Apartment</option>
+                    <option value="condo">Condo</option>
+                    <option value="duplex">Duplex</option>
+                    <option value="vacation_home">Vacation Home</option>
+                    <option value="townhouse">Townhouse</option>
                 </select>
 
-                </div>
+                <select id="commercialOptions" name="subcategory" class="subcategory" style="display:none;">
+                    <option value="office_space">Office Space</option>
+                    <option value="retail_units">Retail Units</option>
+                    <option value="malls">Malls</option>
+                    <option value="restaurants_hotels">Restaurants & Hotels</option>
+                    <option value="mixed_use">Mixed Use</option>
+                </select>
 
-                <input type="text" class="property-input" placeholder="Location">
-                <input type="text" class="property-input" placeholder="Google map link">
-                <input type="text" class="property-input" placeholder="Cost in Kes">
-                <input type="text" class="property-input" placeholder="Mortgage rate if applicable">
-                <input type="text" class="property-input" placeholder="No of bedrooms">
-                <input type="text" class="property-input" placeholder="No of bathrooms">
-                <input type="text" class="property-input" placeholder="Amenities eg Swimming pool, Gym, Clubhouse e.t.c">
-                <input type="text" class="property-input" placeholder="Nearby accessibilities like schools">
-                <textarea id="propertyDescription" class="property-input" placeholder="A short description of the property" maxlength="700"></textarea>
-                <div id="charCounter">0 / 700</div>
+                <select id="industrialOptions" name="subcategory" class="subcategory" style="display:none;">
+                    <option value="warehouse">Warehouse</option>
+                    <option value="factories">Factories</option>
+                    <option value="manufacturing_plants">Manufacturing Plants</option>
+                    <option value="distribution_centers">Distribution Centers</option>
+                    <option value="storage_facilities">Storage Facilities</option>
+                </select>
 
-                <div class="button-container display-flex margin-top50">
-                    <button>Upload</button>
-                    <a href="">Report a problem</a>
-                    <a href="">Request help</a>
-                </div>
-            </form>
-        </div>
+                <select id="landsOptions" name="subcategory" class="subcategory" style="display:none;">
+                    <option value="vacant_lot">Vacant Lot</option>
+                    <option value="agricultural_land">Agricultural Land</option>
+                    <option value="development_land">Development Land</option>
+                </select>
+            </div>
 
-    <?php include './includes/footer.php' ?>
-    <script>
-            const token = localStorage.getItem('token');
+            <!-- Property Details -->
+            <input type="text" name="location" id="location" class="property-input" placeholder="Location" required>
+            <input type="text" name="mapLink" id="mapLink" class="property-input" placeholder="Google Map Link">
+            <input type="text" name="cost" id="cost" class="property-input" placeholder="Cost in KES" required>
+            <input type="text" name="mortgage" id="mortgage" class="property-input" placeholder="Mortgage Rate (if applicable)">
+            <input type="text" name="propertySize" id="propertySize" class="property-input" placeholder="Property Size (sqft/sqm)" required>
+            <input type="text" name="bedrooms" id="bedrooms" class="property-input" placeholder="Number of Bedrooms" required>
+            <input type="text" name="bathrooms" id="bathrooms" class="property-input" placeholder="Number of Bathrooms" required>
+            <input type="text" name="amenities" id="amenities" class="property-input" placeholder="Amenities e.g. Swimming Pool, Gym">
+            <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby Facilities like Schools, Hospitals">
 
-            if (!token) {
-                // If no token, redirect to login page
-                window.location.href = './login.php';
-            } else {
-                // Send the token with the request to validate
-                fetch('./validate_token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token // Send token as Authorization header
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        // If validation fails, redirect to login page
-                        window.location.href = './login.php';
-                    } else {
-                        // Token is valid, show the Sell page content
-                    }
-                });
-            }
+            <!-- Property Description -->
+            <textarea name="propertyDescription" id="propertyDescription" class="property-input" placeholder="Short Description of the Property (max 700 characters)" maxlength="700" required></textarea>
+            <div id="charCounter">0 / 700</div>
 
-    </script>
+            <!-- Submit Button -->
+            <div class="button-container display-flex margin-top50">
+                <button type="submit" id="submitSellBtn">Upload</button>
+                <a href="#">Report a Problem</a>
+                <a href="#">Request Help</a>
+            </div>
+        </form>
+    </div>
+
+    <?php include './includes/footer.php'; ?>
+
     <script src="./scripts/houseSale.js"></script>
 </body>
 </html>
