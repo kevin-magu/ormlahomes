@@ -140,6 +140,13 @@ try {
     $propertyId = $stmt->insert_id;
     $stmt->close();
 
+    //insert to under review 
+$reviewStmt = $conn->prepare("INSERT INTO under_review (property_id, user_id) VALUES (?, ?)");
+$reviewStmt->bind_param("ii", $propertyId, $userId);
+$reviewStmt->execute();
+$reviewStmt->close();
+
+
     // Process and save images
     $uploadDir = "uploads/";
     $imagePaths = processImages($data['images'], $uploadDir);
