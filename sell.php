@@ -26,8 +26,8 @@
             <div class="select-container display-flex">
                 <select id="listingType" name="listingType" class="listingtype" required>
                     <option value="">Listing Type</option>
-                    <option value="for_sale">For Sale</option>
-                    <option value="rental">Rental</option>
+                    <option value="For Sale">For Sale</option>
+                    <option value="Rental">Rental</option>
                 </select>
 
                 <select id="mainCategory" name="mainCategory" required>
@@ -40,11 +40,11 @@
 
                 <!-- Subcategory Selects -->
                 <select id="residentialOptions" name="subcategory" class="subcategory" style="display:none;">
-                    <option value="apartment">Apartment</option>
-                    <option value="condo">Condo</option>
-                    <option value="duplex">Duplex</option>
-                    <option value="vacation_home">Vacation Home</option>
-                    <option value="townhouse">Townhouse</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Condo">Condo</option>
+                    <option value="Duplex">Duplex</option>
+                    <option value="Vacation Home">Vacation Home</option>
+                    <option value="Townhouse">Townhouse</option>
                 </select>
 
                 <select id="commercialOptions" name="subcategory" class="subcategory" style="display:none;">
@@ -69,6 +69,19 @@
                     <option value="development_land">Development Land</option>
                 </select>
             </div>
+            <script>
+              const subcategorySelects = document.getElementsByClassName('subcategory');
+                
+                if (subcategorySelects.length > 0) {
+                  Array.from(subcategorySelects).forEach(select => {
+                    select.addEventListener('input', function () {
+                      console.log(this.value);
+                    });
+                  });
+                } else {
+                  alert("Couldn't get elements with class 'subcategory'");
+                }
+            </script>
 
             <!-- Property Details -->
             <input type="text" name="location" id="location" class="property-input" placeholder="Location" required>
@@ -77,6 +90,7 @@
             <input type="text" name="mortgage" id="mortgage" class="property-input" placeholder="Mortgage Rate (if applicable)">
             <input type="text" name="propertySize" id="propertySize" class="property-input" placeholder="Property Size (sqft/sqm)" required>
             <input type="text" name="bedrooms" id="bedrooms" class="property-input" placeholder="Number of Bedrooms" required>
+            <input type="text" name="garages" id="garages" class="property-input" placeholder="Number of Garages" required>
             <input type="text" name="bathrooms" id="bathrooms" class="property-input" placeholder="Number of Bathrooms" required>
             <input type="text" name="amenities" id="amenities" class="property-input" placeholder="Amenities e.g. Swimming Pool, Gym">
             <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby Facilities like Schools, Hospitals">

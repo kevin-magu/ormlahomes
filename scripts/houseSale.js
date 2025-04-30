@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // ---- File Upload & Preview ----
   const dropZone = document.getElementById("dropZone");
   const fileInput = document.getElementById("fileInput");
   const preview = document.getElementById("preview");
-  const submitBtn = document.getElementById("submitSellBtn"); // Submit button
+  const submitBtn = document.getElementById("submitSellBtn");
 
   dropZone.addEventListener("click", () => fileInput.click());
 
@@ -54,19 +54,18 @@ document.addEventListener("DOMContentLoaded", function() {
       'Authorization': 'Bearer ' + token
     }
   })
-  .then(response => response.json())
-  .then(data => {
-    if (!data.success) {
-      alert('Session expired. Please login again.');
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success) {
+        alert('Session expired. Please login again.');
+        window.location.href = './login.php';
+      }
+    })
+    .catch(error => {
+      console.error('Error checking login:', error);
+      alert('Login validation failed. Please try again.');
       window.location.href = './login.php';
-    }
-    // Token valid
-  })
-  .catch(error => {
-    console.error('Error checking login:', error);
-    alert('Login validation failed. Please try again.');
-    window.location.href = './login.php';
-  });
+    });
 
   // ---- Character Counter for Property Description ----
   const descriptionInput = document.getElementById('propertyDescription');
@@ -87,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function() {
   const industrialOptions = document.getElementById('industrialOptions');
   const landsOptions = document.getElementById('landsOptions');
 
-  // Initially hide all subcategory options
   function hideAllSubcategories() {
     residentialOptions.style.display = 'none';
     commercialOptions.style.display = 'none';
@@ -95,12 +93,9 @@ document.addEventListener("DOMContentLoaded", function() {
     landsOptions.style.display = 'none';
   }
 
-  // Show subcategory options based on category selection
   categorySelect.addEventListener('change', function () {
-    hideAllSubcategories(); // Hide all options first
-    const selectedCategory = categorySelect.value;
-    
-    switch (selectedCategory) {
+    hideAllSubcategories();
+    switch (categorySelect.value) {
       case 'residential':
         residentialOptions.style.display = 'block';
         break;
@@ -113,9 +108,6 @@ document.addEventListener("DOMContentLoaded", function() {
       case 'lands':
         landsOptions.style.display = 'block';
         break;
-      default:
-        // Do nothing if no category is selected or other case
-        break;
     }
   });
 
@@ -125,19 +117,30 @@ document.addEventListener("DOMContentLoaded", function() {
       const propertyData = {
         listingType: document.getElementById('listingType').value,
         mainCategory: document.getElementById('mainCategory').value,
-        subcategory: document.getElementById('subcategory') ? document.getElementById('subcategory').value : '',
+        subcategory: (() => {
+          const subcategorySelects = document.getElementsByClassName('subcategory');
+          for (let i = 0; i < subcategorySelects.length; i++) {
+            const select = subcategorySelects[i];
+            if (select.style.display !== 'none') {
+              return select.value;
+            }
+          }
+          return '';
+        })(),
         location: document.getElementById('location').value,
         mapLink: document.getElementById('mapLink').value,
         cost: document.getElementById('cost').value,
         mortgage: document.getElementById('mortgage').value,
-        bedrooms: document.getElementById('bedrooms').value,
-        bathrooms: document.getElementById('bathrooms').value,
+        bedrooms: (document.getElementById('bedrooms').value),
+        bathrooms: (document.getElementById('bathrooms').value),        
+        garages: (document.getElementById('garages').value),
         amenities: document.getElementById('amenities').value,
         nearby: document.getElementById('nearby').value,
         propertyDescription: document.getElementById('propertyDescription').value,
         propertySize: document.getElementById('propertySize').value,
         images: []
       };
+     
 
       const files = fileInput.files;
       const promises = [];
@@ -156,7 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(base64Images => {
           propertyData.images = base64Images;
 
-          return fetch("./sellProcessing.php", {
+          console.log("Form Data Being Sent:", propertyData)
+
+          return fetch("./sellProcessing", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -164,19 +169,14 @@ document.addEventListener("DOMContentLoaded", function() {
             body: JSON.stringify(propertyData)
           });
         })
-        .then(res => res.text())
-        .then(text => {
-          try {
-            const data = JSON.parse(text);
-            if (data.success) {
-              alert('Property successfully listed!');
-              window.location.reload();
-            } else {
-              alert('Error: ' + (data.message || 'Unknown error'));
-            }
-          } catch (error) {
-            console.error('Invalid JSON response:', text);
-            alert('Server error. See console.');
+        .then(res => res.json()) // ✅ use .json() instead of .text()
+        .then(data => {
+          console.log(data)
+          if (data.success) {
+            alert('Property successfully listed!');
+            window.location.reload();
+          } else {
+            alert('Error: ' + (data.message || 'Unknown error'));
           }
         })
         .catch(error => {

@@ -1,126 +1,185 @@
 <?php
 session_start();
-header('Content-Type: application/json'); // Always send JSON
+require_once './includes/connection.php';
 
-include './includes/connection.php'; // Database connection
+// Set content type to JSON
+header('Content-Type: application/json');
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
-    exit();
+// Standardized response function
+function sendResponse(bool $success, string $message, array $data = [], int $statusCode = 200) {
+    http_response_code($statusCode);
+    echo json_encode(['success' => $success, 'message' => $message, 'data' => $data]);
+    exit;
 }
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'User not authenticated.']);
-    exit();
+// Log errors to a file for debugging
+function logError(string $message) {
+    file_put_contents('error_log.txt', date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL, FILE_APPEND);
 }
 
-$userId = (int) $_SESSION['user_id'];
-
-// Collect form data safely
-$listingType = trim($_POST['listingType'] ?? '');
-$mainCategory = trim($_POST['mainCategory'] ?? '');
-$subcategory = trim($_POST['subcategory'] ?? '');
-$location = trim($_POST['location'] ?? '');
-$mapLink = trim($_POST['mapLink'] ?? '');
-$cost = trim($_POST['cost'] ?? '');
-$mortgage = trim($_POST['mortgage'] ?? '');
-$bedrooms = (int) ($_POST['bedrooms'] ?? 0);
-$bathrooms = (int) ($_POST['bathrooms'] ?? 0);
-$amenities = trim($_POST['amenities'] ?? '');
-$nearby = trim($_POST['nearby'] ?? '');
-$propertyDescription = trim($_POST['propertyDescription'] ?? '');
-$propertySize = trim($_POST['propertySize'] ?? '');
-
-// Handle images upload
-$imagePaths = [];
-if (isset($_FILES['images'])) {
-    $uploadDirectory = "uploads/";
-
-    if (!file_exists($uploadDirectory)) {
-        mkdir($uploadDirectory, 0777, true);
-    }
-
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    $maxSize = 5 * 1024 * 1024; // 5MB
-
-    foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
-        $imageName = basename($_FILES['images']['name'][$key]);
-        $imageType = $_FILES['images']['type'][$key];
-        $imageSize = $_FILES['images']['size'][$key];
-
-        if (!in_array($imageType, $allowedTypes)) {
-            echo json_encode(['success' => false, 'message' => 'Invalid image type. Allowed: JPEG, PNG, GIF.']);
-            exit();
-        }
-
-        if ($imageSize > $maxSize) {
-            echo json_encode(['success' => false, 'message' => 'Image size exceeds the 5MB limit.']);
-            exit();
-        }
-
-        $extension = pathinfo($imageName, PATHINFO_EXTENSION);
-        $uniqueImageName = uniqid('img_', true) . '.' . strtolower($extension);
-        $imagePath = $uploadDirectory . $uniqueImageName;
-
-        if (move_uploaded_file($tmpName, $imagePath)) {
-            $imagePaths[] = $imagePath;
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to upload image.']);
-            exit();
+// Validate required fields
+function validateRequiredFields(array $data, array $requiredFields): ?string {
+    foreach ($requiredFields as $field) {
+        if (!isset($data[$field]) || trim($data[$field]) === '') {
+            return "Missing or empty field: $field";
         }
     }
+    return null;
 }
 
-// Insert property details
-$query = "INSERT INTO properties 
-    (price, location, map_link, mortgage_rate, bedrooms, bathrooms, amenities, nearby, description, property_size, property_type, listing_type, broad_category, user_id, created_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+// Process and save images
+function processImages(array $images, string $uploadDir): array {
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
 
-$stmt = $conn->prepare($query);
+    $imagePaths = [];
+    foreach ($images as $index => $img) {
+        if (!preg_match('/^data:image\/(\w+);base64,/', $img, $type)) {
+            throw new Exception("Invalid image format at index $index");
+        }
 
-if (!$stmt) {
-    echo json_encode(['success' => false, 'message' => 'Database prepare failed: ' . $conn->error]);
-    exit();
+        $ext = strtolower($type[1]);
+        if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) {
+            throw new Exception("Unsupported image type: $ext at index $index");
+        }
+
+        $base64Data = substr($img, strpos($img, ',') + 1);
+        $decoded = base64_decode($base64Data);
+        if ($decoded === false) {
+            throw new Exception("Image decoding failed at index $index");
+        }
+
+        $filename = uniqid('img_', true) . '.' . $ext;
+        $filepath = $uploadDir . $filename;
+
+        if (!file_put_contents($filepath, $decoded)) {
+            throw new Exception("Failed to save image: $filename");
+        }
+
+        $imagePaths[] = $filepath;
+    }
+
+    return $imagePaths;
 }
 
-$stmt->bind_param(
-    "sssssssssssss",
-    $cost,
-    $location,
-    $mapLink,
-    $mortgage,
-    $bedrooms,
-    $bathrooms,
-    $amenities,
-    $nearby,
-    $propertyDescription,
-    $propertySize,
-    $mainCategory,
-    $listingType,
-    $subcategory,
-    $userId
-);
+// Main processing logic
+try {
+    // Read and decode input
+    $rawInput = file_get_contents('php://input');
+    $data = json_decode($rawInput, true);
+    if (json_last_error() !== JSON_ERROR_NONE || !$data) {
+        sendResponse(false, 'Invalid JSON received', [], 400);
+    }
 
-if ($stmt->execute()) {
+    // Check authentication
+    if (!isset($_SESSION['user_id'])) {
+        sendResponse(false, 'User not authenticated', [], 401);
+    }
+    $userId = (int) $_SESSION['user_id'];
+
+    // Define required fields
+    $requiredFields = [
+        'listingType', 'mainCategory', 'subcategory', 'location', 'mapLink',
+        'cost', 'mortgage', 'bedrooms', 'bathrooms', 'garages','amenities', 'nearby',
+        'propertyDescription', 'propertySize'
+    ];
+
+    // Validate required fields
+    if ($error = validateRequiredFields($data, $requiredFields)) {
+        sendResponse(false, $error, [], 400);
+    }
+
+    // Sanitize and extract values
+    $listingType = trim($data['listingType']);
+    $mainCategory = trim($data['mainCategory']);
+    $subcategory = trim($data['subcategory']);
+    $location = trim($data['location']);
+    $mapLink = trim($data['mapLink']);
+    $cost = trim($data['cost']);
+    $mortgage = trim($data['mortgage']);
+    $garages = (int) $data['garages'];
+    $bedrooms = (int) $data['bedrooms'];
+    $bathrooms = (int) $data['bathrooms'];
+    $amenities = trim($data['amenities']);
+    $nearby = trim($data['nearby']);
+    $propertyDescription = trim($data['propertyDescription']);
+    $propertySize = trim($data['propertySize']);
+
+    // Validate images
+    if (empty($data['images']) || !is_array($data['images'])) {
+        sendResponse(false, 'No images provided', [], 400);
+    }
+
+    // Start transaction
+    $conn->begin_transaction();
+
+    // Insert into properties table
+    $insertQuery = "INSERT INTO properties 
+        (price, location, map_link, mortgage_rate, bedrooms, bathrooms, garage,amenities, 
+         accessibilities, description, propertySize, property_type, listing_type, 
+         broad_category, user_id, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,NOW())";
+
+    $stmt = $conn->prepare($insertQuery);
+    if (!$stmt) {
+        throw new Exception('Prepare failed for properties: ' . $conn->error);
+    }
+
+    $stmt->bind_param(
+        "sssssssssssssss",
+        $cost, $location, $mapLink, $mortgage, $bedrooms, $bathrooms,$garages,
+        $amenities, $nearby, $propertyDescription, $propertySize,
+        $subcategory, $listingType, $mainCategory, $userId
+    );
+
+    if (!$stmt->execute()) {
+        throw new Exception('Execution failed for properties: ' . $stmt->error);
+    }
+
     $propertyId = $stmt->insert_id;
+    $stmt->close();
 
-    // Insert images
-    foreach ($imagePaths as $imagePath) {
-        $imageQuery = "INSERT INTO property_images (property_id, image_url) VALUES (?, ?)";
-        $imageStmt = $conn->prepare($imageQuery);
-        if ($imageStmt) {
-            $imageStmt->bind_param("is", $propertyId, $imagePath);
-            $imageStmt->execute();
-            $imageStmt->close();
-        }
+    // Process and save images
+    $uploadDir = "uploads/";
+    $imagePaths = processImages($data['images'], $uploadDir);
+
+    // Insert images into property_images table
+    $imgStmt = $conn->prepare("INSERT INTO property_images (property_id, image_url) VALUES (?, ?)");
+    if (!$imgStmt) {
+        throw new Exception('Prepare failed for property_images: ' . $conn->error);
     }
 
-    echo json_encode(['success' => true, 'message' => 'Property successfully listed.']);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Error listing property: ' . $stmt->error]);
-}
+    foreach ($imagePaths as $path) {
+        $imgStmt->bind_param("is", $propertyId, $path);
+        if (!$imgStmt->execute()) {
+            throw new Exception("Error saving image $path: " . $imgStmt->error);
+        }
+    }
+    $imgStmt->close();
 
-$stmt->close();
-$conn->close();
+    // Commit transaction
+    $conn->commit();
+
+    // Send success response
+    sendResponse(true, 'Property listed successfully', [
+        'propertyId' => $propertyId,
+        'images' => $imagePaths
+    ]);
+
+} catch (Exception $e) {
+    // Rollback transaction on error
+    if ($conn->inTransaction()) {
+        $conn->rollback();
+    }
+
+    // Log the error
+    logError($e->getMessage());
+
+    // Send error response
+    sendResponse(false, 'Failed to process listing: ' . $e->getMessage(), [], 500);
+} finally {
+    // Close database connection
+    $conn->close();
+}
 ?>
