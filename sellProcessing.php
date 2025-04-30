@@ -2,17 +2,14 @@
 session_start();
 require_once './includes/connection.php';
 
-// Set content type to JSON
-header('Content-Type: application/json');
-
-// Standardized response function
-function sendResponse(bool $success, string $message, array $data = [], int $statusCode = 200) {
-    http_response_code($statusCode);
-    echo json_encode(['success' => $success, 'message' => $message, 'data' => $data]);
+// Restrict access to POST method only. If not POST, redirect to ./sell page.
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Redirect to sell page if the method is not POST
+    header("Location: ./sell");
     exit;
 }
 
-// Log errors to a file for debugging
+// Log errors to a file for debugging (in production, use proper logging systems like Monolog)
 function logError(string $message) {
     file_put_contents('error_log.txt', date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL, FILE_APPEND);
 }
@@ -27,7 +24,7 @@ function validateRequiredFields(array $data, array $requiredFields): ?string {
     return null;
 }
 
-// Process and save images
+// Process and save base64 images
 function processImages(array $images, string $uploadDir): array {
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0777, true);
@@ -63,34 +60,35 @@ function processImages(array $images, string $uploadDir): array {
     return $imagePaths;
 }
 
-// Main processing logic
+header('Content-Type: application/json');
+
 try {
-    // Read and decode input
+    // Decode raw JSON input
     $rawInput = file_get_contents('php://input');
     $data = json_decode($rawInput, true);
     if (json_last_error() !== JSON_ERROR_NONE || !$data) {
-        sendResponse(false, 'Invalid JSON received', [], 400);
+        throw new Exception('Invalid JSON received');
     }
 
-    // Check authentication
+    // Check user session
     if (!isset($_SESSION['user_id'])) {
-        sendResponse(false, 'User not authenticated', [], 401);
+        throw new Exception('User not authenticated');
     }
+
     $userId = (int) $_SESSION['user_id'];
 
-    // Define required fields
+    // Define and validate fields
     $requiredFields = [
         'listingType', 'mainCategory', 'subcategory', 'location', 'mapLink',
-        'cost', 'mortgage', 'bedrooms', 'bathrooms', 'garages','amenities', 'nearby',
-        'propertyDescription', 'propertySize'
+        'cost', 'mortgage', 'bedrooms', 'bathrooms', 'garages',
+        'amenities', 'nearby', 'propertyDescription', 'propertySize'
     ];
 
-    // Validate required fields
     if ($error = validateRequiredFields($data, $requiredFields)) {
-        sendResponse(false, $error, [], 400);
+        throw new Exception($error);
     }
 
-    // Sanitize and extract values
+    // Sanitize input
     $listingType = trim($data['listingType']);
     $mainCategory = trim($data['mainCategory']);
     $subcategory = trim($data['subcategory']);
@@ -106,87 +104,74 @@ try {
     $propertyDescription = trim($data['propertyDescription']);
     $propertySize = trim($data['propertySize']);
 
-    // Validate images
     if (empty($data['images']) || !is_array($data['images'])) {
-        sendResponse(false, 'No images provided', [], 400);
+        throw new Exception('No images provided');
     }
 
-    // Start transaction
+    // Begin transaction
     $conn->begin_transaction();
 
     // Insert into properties table
     $insertQuery = "INSERT INTO properties 
-        (price, location, map_link, mortgage_rate, bedrooms, bathrooms, garage,amenities, 
-         accessibilities, description, propertySize, property_type, listing_type, 
-         broad_category, user_id, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,NOW())";
+        (price, location, map_link, mortgage_rate, bedrooms, bathrooms, garage, 
+        amenities, accessibilities, description, propertySize, property_type, listing_type, 
+        broad_category, user_id, under_review, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'yes', NOW())";
 
     $stmt = $conn->prepare($insertQuery);
-    if (!$stmt) {
-        throw new Exception('Prepare failed for properties: ' . $conn->error);
-    }
+    if (!$stmt) throw new Exception('Prepare failed: ' . $conn->error);
 
     $stmt->bind_param(
         "sssssssssssssss",
-        $cost, $location, $mapLink, $mortgage, $bedrooms, $bathrooms,$garages,
+        $cost, $location, $mapLink, $mortgage, $bedrooms, $bathrooms, $garages,
         $amenities, $nearby, $propertyDescription, $propertySize,
         $subcategory, $listingType, $mainCategory, $userId
     );
 
     if (!$stmt->execute()) {
-        throw new Exception('Execution failed for properties: ' . $stmt->error);
+        throw new Exception('Execution failed: ' . $stmt->error);
     }
 
     $propertyId = $stmt->insert_id;
     $stmt->close();
 
-    //insert to under review 
-$reviewStmt = $conn->prepare("INSERT INTO under_review (property_id, user_id) VALUES (?, ?)");
-$reviewStmt->bind_param("ii", $propertyId, $userId);
-$reviewStmt->execute();
-$reviewStmt->close();
+    // Insert into under_review table
+    $reviewStmt = $conn->prepare("INSERT INTO under_review (property_id, user_id) VALUES (?, ?)");
+    if (!$reviewStmt) throw new Exception('Prepare failed (under_review): ' . $conn->error);
+    $reviewStmt->bind_param("ii", $propertyId, $userId);
+    $reviewStmt->execute();
+    $reviewStmt->close();
 
-
-    // Process and save images
+    // Save images
     $uploadDir = "uploads/";
     $imagePaths = processImages($data['images'], $uploadDir);
 
-    // Insert images into property_images table
     $imgStmt = $conn->prepare("INSERT INTO property_images (property_id, image_url) VALUES (?, ?)");
-    if (!$imgStmt) {
-        throw new Exception('Prepare failed for property_images: ' . $conn->error);
-    }
+    if (!$imgStmt) throw new Exception('Prepare failed (images): ' . $conn->error);
 
     foreach ($imagePaths as $path) {
         $imgStmt->bind_param("is", $propertyId, $path);
         if (!$imgStmt->execute()) {
-            throw new Exception("Error saving image $path: " . $imgStmt->error);
+            throw new Exception("Image insert error: " . $imgStmt->error);
         }
     }
     $imgStmt->close();
 
-    // Commit transaction
+    // Commit all
     $conn->commit();
 
-    // Send success response
-    sendResponse(true, 'Property listed successfully', [
-        'propertyId' => $propertyId,
-        'images' => $imagePaths
-    ]);
+    // Success response
+    echo json_encode(['status' => 'success', 'message' => 'Property added successfully. Admin will approve the property shortly', 'propertyId' => $propertyId]);
 
 } catch (Exception $e) {
-    // Rollback transaction on error
-    if ($conn->inTransaction()) {
-        $conn->rollback();
-    }
-
+    $conn->rollback();
+    
     // Log the error
     logError($e->getMessage());
-
-    // Send error response
-    sendResponse(false, 'Failed to process listing: ' . $e->getMessage(), [], 500);
+    
+    // Send error response to the frontend
+    echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 } finally {
-    // Close database connection
     $conn->close();
 }
 ?>

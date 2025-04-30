@@ -11,7 +11,7 @@
     <?php include './includes/navbar.php'; ?>
 
     <p class="justify-centre all-pages-title margin-top30">We sell your property on your behalf.</p>
-
+    <div id="userResponse" class="response-box hidden"></div>
     <div class="form-container display-flex justify-centre">
         <form id="sellForm" method="POST" action="./sellProcessing.php" enctype="multipart/form-data">
             <!-- File Upload -->

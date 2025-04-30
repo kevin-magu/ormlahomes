@@ -1,0 +1,20 @@
+2025-04-30 20:24:54 - Invalid JSON received
+2025-04-30 21:10:45 - Missing or empty field: listingType
+2025-04-30 21:10:51 - Missing or empty field: listingType
+2025-04-30 21:12:34 - Invalid JSON received
+2025-04-30 21:12:41 - Missing or empty field: subcategory
+2025-04-30 21:12:41 - Invalid JSON received
+2025-04-30 21:30:24 - Missing or empty field: listingType
+2025-04-30 21:35:47 - Missing or empty field: listingType
+2025-04-30 21:42:45 - Missing or empty field: listingType
+2025-04-30 21:43:11 - Missing or empty field: cost
+2025-04-30 21:59:06 - Missing or empty field: listingType
+2025-04-30 21:59:15 - Missing or empty field: mainCategory
+2025-04-30 21:59:42 - Missing or empty field: listingType
+2025-04-30 21:59:46 - Missing or empty field: mainCategory
+2025-04-30 22:01:30 - Missing or empty field: cost
+2025-04-30 22:04:54 - Missing or empty field: listingType
+2025-04-30 22:05:14 - Missing or empty field: listingType
+2025-04-30 22:05:19 - Missing or empty field: mainCategory
+2025-04-30 22:06:07 - Missing or empty field: listingType
+2025-04-30 22:06:30 - Missing or empty field: listingType

@@ -5,20 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const preview = document.getElementById("preview");
   const submitBtn = document.getElementById("submitSellBtn");
 
-  dropZone.addEventListener("click", () => fileInput.click());
+  dropZone?.addEventListener("click", () => fileInput?.click());
 
-  fileInput.addEventListener("change", updatePreview);
+  fileInput?.addEventListener("change", updatePreview);
 
-  dropZone.addEventListener("dragover", e => {
+  dropZone?.addEventListener("dragover", e => {
     e.preventDefault();
     dropZone.style.backgroundColor = "#e0f0ff";
   });
 
-  dropZone.addEventListener("dragleave", () => {
+  dropZone?.addEventListener("dragleave", () => {
     dropZone.style.backgroundColor = "#fafafa";
   });
 
-  dropZone.addEventListener("drop", e => {
+  dropZone?.addEventListener("drop", e => {
     e.preventDefault();
     fileInput.files = e.dataTransfer.files;
     updatePreview();
@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function updatePreview() {
+    if (!preview || !fileInput?.files) return;
     preview.innerHTML = "";
     const files = fileInput.files;
     for (const file of files) {
@@ -39,35 +40,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // ---- Validate if user is logged in first ----
-  const token = localStorage.getItem('token');
+  // ---- Validate if user is logged in ----
+const token = localStorage.getItem('token');
+if (!token) {
+  showResponseMessage('You must be logged in to access this Feature', 2000); // Show message for 2 seconds
+  setTimeout(() => {
+    window.location.href = './login.php'; // Redirect to login page after 2 seconds
+  }, 2000);
+  return;
+}
 
-  if (!token) {
-    alert('Authentication required. Please login.');
-    window.location.href = './login.php';
-    return;
+fetch('./validate_token.php', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer ' + token
   }
-
-  fetch('./validate_token.php', {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + token
+})
+  .then(response => response.json())
+  .then(data => {
+    if (!data.success) {
+      showResponseMessage('Session expired. Please login again.', 2000); // Show message for 2 seconds
+      setTimeout(() => {
+        window.location.href = './login.php'; // Redirect to login page after 2 seconds
+      }, 2000);
     }
   })
-    .then(response => response.json())
-    .then(data => {
-      if (!data.success) {
-        alert('Session expired. Please login again.');
-        window.location.href = './login.php';
-      }
-    })
-    .catch(error => {
-      console.error('Error checking login:', error);
-      alert('Login validation failed. Please try again.');
-      window.location.href = './login.php';
-    });
+  .catch(() => {
+    showResponseMessage('Login validation failed. Please try again.', 2000); // Show message for 2 seconds
+    setTimeout(() => {
+      window.location.href = './login.php'; // Redirect to login page after 2 seconds
+    }, 2000);
+  });
 
-  // ---- Character Counter for Property Description ----
+
+  // ---- Character Counter for Description ----
   const descriptionInput = document.getElementById('propertyDescription');
   const charCounter = document.getElementById('charCounter');
 
@@ -75,11 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
     descriptionInput.addEventListener('input', function () {
       charCounter.textContent = `${descriptionInput.value.length} / 700`;
     });
-  } else {
-    console.warn('Character counter elements not found!');
   }
 
-  // ---- Category and Subcategory Selection ----
+  // ---- Category & Subcategory Handling ----
   const categorySelect = document.getElementById('mainCategory');
   const residentialOptions = document.getElementById('residentialOptions');
   const commercialOptions = document.getElementById('commercialOptions');
@@ -93,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     landsOptions.style.display = 'none';
   }
 
-  categorySelect.addEventListener('change', function () {
+  categorySelect?.addEventListener('change', function () {
     hideAllSubcategories();
     switch (categorySelect.value) {
       case 'residential':
@@ -111,12 +115,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // ---- Upload Property Listing ----
+  // ---- Submit Property Listing ----
   if (submitBtn) {
-    submitBtn.addEventListener('click', function () {
+    submitBtn.addEventListener('click', function (event) {
+      // Prevent page reload
+      event.preventDefault();
+
       const propertyData = {
-        listingType: document.getElementById('listingType').value,
-        mainCategory: document.getElementById('mainCategory').value,
+        listingType: document.getElementById('listingType')?.value || '',
+        mainCategory: document.getElementById('mainCategory')?.value || '',
         subcategory: (() => {
           const subcategorySelects = document.getElementsByClassName('subcategory');
           for (let i = 0; i < subcategorySelects.length; i++) {
@@ -127,22 +134,21 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           return '';
         })(),
-        location: document.getElementById('location').value,
-        mapLink: document.getElementById('mapLink').value,
-        cost: document.getElementById('cost').value,
-        mortgage: document.getElementById('mortgage').value,
-        bedrooms: (document.getElementById('bedrooms').value),
-        bathrooms: (document.getElementById('bathrooms').value),        
-        garages: (document.getElementById('garages').value),
-        amenities: document.getElementById('amenities').value,
-        nearby: document.getElementById('nearby').value,
-        propertyDescription: document.getElementById('propertyDescription').value,
-        propertySize: document.getElementById('propertySize').value,
+        location: document.getElementById('location')?.value || '',
+        mapLink: document.getElementById('mapLink')?.value || '',
+        cost: document.getElementById('cost')?.value || '',
+        mortgage: document.getElementById('mortgage')?.value || '',
+        bedrooms: document.getElementById('bedrooms')?.value || '',
+        bathrooms: document.getElementById('bathrooms')?.value || '',
+        garages: document.getElementById('garages')?.value || '',
+        amenities: document.getElementById('amenities')?.value || '',
+        nearby: document.getElementById('nearby')?.value || '',
+        propertyDescription: document.getElementById('propertyDescription')?.value || '',
+        propertySize: document.getElementById('propertySize')?.value || '',
         images: []
       };
-     
 
-      const files = fileInput.files;
+      const files = fileInput?.files || [];
       const promises = [];
 
       for (const file of files) {
@@ -159,8 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(base64Images => {
           propertyData.images = base64Images;
 
-          console.log("Form Data Being Sent:", propertyData)
-
           return fetch("./sellProcessing", {
             method: "POST",
             headers: {
@@ -169,22 +173,58 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify(propertyData)
           });
         })
-        .then(res => res.json()) // ✅ use .json() instead of .text()
-        .then(data => {
-          console.log(data)
-          if (data.success) {
-            alert('Property successfully listed!');
-            window.location.reload();
+        .then(res => {
+          if (res.redirected) {
+            window.location.href = res.url;
           } else {
-            alert('Error: ' + (data.message || 'Unknown error'));
+            return res.json().then(data => {
+              if (data?.message) {
+                showResponseMessage(data.message);
+                // Clear the form fields after successful submission
+              }
+              if(data.status=='success'){
+                clearFormFields();
+              }
+
+            });
           }
         })
-        .catch(error => {
-          console.error('Error submitting property:', error);
-          alert('Network error. Please try again.');
+        .catch(() => {
+          showResponseMessage('Network error. Please try again.');
         });
     });
-  } else {
-    console.error('Submit button not found!');
+  }
+
+  // ---- Response Message Display ----
+  function showResponseMessage(message, duration = 6000) {
+    const responseBox = document.getElementById('userResponse');
+    if (!responseBox) return;
+    responseBox.textContent = message;
+    responseBox.classList.remove('hidden');
+    responseBox.classList.add('show');
+
+    setTimeout(() => {
+      responseBox.classList.remove('show');
+      responseBox.classList.add('hidden');
+    }, duration);
+  }
+
+  // ---- Clear Form Fields ----
+  function clearFormFields() {
+    document.getElementById('listingType').value = '';
+    document.getElementById('mainCategory').value = '';
+    document.getElementById('location').value = '';
+    document.getElementById('mapLink').value = '';
+    document.getElementById('cost').value = '';
+    document.getElementById('mortgage').value = '';
+    document.getElementById('bedrooms').value = '';
+    document.getElementById('bathrooms').value = '';
+    document.getElementById('garages').value = '';
+    document.getElementById('amenities').value = '';
+    document.getElementById('nearby').value = '';
+    document.getElementById('propertyDescription').value = '';
+    document.getElementById('propertySize').value = '';
+    fileInput.value = ''; // Clear file input
+    preview.innerHTML = ''; // Clear image preview
   }
 });
