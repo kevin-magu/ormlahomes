@@ -6,3 +6,15 @@ function showGallery() {
 function hideGallery() {
     document.getElementById("fullGallery").style.display = "none";
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+    hideGallery(); // Ensures gallery is hidden on reload
+
+    const photoGridImages = document.querySelectorAll('.photo-grid img');
+
+    photoGridImages.forEach(img => {
+        img.addEventListener('click', () => {
+            showGallery();
+        });
+    });
+});
