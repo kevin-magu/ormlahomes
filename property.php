@@ -19,6 +19,17 @@ if (!$propertyId) {
     exit;
 }
 
+
+
+// Fetch basic property details
+$stmt = $conn->prepare("SELECT * FROM properties WHERE id = ?");
+$stmt->bind_param("i", $propertyId);
+$stmt->execute();
+$result = $stmt->get_result();
+$propertyDetails = $result->fetch_assoc();
+$stmt->close();
+
+
 // Fetch all images once
 $stmt = $conn->prepare("SELECT * FROM property_images WHERE property_id = ? ORDER BY created_at ASC");
 $stmt->bind_param("i", $propertyId);
@@ -43,6 +54,13 @@ $previewImages = array_slice($allImages, 0, 3);
     <?php include './includes/navbar.php'; ?>
 
     <div class="main-content-container display-flex justify-centre">
+        <div class="house-properties-container">
+        <div class="property-feature">
+            <p><?= htmlspecialchars($propertyDetails['property_type'] ?? 'N/A') ?></p>,
+            <p><?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>,  
+            <p><?= htmlspecialchars($propertyDetails['listing_type'] ?? 'N/A') ?></p>  
+        </div>
+
         <div class="photo-grid">
             <div class="big-photo">
                 <?php if (!empty($previewImages[0])): ?>
@@ -54,15 +72,58 @@ $previewImages = array_slice($allImages, 0, 3);
                     <img src="<?= htmlspecialchars($img['image_url']) ?>" alt="Sub Image">
                 <?php endforeach; ?>
             </div>
+            <button class="view-all-btn" onclick="showGallery()">View All Photos</button>
         </div>
 
-        <button class="view-all-btn" onclick="showGallery()">View All Photos</button>
+        
 
         <div class="full-gallery" id="fullGallery">
             <?php foreach ($allImages as $img): ?>
                 <img src="<?= htmlspecialchars($img['image_url']) ?>" alt="Gallery Image">
             <?php endforeach; ?>
             <button class="cancel-btn" onclick="hideGallery()">Close</button>
+        </div>
+
+        <div class="property-features">
+            <?php
+                $listingType = $propertyDetails['listing_type'];
+                $priceText = '';
+                if ($listingType === 'Rental') {
+                    $priceText = 'Ksh ' . number_format($propertyDetails['price_per_month']) . ' / month';
+                } elseif ($listingType === 'For sale') {
+                    $priceText = 'Ksh ' . number_format($propertyDetails['price']);
+            }
+            ?>
+            <!-- Display it in HTML -->
+            <p class="property-price"><?= $priceText ?></p>
+
+        </div>
+
+        <div class="property-features">
+            <div class="property-feature">
+                <i class="fa-solid fa-bed"></i>
+                <p>Bedrooms</p>
+                <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? 'N/A') ?></p>
+            </div>
+            <div class="property-feature">
+                <i class="fa-solid fa-bath"></i>
+                <p>Bathrooms</p>
+                <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? 'N/A') ?></p>                
+            </div>
+            <div class="property-feature">
+                <i class="fa-solid fa-warehouse"></i>
+                <p>Garages</p>
+                <p><?= htmlspecialchars($propertyDetails['garage'] ?? 'N/A') ?></p>
+            </div>
+        </div>
+        
+        <div class="property-features">
+            <p>Nearby Essentials:</p>
+            <p><?= htmlspecialchars($propertyDetails['accessibilities'] ?? 'N/A') ?></p>
+        </div>
+        <div class="property-features">
+            <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? 'N/A') ?></p>
+        </div>
         </div>
     </div>
 
