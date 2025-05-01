@@ -486,12 +486,26 @@ footer .row2 a{
     background-color: #911d4e;
     color: white;
 }
+  
 button {
     background-color: #911d4e;
     color: white;
-    padding: 12px 20px;
     border: none;
-    border-radius: 6px;
+    padding: 12px 18px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+  
+button:hover {
+    background-color: #a52a5f;
+    transform: translateY(-2px);
+    color: white;
+}
+  
+button:active {
+    transform: scale(0.97);
+}

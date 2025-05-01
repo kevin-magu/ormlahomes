@@ -55,9 +55,9 @@ $previewImages = array_slice($allImages, 0, 3);
 
     <div class="main-content-container display-flex justify-centre">
         <div class="house-properties-container">
-        <div class="property-feature">
+        <div class="property-feature property-title">
             <p><?= htmlspecialchars($propertyDetails['property_type'] ?? 'N/A') ?></p>,
-            <p><?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>,  
+            
             <p><?= htmlspecialchars($propertyDetails['listing_type'] ?? 'N/A') ?></p>  
         </div>
 
@@ -99,30 +99,35 @@ $previewImages = array_slice($allImages, 0, 3);
 
         </div>
 
+        <div class="price-features">
+            
+            <p> <i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
+        </div>
+
         <div class="property-features">
             <div class="property-feature">
                 <i class="fa-solid fa-bed"></i>
                 <p>Bedrooms</p>
-                <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? 'N/A') ?></p>
+                <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? '__') ?></p>
             </div>
             <div class="property-feature">
                 <i class="fa-solid fa-bath"></i>
                 <p>Bathrooms</p>
-                <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? 'N/A') ?></p>                
+                <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? '__') ?></p>                
             </div>
             <div class="property-feature">
                 <i class="fa-solid fa-warehouse"></i>
                 <p>Garages</p>
-                <p><?= htmlspecialchars($propertyDetails['garage'] ?? 'N/A') ?></p>
+                <p><?= htmlspecialchars($propertyDetails['garage'] ?? '__') ?></p>
             </div>
         </div>
         
         <div class="property-features">
             <p>Nearby Essentials:</p>
-            <p><?= htmlspecialchars($propertyDetails['accessibilities'] ?? 'N/A') ?></p>
+            <p><?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>
         </div>
         <div class="property-features">
-            <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? 'N/A') ?></p>
+            <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? '__') ?></p>
         </div>
         <div class="property-features">
             <button>Tour in person</button>
@@ -131,7 +136,7 @@ $previewImages = array_slice($allImages, 0, 3);
         </div>
         </div>
     </div>
-
-    <script src="./scripts/property.js"></script>
+<?php include './includes/footer.php' ?>
+<script src="./scripts/property.js"></script>
 </body>
 </html>
