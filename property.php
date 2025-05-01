@@ -124,6 +124,11 @@ $previewImages = array_slice($allImages, 0, 3);
         <div class="property-features">
             <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? 'N/A') ?></p>
         </div>
+        <div class="property-features">
+            <button>Tour in person</button>
+            <button>Tour via video chat</button>
+            <button>Email / Call</button>
+        </div>
         </div>
     </div>
 
