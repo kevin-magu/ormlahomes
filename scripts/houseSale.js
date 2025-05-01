@@ -141,116 +141,125 @@ listingTypeSelect?.addEventListener('change', handleListingType);
 // Call the function once to set the initial state
 handleListingType();
 
-  // ---- Submit Property Listing ----
-  if (submitBtn) {
-    submitBtn.addEventListener('click', function (event) {
-      // Prevent page reload
-      event.preventDefault();
+// ---- Submit Property Listing ----
+if (submitBtn) {
+  submitBtn.addEventListener('click', function (event) {
+    // Prevent page reload
+    event.preventDefault();
 
-      const propertyData = {
-        listingType: document.getElementById('listingType')?.value || '',
-        mainCategory: document.getElementById('mainCategory')?.value || '',
-        subcategory: (() => {
-          const subcategorySelects = document.getElementsByClassName('subcategory');
-          for (let i = 0; i < subcategorySelects.length; i++) {
-            const select = subcategorySelects[i];
-            if (select.style.display !== 'none') {
-              return select.value;
+    const propertyData = {
+      listingType: document.getElementById('listingType')?.value || '',
+      mainCategory: document.getElementById('mainCategory')?.value || '',
+      subcategory: (() => {
+        const subcategorySelects = document.getElementsByClassName('subcategory');
+        for (let i = 0; i < subcategorySelects.length; i++) {
+          const select = subcategorySelects[i];
+          if (select.style.display !== 'none') {
+            return select.value;
+          }
+        }
+        return '';
+      })(),
+      location: document.getElementById('location')?.value || '',
+      mapLink: document.getElementById('mapLink')?.value || '',
+      cost: document.getElementById('cost')?.value || '',
+      rentPerMonth: document.getElementById('rentPerMonth')?.value || '',  // Added rent per month
+      title: document.getElementById('title')?.value || '',  // Added title field
+      propertyCondition: document.getElementById('propertyCondition')?.value || '',  // Added property condition
+      yearBuilt: document.getElementById('yearBuilt')?.value || '',  // Added year built
+      floor: document.getElementById('floor')?.value || '',  // Added floor
+      bedrooms: document.getElementById('bedrooms')?.value || '',
+      bathrooms: document.getElementById('bathrooms')?.value || '',
+      garages: document.getElementById('garages')?.value || '',
+      amenities: document.getElementById('amenities')?.value || '',
+      nearby: document.getElementById('nearby')?.value || '',
+      propertyDescription: document.getElementById('propertyDescription')?.value || '',
+      propertySize: document.getElementById('propertySize')?.value || '',
+      images: []
+    };
+
+    const files = fileInput?.files || [];
+    const promises = [];
+
+    for (const file of files) {
+      const reader = new FileReader();
+      const promise = new Promise((resolve, reject) => {
+        reader.onload = e => resolve(e.target.result);
+        reader.onerror = reject;
+      });
+      reader.readAsDataURL(file);
+      promises.push(promise);
+    }
+
+    Promise.all(promises)
+      .then(base64Images => {
+        propertyData.images = base64Images;
+
+        return fetch("./sellProcessing", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(propertyData)
+        });
+      })
+      .then(res => {
+        if (res.redirected) {
+          window.location.href = res.url;
+        } else {
+          return res.json().then(data => {
+            if (data?.message) {
+              showResponseMessage(data.message);
+              // Clear the form fields after successful submission
             }
-          }
-          return '';
-        })(),
-        location: document.getElementById('location')?.value || '',
-        mapLink: document.getElementById('mapLink')?.value || '',
-        cost: document.getElementById('cost')?.value || '',
-        mortgage: document.getElementById('mortgage')?.value || '',
-        bedrooms: document.getElementById('bedrooms')?.value || '',
-        bathrooms: document.getElementById('bathrooms')?.value || '',
-        garages: document.getElementById('garages')?.value || '',
-        amenities: document.getElementById('amenities')?.value || '',
-        nearby: document.getElementById('nearby')?.value || '',
-        propertyDescription: document.getElementById('propertyDescription')?.value || '',
-        propertySize: document.getElementById('propertySize')?.value || '',
-        images: []
-      };
-
-      const files = fileInput?.files || [];
-      const promises = [];
-
-      for (const file of files) {
-        const reader = new FileReader();
-        const promise = new Promise((resolve, reject) => {
-          reader.onload = e => resolve(e.target.result);
-          reader.onerror = reject;
-        });
-        reader.readAsDataURL(file);
-        promises.push(promise);
-      }
-
-      Promise.all(promises)
-        .then(base64Images => {
-          propertyData.images = base64Images;
-
-          return fetch("./sellProcessing", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(propertyData)
+            if(data.status == 'success') {
+              clearFormFields();
+            }
           });
-        })
-        .then(res => {
-          if (res.redirected) {
-            window.location.href = res.url;
-          } else {
-            return res.json().then(data => {
-              if (data?.message) {
-                showResponseMessage(data.message);
-                // Clear the form fields after successful submission
-              }
-              if(data.status=='success'){
-                clearFormFields();
-              }
+        }
+      })
+      .catch(() => {
+        showResponseMessage('Network error. Please try again.');
+      });
+  });
+}
 
-            });
-          }
-        })
-        .catch(() => {
-          showResponseMessage('Network error. Please try again.');
-        });
-    });
-  }
+// ---- Response Message Display ----
+function showResponseMessage(message, duration = 6000) {
+  const responseBox = document.getElementById('userResponse');
+  if (!responseBox) return;
+  responseBox.textContent = message;
+  responseBox.classList.remove('hidden');
+  responseBox.classList.add('show');
 
-  // ---- Response Message Display ----
-  function showResponseMessage(message, duration = 6000) {
-    const responseBox = document.getElementById('userResponse');
-    if (!responseBox) return;
-    responseBox.textContent = message;
-    responseBox.classList.remove('hidden');
-    responseBox.classList.add('show');
+  setTimeout(() => {
+    responseBox.classList.remove('show');
+    responseBox.classList.add('hidden');
+  }, duration);
+}
 
-    setTimeout(() => {
-      responseBox.classList.remove('show');
-      responseBox.classList.add('hidden');
-    }, duration);
-  }
+// ---- Clear Form Fields ----
+function clearFormFields() {
+  document.getElementById('listingType').value = '';
+  document.getElementById('mainCategory').value = '';
+  document.getElementById('location').value = '';
+  document.getElementById('mapLink').value = '';
+  document.getElementById('cost').value = '';
+  document.getElementById('rentPerMonth').value = '';  // Clear rent per month
+  document.getElementById('title').value = '';  // Clear title
+  document.getElementById('propertyCondition').value = '';  // Clear property condition
+  document.getElementById('yearBuilt').value = '';  // Clear year built
+  document.getElementById('floor').value = '';  // Clear floor
+  document.getElementById('bedrooms').value = '';
+  document.getElementById('bathrooms').value = '';
+  document.getElementById('garages').value = '';
+  document.getElementById('amenities').value = '';
+  document.getElementById('nearby').value = '';
+  document.getElementById('propertyDescription').value = '';
+  document.getElementById('propertySize').value = '';
+  fileInput.value = '';  // Clear file input
+  preview.innerHTML = '';  // Clear image preview
+}
 
-  // ---- Clear Form Fields ----
-  function clearFormFields() {
-    document.getElementById('listingType').value = '';
-    document.getElementById('mainCategory').value = '';
-    document.getElementById('location').value = '';
-    document.getElementById('mapLink').value = '';
-    document.getElementById('cost').value = '';
-    document.getElementById('mortgage').value = '';
-    document.getElementById('bedrooms').value = '';
-    document.getElementById('bathrooms').value = '';
-    document.getElementById('garages').value = '';
-    document.getElementById('amenities').value = '';
-    document.getElementById('nearby').value = '';
-    document.getElementById('propertyDescription').value = '';
-    document.getElementById('propertySize').value = '';
-    fileInput.value = ''; // Clear file input
-    preview.innerHTML = ''; // Clear image preview
-  }
+ 
 });

@@ -73,7 +73,8 @@ try {
     $requiredFields = [
         'listingType', 'mainCategory', 'subcategory', 'location', 'mapLink',
         'cost', 'mortgage', 'bedrooms', 'bathrooms', 'garages',
-        'amenities', 'nearby', 'propertyDescription', 'propertySize'
+        'amenities', 'nearby', 'propertyDescription', 'propertySize',
+        'title', 'propertyCondition', 'floor', 'yearBuilt'  // Added new required fields
     ];
 
     if ($error = validateRequiredFields($data, $requiredFields)) {
@@ -95,6 +96,10 @@ try {
     $nearby              = trim($data['nearby']);
     $propertyDescription = trim($data['propertyDescription']);
     $propertySize        = trim($data['propertySize']);
+    $title               = trim($data['title']);  // Title field
+    $propertyCondition   = trim($data['propertyCondition']);  // Property condition field
+    $floor               = (int) $data['floor'];  // Floor field
+    $yearBuilt           = (int) $data['yearBuilt'];  // Year built field
 
     if (empty($data['images']) || !is_array($data['images'])) {
         throw new Exception('No images provided');
@@ -117,17 +122,19 @@ try {
     $insertQuery = "INSERT INTO properties 
         (price, location, map_link, mortgage_rate, bedrooms, bathrooms, garage, 
          amenities, other_property_amenities, accessibilities, description, propertySize, 
-         property_type, listing_type, broad_category, user_id, under_review, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'yes', NOW())";
+         property_type, listing_type, broad_category, user_id, under_review, title, 
+         property_condition, floor, year_built, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmt = $conn->prepare($insertQuery);
     if (!$stmt) throw new Exception('Prepare failed: ' . $conn->error);
 
     $stmt->bind_param(
-        "ssssssssssssssss",
+        "ssssssssssssssssssss",
         $cost, $location, $mapLink, $mortgage, $bedrooms, $bathrooms, $garages,
         $residentialAmenity, $otherAmenity, $nearby, $propertyDescription, $propertySize,
-        $subcategory, $listingType, $mainCategory, $userId
+        $subcategory, $listingType, $mainCategory, $userId, $title, $propertyCondition,
+        $floor, $yearBuilt
     );
 
     if (!$stmt->execute()) {
