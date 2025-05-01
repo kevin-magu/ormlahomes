@@ -18,3 +18,5 @@
 2025-04-30 22:05:19 - Missing or empty field: mainCategory
 2025-04-30 22:06:07 - Missing or empty field: listingType
 2025-04-30 22:06:30 - Missing or empty field: listingType
+2025-05-01 21:52:33 - No images provided
+2025-05-01 21:52:52 - Field 'price_per_month' doesn't have a default value

@@ -32,7 +32,7 @@ include './includes/navbar.php';
         <p data-type="Office Space">Office Space</p>
         <p data-type="retail units">Retail units</p>
         <p data-type="malls">Malls</p>
-        <p data-type="restaurants & hotels ">Restaurants & Hotels</p>
+        <p data-type="restaurant & hotel ">Restaurants & Hotels</p>
         <p data-type="mixed use">Mixed use</p>
 
         <select name="listingType" id="listingType">

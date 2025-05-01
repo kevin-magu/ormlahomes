@@ -84,36 +84,62 @@ fetch('./validate_token.php', {
   }
 
   // ---- Category & Subcategory Handling ----
-  const categorySelect = document.getElementById('mainCategory');
-  const residentialOptions = document.getElementById('residentialOptions');
-  const commercialOptions = document.getElementById('commercialOptions');
-  const industrialOptions = document.getElementById('industrialOptions');
-  const landsOptions = document.getElementById('landsOptions');
+const categorySelect = document.getElementById('mainCategory');
+const residentialOptions = document.getElementById('residentialOptions');
+const commercialOptions = document.getElementById('commercialOptions');
+const industrialOptions = document.getElementById('industrialOptions');
+const landsOptions = document.getElementById('landsOptions');
 
-  function hideAllSubcategories() {
+const listingTypeSelect = document.getElementById('listingType');
+const costInput = document.getElementById('cost');
+const rentPerMonthInput = document.getElementById('rentPerMonth');
+
+// Function to hide all subcategories
+function hideAllSubcategories() {
     residentialOptions.style.display = 'none';
     commercialOptions.style.display = 'none';
     industrialOptions.style.display = 'none';
     landsOptions.style.display = 'none';
-  }
+}
 
-  categorySelect?.addEventListener('change', function () {
+// Function to show fields based on listing type
+function handleListingType() {
+    // Hide Rent per Month and Cost initially
+    rentPerMonthInput.style.display = 'none';
+    costInput.style.display = 'none';
+
+    // Show fields based on listing type
+    if (listingTypeSelect.value === 'For Sale') {
+        costInput.style.display = 'block';  // Show cost for sale
+    } else if (listingTypeSelect.value === 'Rental') {
+        rentPerMonthInput.style.display = 'block';  // Show rent per month for rental
+    }
+}
+
+// Set event listeners for category change
+categorySelect?.addEventListener('change', function () {
     hideAllSubcategories();
     switch (categorySelect.value) {
-      case 'residential':
-        residentialOptions.style.display = 'block';
-        break;
-      case 'commercial':
-        commercialOptions.style.display = 'block';
-        break;
-      case 'industrial':
-        industrialOptions.style.display = 'block';
-        break;
-      case 'lands':
-        landsOptions.style.display = 'block';
-        break;
+        case 'residential':
+            residentialOptions.style.display = 'block';
+            break;
+        case 'commercial':
+            commercialOptions.style.display = 'block';
+            break;
+        case 'industrial':
+            industrialOptions.style.display = 'block';
+            break;
+        case 'lands':
+            landsOptions.style.display = 'block';
+            break;
     }
-  });
+});
+
+// Set event listener for listing type change
+listingTypeSelect?.addEventListener('change', handleListingType);
+
+// Call the function once to set the initial state
+handleListingType();
 
   // ---- Submit Property Listing ----
   if (submitBtn) {

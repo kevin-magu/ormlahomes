@@ -104,24 +104,31 @@ $previewImages = array_slice($allImages, 0, 3);
             <p> <i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
         </div>
 
-        <div class="property-features">
-            <div class="property-feature">
-                <i class="fa-solid fa-bed"></i>
-                <p>Bedrooms</p>
-                <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? '__') ?></p>
+        <?php if (strtolower($propertyDetails['broad_category']) === 'residential'): ?>
+            <div class="property-features amenities">
+                <div class="property-feature">
+                    <i class="fa-solid fa-bed"></i>
+                    <p>Bedrooms</p>
+                    <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? '__') ?></p>
+                </div>
+                <div class="property-feature">
+                    <i class="fa-solid fa-bath"></i>
+                    <p>Bathrooms</p>
+                    <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? '__') ?></p>                
+                </div>
+                <div class="property-feature">
+                    <i class="fa-solid fa-warehouse"></i>
+                    <p>Garages</p>
+                    <p><?= htmlspecialchars($propertyDetails['garage'] ?? '__') ?></p>
+                </div>
             </div>
-            <div class="property-feature">
-                <i class="fa-solid fa-bath"></i>
-                <p>Bathrooms</p>
-                <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? '__') ?></p>                
-            </div>
-            <div class="property-feature">
-                <i class="fa-solid fa-warehouse"></i>
-                <p>Garages</p>
-                <p><?= htmlspecialchars($propertyDetails['garage'] ?? '__') ?></p>
-            </div>
-        </div>
-        
+            <?php else: ?>
+                <div class="property-features amenities">
+                    <p><strong>Amenities:</strong> <?= htmlspecialchars($propertyDetails['other_property_amenities'] ?? 'Not specified') ?></p>
+                </div>
+            <?php endif; ?>
+
+
         <div class="property-features">
             <p>Nearby Essentials:</p>
             <p><?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>

@@ -21,7 +21,7 @@
             </div>
 
             <div id="preview" class="preview-area"></div>
-
+            <input type="text" name="title" id="title" class="property-input" placeholder="Property Title (e.g. Modern 3-Bedroom in Kilimani)" required>
             <!-- Category and Subcategory Selection -->
             <div class="select-container display-flex">
                 <select id="listingType" name="listingType" class="listingtype" required>
@@ -69,31 +69,25 @@
                     <option value="development_land">Development Land</option>
                 </select>
             </div>
-            <script>
-              const subcategorySelects = document.getElementsByClassName('subcategory');
-                
-                if (subcategorySelects.length > 0) {
-                  Array.from(subcategorySelects).forEach(select => {
-                    select.addEventListener('input', function () {
-                      console.log(this.value);
-                    });
-                  });
-                } else {
-                  alert("Couldn't get elements with class 'subcategory'");
-                }
-            </script>
 
             <!-- Property Details -->
-            <input type="text" name="location" id="location" class="property-input" placeholder="Location" required>
-            <input type="text" name="mapLink" id="mapLink" class="property-input" placeholder="Google Map Link">
-            <input type="text" name="cost" id="cost" class="property-input" placeholder="Cost in KES" required>
-            <input type="text" name="mortgage" id="mortgage" class="property-input" placeholder="Mortgage Rate (if applicable)">
-            <input type="text" name="propertySize" id="propertySize" class="property-input" placeholder="Property Size (sqft/sqm)" required>
-            <input type="text" name="bedrooms" id="bedrooms" class="property-input" placeholder="Number of Bedrooms" required>
-            <input type="text" name="garages" id="garages" class="property-input" placeholder="Number of Garages" required>
-            <input type="text" name="bathrooms" id="bathrooms" class="property-input" placeholder="Number of Bathrooms" required>
-            <input type="text" name="amenities" id="amenities" class="property-input" placeholder="Amenities e.g. Swimming Pool, Gym">
-            <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby Facilities like Schools, Hospitals">
+            <!-- Property Details -->
+            <input type="text" name="location" id="location" class="property-input" placeholder="Location (e.g. Kilimani, Nairobi)" required>
+            <input type="text" name="mapLink" id="mapLink" class="property-input" placeholder="Google Map Link (Optional)">
+            <input type="text" name="cost" id="cost" class="property-input" placeholder="Sale Price in KES" required>
+            <input type="text" name="rentPerMonth" id="rentPerMonth" class="property-input" placeholder="Rent per Month in KES" style="display: none;">
+            <input type="text" name="propertySize" id="propertySize" class="property-input" placeholder="Property Size (e.g. 1200 sqft)" required>
+
+            <input type="text" name="bedrooms" id="bedrooms" class="property-input" placeholder="Number of Bedrooms" min="0" required>
+            <input type="text" name="bathrooms" id="bathrooms" class="property-input" placeholder="Number of Bathrooms" min="0" required>
+            <input type="text" name="garages" id="garages" class="property-input" placeholder="Number of Parking Spaces" min="0">
+
+            <input type="text" name="yearBuilt" id="yearBuilt" class="property-input" placeholder="Year Built (e.g. 2019)">
+            <input type="text" name="condition" id="condition" class="property-input" placeholder="Condition (e.g. New, Renovated)">
+            <input type="text" name="floor" id="floor" class="property-input" placeholder="Floor Level (if applicable)">
+            <input type="text" name="amenities" id="amenities" class="property-input" placeholder="Amenities (e.g. Pool, Gym)">
+            <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby (e.g. Schools, Hospitals)">
+
 
             <!-- Property Description -->
             <textarea name="propertyDescription" id="propertyDescription" class="property-input" placeholder="Short Description of the Property (max 700 characters)" maxlength="700" required></textarea>
