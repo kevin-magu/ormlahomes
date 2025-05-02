@@ -19,8 +19,6 @@ if (!$propertyId) {
     exit;
 }
 
-
-
 // Fetch basic property details
 $stmt = $conn->prepare("SELECT * FROM properties WHERE id = ?");
 $stmt->bind_param("i", $propertyId);
