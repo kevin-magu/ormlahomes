@@ -72,9 +72,9 @@ try {
 
     $requiredFields = [
         'listingType', 'mainCategory', 'subcategory', 'location', 'mapLink',
-        'cost', 'mortgage', 'bedrooms', 'bathrooms', 'garages',
+        'cost', 'bedrooms', 'bathrooms', 'garages',
         'amenities', 'nearby', 'propertyDescription', 'propertySize',
-        'title', 'propertyCondition', 'floor', 'yearBuilt'  // Added new required fields
+        'title', 'propertyCondition', 'floor', 'yearBuilt'
     ];
 
     if ($error = validateRequiredFields($data, $requiredFields)) {
@@ -88,7 +88,6 @@ try {
     $location            = trim($data['location']);
     $mapLink             = trim($data['mapLink']);
     $cost                = trim($data['cost']);
-    $mortgage            = trim($data['mortgage']);
     $garages             = (int) $data['garages'];
     $bedrooms            = (int) $data['bedrooms'];
     $bathrooms           = (int) $data['bathrooms'];
@@ -96,45 +95,44 @@ try {
     $nearby              = trim($data['nearby']);
     $propertyDescription = trim($data['propertyDescription']);
     $propertySize        = trim($data['propertySize']);
-    $title               = trim($data['title']);  // Title field
-    $propertyCondition   = trim($data['propertyCondition']);  // Property condition field
-    $floor               = (int) $data['floor'];  // Floor field
-    $yearBuilt           = (int) $data['yearBuilt'];  // Year built field
+    $title               = trim($data['title']);
+    $propertyCondition   = trim($data['propertyCondition']);
+    $floor               = (int) $data['floor'];
+    $yearBuilt           = (int) $data['yearBuilt'];
+    $underReview         = 'yes'; // Default for all new uploads
 
     if (empty($data['images']) || !is_array($data['images'])) {
         throw new Exception('No images provided');
     }
 
-    // Decide where amenities go
+    // Assign amenities
     $residentialAmenity = '';
     $otherAmenity       = '';
-
     if (strtolower($mainCategory) === 'residential') {
         $residentialAmenity = $allAmenities;
     } else {
         $otherAmenity = $allAmenities;
     }
 
-    // Begin transaction
     $conn->begin_transaction();
 
-    // Insert into properties
+    // Insert property
     $insertQuery = "INSERT INTO properties 
-        (price, location, map_link, mortgage_rate, bedrooms, bathrooms, garage, 
+        (price, location, map_link, bedrooms, bathrooms, garage, 
          amenities, other_property_amenities, accessibilities, description, propertySize, 
          property_type, listing_type, broad_category, user_id, under_review, title, 
-         property_condition, floor, year_built, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+         property_condition, floor, yearBuilt, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmt = $conn->prepare($insertQuery);
     if (!$stmt) throw new Exception('Prepare failed: ' . $conn->error);
 
     $stmt->bind_param(
         "ssssssssssssssssssss",
-        $cost, $location, $mapLink, $mortgage, $bedrooms, $bathrooms, $garages,
+        $cost, $location, $mapLink, $bedrooms, $bathrooms, $garages,
         $residentialAmenity, $otherAmenity, $nearby, $propertyDescription, $propertySize,
-        $subcategory, $listingType, $mainCategory, $userId, $title, $propertyCondition,
-        $floor, $yearBuilt
+        $subcategory, $listingType, $mainCategory, $userId, $underReview, $title,
+        $propertyCondition, $floor, $yearBuilt
     );
 
     if (!$stmt->execute()) {

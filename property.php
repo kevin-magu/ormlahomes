@@ -89,7 +89,7 @@ $previewImages = array_slice($allImages, 0, 3);
                 $listingType = $propertyDetails['listing_type'];
                 $priceText = '';
                 if ($listingType === 'Rental') {
-                    $priceText = 'Ksh ' . number_format($propertyDetails['price_per_month']) . ' / month';
+                    $priceText = 'Ksh ' . number_format($propertyDetails['rent_per_month']) . ' / month';
                 } elseif ($listingType === 'For sale') {
                     $priceText = 'Ksh ' . number_format($propertyDetails['price']);
             }
@@ -124,14 +124,13 @@ $previewImages = array_slice($allImages, 0, 3);
             </div>
             <?php else: ?>
                 <div class="property-features amenities">
-                    <p><strong>Amenities:</strong> <?= htmlspecialchars($propertyDetails['other_property_amenities'] ?? 'Not specified') ?></p>
+                    <p><strong>Amenities:</strong> <?= htmlspecialchars($propertyDetails['other_property_amenities'] ?? '__') ?></p>
                 </div>
             <?php endif; ?>
 
 
         <div class="property-features">
-            <p>Nearby Essentials:</p>
-            <p><?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>
+            <p>Nearby Essentials: <?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>
         </div>
         <div class="property-features">
             <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? '__') ?></p>

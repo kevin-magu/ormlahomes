@@ -83,7 +83,7 @@
             <input type="text" name="garages" id="garages" class="property-input" placeholder="Number of Parking Spaces" min="0">
 
             <input type="text" name="yearBuilt" id="yearBuilt" class="property-input" placeholder="Year Built (e.g. 2019)">
-            <input type="text" name="condition" id="condition" class="property-input" placeholder="Condition (e.g. New, Renovated)">
+            <input type="text" name="condition" id="propertyCondition" class="property-input" placeholder="Condition (e.g. New, Renovated)">
             <input type="text" name="floor" id="floor" class="property-input" placeholder="Floor Level (if applicable)">
             <input type="text" name="amenities" id="amenities" class="property-input" placeholder="Amenities (e.g. Pool, Gym)">
             <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby (e.g. Schools, Hospitals)">
