@@ -76,7 +76,7 @@
                                 <p><?php echo htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
                             </div>
                         <?php endif; ?>
-                        <p>Ksh <?php echo htmlspecialchars($property['price'], ENT_QUOTES, 'UTF-8'); ?><?php echo $isRental ? ' /month' : ''; ?></p>
+                        <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
                         <p><i class="fa-solid fa-location-dot"></i>
                             <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                             
