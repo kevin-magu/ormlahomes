@@ -34,7 +34,7 @@ function renderPropertyCard($property, $images) {
         <div class="property-card" style="position: relative;">
             <!-- Heart icon outside the <a> tag with positioning -->
             <i class="fa-regular fa-heart heart-icon"></i>
-            <a href="property?ref=<?= urlencode($token) ?>">
+            <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">

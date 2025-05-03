@@ -1,9 +1,10 @@
-
-
 // Create a reusable function to initialize a Swiper instance
 function initializeSwiper(swiperContainer) {
+  if (!swiperContainer) return;
+
   const nextButton = swiperContainer.querySelector('.swiper-button-next');
   const prevButton = swiperContainer.querySelector('.swiper-button-prev');
+  const paginationEl = swiperContainer.querySelector('.swiper-pagination');
 
   const isFeedbackSwiper = swiperContainer.classList.contains('feedback-swiper');
 
@@ -16,33 +17,28 @@ function initializeSwiper(swiperContainer) {
       prevEl: prevButton,
     },
     pagination: {
-      el: swiperContainer.querySelector('.swiper-pagination'),
+      el: paginationEl,
       clickable: true,
     },
     on: {
-      slideChange: function () {
+      slideChange() {
         updateButtonVisibility(this);
       },
-      reachEnd: function () {
+      reachEnd() {
         updateButtonVisibility(this);
       },
-      reachBeginning: function () {
+      reachBeginning() {
         updateButtonVisibility(this);
       },
     },
   });
 
   function updateButtonVisibility(swiperInstance) {
-    if (swiperInstance.isBeginning) {
-      prevButton.style.display = 'none';
-    } else {
-      prevButton.style.display = 'flex';
+    if (prevButton) {
+      prevButton.style.display = swiperInstance.isBeginning ? 'none' : 'flex';
     }
-
-    if (swiperInstance.isEnd) {
-      nextButton.style.display = 'none';
-    } else {
-      nextButton.style.display = 'flex';
+    if (nextButton) {
+      nextButton.style.display = swiperInstance.isEnd ? 'none' : 'flex';
     }
   }
 
@@ -52,40 +48,92 @@ function initializeSwiper(swiperContainer) {
 // Define the reinit function globally so other scripts can use it
 function reinitializeAllSwipers() {
   const allSwipers = document.querySelectorAll('.mySwiper, .feedback-swiper');
-  allSwipers.forEach(swiperContainer => {
-    initializeSwiper(swiperContainer);
+  allSwipers.forEach(swiperContainer => initializeSwiper(swiperContainer));
+}
+
+// Prevent the heart click from affecting the <a> tag
+function preventHeartIconLinkBehavior(event) {
+  event.stopPropagation();
+  event.preventDefault();
+}
+
+function updateFavoriteIcon(propertyId, iconElement) {
+  fetch(`./favorites?property_id=${propertyId}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.favorited) {
+        iconElement.classList.remove('fa-regular');
+        iconElement.classList.add('fa-solid');
+        iconElement.classList.add('favorited');
+      } else {
+        iconElement.classList.remove('fa-solid');
+        iconElement.classList.add('fa-regular');
+        iconElement.classList.remove('favorited');
+      }
+    })
+    .catch(error => console.error('Error updating favorite icon:', error));
+}
+
+function toggleFavorite(propertyId, iconElement) {
+  const action = iconElement.classList.contains('fa-solid') ? 'remove' : 'add';
+
+  fetch('./favorites', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ property_id: propertyId, action })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.favorited) {
+        iconElement.classList.remove('fa-regular');
+        iconElement.classList.add('fa-solid');
+        iconElement.classList.add('favorited');
+      } else {
+        iconElement.classList.remove('fa-solid');
+        iconElement.classList.add('fa-regular');
+        iconElement.classList.remove('favorited');
+      }
+    })
+    .catch(error => console.error('Error toggling favorite:', error));
+}
+
+// Initialize heart icon event listeners
+function reinitializeHeartIcons() {
+  const heartIcons = document.querySelectorAll('.heart-icon');
+  console.log('Heart icons initialized:', heartIcons.length);
+
+  heartIcons.forEach(icon => {
+    // Remove existing listeners to prevent duplicates
+    const newIcon = icon.cloneNode(true);
+    icon.parentNode.replaceChild(newIcon, icon);
+
+    // Update favorite status
+    const propertyId = newIcon.getAttribute('data-property-id');
+    if (propertyId) {
+      updateFavoriteIcon(propertyId, newIcon);
+    }
+
+    // Add click listener
+    newIcon.addEventListener('click', (event) => {
+      preventHeartIconLinkBehavior(event);
+
+      const propId = newIcon.getAttribute('data-property-id');
+      if (propId) {
+        toggleFavorite(propId, newIcon);
+      }
+    });
   });
 }
 
 // Expose globally
 window.reinitializeAllSwipers = reinitializeAllSwipers;
+window.reinitializeHeartIcons = reinitializeHeartIcons;
 
-// Also run on initial load
+// Run on initial load
 document.addEventListener("DOMContentLoaded", () => {
   reinitializeAllSwipers();
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Select all heart icons
-  const heartIcons = document.querySelectorAll('.heart-icon');
-
-  heartIcons.forEach(icon => {
-      icon.addEventListener('click', (event) => {
-          // Prevent the click from propagating to the parent <a> tag
-          event.preventDefault();
-          event.stopPropagation();
-
-          // Get the property ID from the data attribute
-          const propertyId = icon.getAttribute('data-property-id');
-
-          // Toggle the heart icon's appearance (e.g., filled vs. unfilled)
-          icon.classList.toggle('fa-regular');
-          icon.classList.toggle('fa-solid');
-
-          // Implement favorite functionality (e.g., send to server)
-         // toggleFavorite(propertyId, icon);
-      });
-  });
-
+  reinitializeHeartIcons();
 });

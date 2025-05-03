@@ -40,7 +40,7 @@
             <section class="justify-centre">
                     <div class="swiper mySwiper" style="position: relative;">
                     <!-- Heart icon moved outside swiper-wrapper -->
-                    <i class="fa-regular fa-heart heart-icon"></i>
+                    <i class="fa-heart fa-regular heart-icon" data-property-id="<?= $property['id']; ?>"></i>
 
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>
@@ -205,8 +205,6 @@
                 <button type="submit" class="">Submit</button>
                 <div id="responseMessage"></div>
             </form>
-            
-
         </div>
     </section>
 

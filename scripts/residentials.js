@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (typeof window.reinitializeAllSwipers === 'function') {
                 window.reinitializeAllSwipers();
+                window.reinitializeHeartIcons();
             } else {
                 console.warn("Swiper reinit function not found!");
             }
