@@ -232,7 +232,7 @@ nav ul a.nav-active {
     justify-content: center;
     flex-wrap: wrap;
     padding: 40px 0;
-    
+    gap: 20px;
 }
 .cards-container a{
     text-decoration: none;
@@ -242,7 +242,7 @@ nav ul a.nav-active {
 /* Property Card Styling */
 .property-card {
     border-radius: 8px;
-    padding: 15px;
+    margin: 10px 0px;
     width: 300px; /* This will allow 4 cards per row */
     box-sizing: border-box;
     transition: transform 0.3s ease;
@@ -273,15 +273,20 @@ nav ul a.nav-active {
     background-size: cover;
     background-position: center;
     border-radius: 8px;
+}
+.swiper-wrapper{
     position: relative;
 }
-.image-slide .fa-heart{
+
+/* Heart icon */
+.heart-icon {
     position: absolute;
-    right: 20px;
     top: 20px;
+    right: 20px;
     font-size: 25px;
-    color: white;
+    color: #911d4e;
     cursor: pointer;
+    z-index: 999; /* Make sure it sits on top */
 }
 
 .image-slide .fa-heart:hover{
@@ -327,7 +332,7 @@ nav ul a.nav-active {
     justify-content: center;
     align-items: center;
     padding: 30px;
-    border-radius: 50%;
+    border-radius: 52%;
     width: 20px;
     height: 20px;
     transform: scale(0.4);
