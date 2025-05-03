@@ -68,24 +68,25 @@ include './includes/navbar.php';
     function renderImageSlider($images) {
         ob_start(); ?>
         <section class="justify-centre">
-        
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <?php while ($image = $images->fetch_assoc()): ?>
-                        <div class="swiper-slide">
-                            <div class="image-slide"
-                                 style="background-image: url('<?php echo htmlspecialchars($image['image_url']); ?>');">
-                                 <i class="fa-solid fa-heart"></i>
+                    <div class="swiper mySwiper" style="position: relative;">
+                    <!-- Heart icon moved outside swiper-wrapper -->
+                    <i class="fa-solid fa-heart heart-icon"></i>
+
+                    <div class="swiper-wrapper">
+                        <?php while ($image = $images->fetch_assoc()): ?>
+                            <div class="swiper-slide">
+                                <div class="image-slide"
+                                    style="background-image: url('<?php echo htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
+                                </div>
                             </div>
-                            
-                        </div>
-                    <?php endwhile; ?>
+                        <?php endwhile; ?>
+                    </div>
+                        
+                    <div class="swiper-button-prev next-buttons"></div>
+                    <div class="swiper-button-next next-buttons"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
-                <div class="swiper-button-prev next-buttons"></div>
-                <div class="swiper-button-next next-buttons"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </section>
+            </section>
         <?php return ob_get_clean();
     }
 

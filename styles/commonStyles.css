@@ -284,19 +284,21 @@ nav ul a.nav-active {
     top: 20px;
     right: 20px;
     font-size: 25px;
-    color: #911d4e;
+    color: white;
+    transform: scale(1.4);
     cursor: pointer;
     z-index: 999; /* Make sure it sits on top */
 }
 
-.image-slide .fa-heart:hover{
-    transform: scale(1.1);
+.heart-icon:hover{
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
 .listing-type{
     position: absolute;
-    top: 30px;
-    left: 30px;
+    top: 15px;
+    left: 15px;
     z-index: 40;
     background-color: white;
     padding: 4px 8px 4px 8px;
@@ -513,4 +515,8 @@ button:hover {
   
 button:active {
     transform: scale(0.97);
+}
+
+.property-cards-container{
+    gap: 20px;
 }

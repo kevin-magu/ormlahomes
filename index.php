@@ -69,6 +69,7 @@
                     <div class="property-card">
                         <?php renderImageSlider($images); ?>
                         <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                        <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
                         <?php if (!$isRental): ?>
                             <div class="display-flex homesize">
                                 <p class="card-square"></p>
