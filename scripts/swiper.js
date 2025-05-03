@@ -1,3 +1,5 @@
+
+
 // Create a reusable function to initialize a Swiper instance
 function initializeSwiper(swiperContainer) {
   const nextButton = swiperContainer.querySelector('.swiper-button-next');
@@ -62,3 +64,18 @@ window.reinitializeAllSwipers = reinitializeAllSwipers;
 document.addEventListener("DOMContentLoaded", () => {
   reinitializeAllSwipers();
 });
+
+
+function handleFavorite(event, id) {
+  event.stopPropagation();
+  event.preventDefault();
+  alert("Favorite clicked for property ID: " + id);
+  // TODO: Add your logic here
+}
+
+function editListing(event, id) {
+  event.stopPropagation();
+  event.preventDefault();
+  alert("Edit clicked for property ID: " + id);
+  // TODO: Add your edit redirect or modal logic here
+}

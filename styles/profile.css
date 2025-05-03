@@ -1,8 +1,15 @@
 .main-content-container{
     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .username{
     color: #a52a5f;
     font-weight: bold;
+}
+.listings{
+    display: flex;
+    flex-wrap: wrap;
 }
