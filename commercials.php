@@ -114,7 +114,7 @@ include './includes/navbar.php';
                     </div>
                     
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
-                    <p><i class="fa-regular fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
+                    <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
                 </div>
             </a>
         </div>

@@ -94,7 +94,7 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                             <?php endif; ?>
                             <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
-                            <p><i class="fa-regular fa-location-dot"></i>
+                            <p><i class="fa-solid fa-location-dot"></i>
                                 <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                                 
                         </div>

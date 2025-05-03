@@ -25,8 +25,8 @@ include './includes/navbar.php';
                 <form id="registrationForm" class="display-flex justify-centre">
                     <input type="text" id="loginEmail" name="email" placeholder="Your Email">
                     <input type="text" id="loginPassword" name="password" placeholder="Your Password">
-                    <button class="a-button" id="submitBtn" type="submit">Login</button>
-                    <p>Don't have an account? <a href="">Register here</a></p>
+                    <button id="submitBtn" type="submit">Login</button>
+                    <p>Don't have an account? <a href="./register">Register here</a></p>
                     <div id="loginResult"></div>
                 </form>
             </div>

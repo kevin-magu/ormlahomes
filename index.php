@@ -77,7 +77,7 @@
                             </div>
                         <?php endif; ?>
                         <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
-                        <p><i class="fa-regular fa-location-dot"></i>
+                        <p><i class="fa-solid fa-location-dot"></i>
                         <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                             
                     </div>
@@ -159,7 +159,7 @@
         <p class="title margin-bottom30">FEATURED</p>
         <div class="amenities margin-bottom30">
             <p>Luxury Modern Villa</p>
-            <p><i class="fa-regular fa-location-dot"></i> Kitengela-Namanga Rd</p>
+            <p><i class="fa-solid fa-location-dot"></i> Kitengela-Namanga Rd</p>
             <p>KES 20,000,000</p>
         </div>
         <div class="container">

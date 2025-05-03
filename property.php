@@ -99,7 +99,7 @@ $previewImages = array_slice($allImages, 0, 3);
 
         <div class="price-features">
             
-            <p> <i class="fa-regular fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
+            <p> <i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
         </div>
 
         <?php if (strtolower($propertyDetails['broad_category']) === 'residential'): ?>

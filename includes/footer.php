@@ -5,7 +5,7 @@
                 <b>Contact Us</b>
                 <p><i class="fa-regular fa-envelope"></i> info@orlmahomes.com</p>
                 <p><i class="fa-regular fa-phone"></i> +254 796 257 269</p>
-                <p><i class="fa-regular fa-location-dot"></i> Syokimau</p>
+                <p><i class="fa-solid fa-location-dot"></i> Syokimau</p>
             </div>
             <div class="column2 column">
                 <b>Quick Links</b>
