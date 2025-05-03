@@ -112,7 +112,7 @@
             <?php renderProperties($conn, 'For sale', 12); ?>
         </div>
         <div class="justify-centre">
-            <a href="./residentials" class="a-button">View More Listings</a>
+        <a href="./residentials"><button>View more listings</button></a>
         </div>
     </section>
 
@@ -123,7 +123,7 @@
             <?php renderProperties($conn, 'rental', 6, true); ?>
         </div>
         <div class="justify-centre">
-            <a href="" class="a-button">View More Rentals</a>
+            <a href="./residentials"><button>View more rentals</button></a>
         </div>
     </section>
 
@@ -148,7 +148,7 @@
                     <p class="picture <?php echo $step['imgClass']; ?>"></p>
                     <p class="title"><?php echo $step['title']; ?></p>
                     <p class="centext"><?php echo $step['desc']; ?></p>
-                    <a href="" class="a-button">Read more</a>
+                    <a href="" class=""><button>Read more</button></a>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -202,7 +202,7 @@
                 <input type="text" name="email" placeholder="Email" required />
                 <input type="number" name="rating" placeholder="Rating out of 5" required />
                 <textarea name="feedbackText" placeholder="Give us your honest feedback about our services" required></textarea>
-                <button type="submit" class="a-button">Submit</button>
+                <button type="submit" class="">Submit</button>
                 <div id="responseMessage"></div>
             </form>
             

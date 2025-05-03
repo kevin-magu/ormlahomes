@@ -18,10 +18,23 @@ $listingType = $data['listingType'] ?? '';
 // Function to render property cards
 function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
+    
+    // Check if the property is favorited by the user (if authenticated)
+    $isFavorited = false;
+    if (isset($_SESSION['user_id'])) {
+        global $conn;
+        $stmt = $conn->prepare("SELECT id FROM favorites WHERE user_id = ? AND property_id = ?");
+        $stmt->bind_param("ii", $_SESSION['user_id'], $property['id']);
+        $stmt->execute();
+        $isFavorited = $stmt->get_result()->num_rows > 0;
+        $stmt->close();
+    }
     ?>
     <div class="cards-container">
-        <a href="property?ref=<?= urlencode($token) ?>">
-            <div class="property-card">
+        <div class="property-card">
+            <!-- Heart icon outside the <a> tag with data-property-id -->
+            <i class="fa-<?= $isFavorited ? 'solid' : 'regular' ?> fa-heart heart-icon <?= $isFavorited ? 'favorited' : '' ?>" data-property-id="<?= $property['id'] ?>"></i>
+            <a href="property?ref=<?= urlencode($token) ?>">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -29,7 +42,6 @@ function renderPropertyCard($property, $images) {
                                 <div class="swiper-slide">
                                     <div class="image-slide"
                                          style="background-image: url('<?= htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
-                                        <i class="fa-regular fa-heart"></i>
                                     </div>
                                 </div>
                             <?php endwhile; ?>
@@ -47,8 +59,8 @@ function renderPropertyCard($property, $images) {
                 </div>
                 <p>Ksh <?= number_format((int)$property['price']); ?></p>
                 <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
     <?php
 }
@@ -119,6 +131,7 @@ if ($result->num_rows > 0) {
         $imgStmt->execute();
         $images = $imgStmt->get_result();
         renderPropertyCard($property, $images);
+        $imgStmt->close();
     }
 } else {
     echo '<p class="no-results-message" style="text-align:center; font-size:18px; margin-top:40px;">No listing found</p>';

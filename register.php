@@ -27,8 +27,8 @@ include './includes/navbar.php';
                     <input type="text" id="registerMobile" name="mobile" placeholder="Your Mobile Number">
                     <input type="text" id="registerPassword" name="password" placeholder="Your Password">
                     <input type="text" id="registerConfirmPassword" name="confirm-password" placeholder="Confirm Password">
-                    <button class="a-button" id="submitBtn" type="submit">Register</button>
-                    <p>Already have an account? <a href="./register">Register here</a></p>
+                    <button id="submitBtn" type="submit">Register</button>
+                    <p>Already have an account? <a href="./login">Login here</a></p>
 
                     <div id="registrationResult"></div>
                 </form>
