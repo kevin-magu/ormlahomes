@@ -12,7 +12,6 @@ include './includes/navbar.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="./styles/buy.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script src="https://kit.fontawesome.com/6a82c0f93a.js" crossorigin="anonymous"></script>
     <style>
         .p-filter-container p.selected {
             background-color: #222;
@@ -136,10 +135,10 @@ while ($property = $result->fetch_assoc()) {
 </div>
 
 
+<?php include './includes/footer.php' ?>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./scripts/swiper.js"></script>
 <script src="./scripts/commercials.js"></script>
-<?php include './includes/footer.php' ?>
-</div>
 </body>
 </html>

@@ -20,16 +20,17 @@ function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
     ?>
     <div class="cards-container">
-        <a href="property?ref=<?= urlencode($token) ?>">
+        <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
             <div class="property-card">
                 <section class="justify-centre">
-                    <div class="swiper mySwiper">
+                    <div class="swiper mySwiper" style="position: relative;">
+                    <i class="fa-regular fa-heart heart-icon" style="position: absolute;"></i>
                         <div class="swiper-wrapper">
                             <?php while ($image = $images->fetch_assoc()): ?>
                                 <div class="swiper-slide">
                                     <div class="image-slide"
                                          style="background-image: url('<?= htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
-                                        <i class="fa-regular fa-heart"></i>
+                                        
                                     </div>
                                 </div>
                             <?php endwhile; ?>

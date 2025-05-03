@@ -11,7 +11,7 @@ include './includes/navbar.php';
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/buy.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <script src="https://kit.fontawesome.com/6a82c0f93a.js" crossorigin="anonymous"></script>
+    
     <style>
         .p-filter-container p.selected {
             background-color: #222;

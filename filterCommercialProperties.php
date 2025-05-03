@@ -21,10 +21,10 @@ function renderPropertyCard($property, $images) {
     ?>
     <div class="cards-container">
         <a href="property?ref=<?= urlencode($token) ?>">
-            <div class="property-card">
+            <div class="property-card" style="position: relative;">
+                <i class="fa-regular fa-heart heart-icon" style="position: absolute;"></i>
                 <section class="justify-centre">
-                    <div class="swiper mySwiper">
-                    <i class="fa-regular fa-heart heart-icon"></i>
+                    <div class="swiper mySwiper">       
                         <div class="swiper-wrapper">
                             <?php while ($image = $images->fetch_assoc()): ?>
                                 <div class="swiper-slide">

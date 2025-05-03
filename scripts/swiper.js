@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
           icon.classList.toggle('fa-solid');
 
           // Implement favorite functionality (e.g., send to server)
-          toggleFavorite(propertyId, icon);
+         // toggleFavorite(propertyId, icon);
       });
   });
 
