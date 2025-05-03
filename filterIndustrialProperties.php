@@ -20,17 +20,17 @@ function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
     ?>
     <div class="cards-container">
-        <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
-            <div class="property-card">
+        <div class="property-card" style="position: relative;">
+            <!-- Heart icon outside the <a> tag with positioning -->
+            <i class="fa-regular fa-heart heart-icon"></i>
+            <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
-                    <div class="swiper mySwiper" style="position: relative;">
-                    <i class="fa-regular fa-heart heart-icon" style="position: absolute;"></i>
+                    <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             <?php while ($image = $images->fetch_assoc()): ?>
                                 <div class="swiper-slide">
                                     <div class="image-slide"
                                          style="background-image: url('<?= htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
-                                        
                                     </div>
                                 </div>
                             <?php endwhile; ?>
@@ -48,13 +48,13 @@ function renderPropertyCard($property, $images) {
                 </div>
                 <p>Ksh <?= number_format((int)$property['price']); ?></p>
                 <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
     <?php
 }
 
-// Base query with hardcoded broad_category = 'residential'
+// Base query with hardcoded broad_category = 'industrial'
 $sql = "SELECT * FROM properties WHERE broad_category = 'industrial'";
 $params = [];
 $types = "";

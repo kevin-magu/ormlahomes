@@ -33,7 +33,7 @@ function renderPropertyCard($property, $images) {
     <div class="cards-container">
         <div class="property-card">
             <!-- Heart icon outside the <a> tag with data-property-id -->
-            <i class="fa-<?= $isFavorited ? 'solid' : 'regular' ?> fa-heart heart-icon <?= $isFavorited ? 'favorited' : '' ?>" data-property-id="<?= $property['id'] ?>"></i>
+            <i class="fa-regular fa-heart heart-icon"></i>
             <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
                 <div class="swiper mySwiper" style="position: relative;">
