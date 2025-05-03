@@ -228,7 +228,13 @@ nav ul a{
     flex-wrap: wrap;
     padding: 40px 0;
     gap: 20px;
+    text-decoration: none;
 }
+
+.cards-container{
+    text-decoration: none;
+}
+
 .cards-container a{
     text-decoration: none;
 }

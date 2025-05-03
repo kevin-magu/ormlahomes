@@ -18,23 +18,12 @@ $listingType = $data['listingType'] ?? '';
 // Function to render property cards
 function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
-    
-    // Check if the property is favorited by the user (if authenticated)
-    $isFavorited = false;
-    if (isset($_SESSION['user_id'])) {
-        global $conn;
-        $stmt = $conn->prepare("SELECT id FROM favorites WHERE user_id = ? AND property_id = ?");
-        $stmt->bind_param("ii", $_SESSION['user_id'], $property['id']);
-        $stmt->execute();
-        $isFavorited = $stmt->get_result()->num_rows > 0;
-        $stmt->close();
-    }
     ?>
     <div class="cards-container">
         <div class="property-card">
-            <!-- Heart icon outside the <a> tag with data-property-id -->
-            <i class="fa-<?= $isFavorited ? 'solid' : 'regular' ?> fa-heart heart-icon <?= $isFavorited ? 'favorited' : '' ?>" data-property-id="<?= $property['id'] ?>"></i>
-            <a href="property?ref=<?= urlencode($token) ?>">
+            <!-- Heart icon outside the <a> tag -->
+            <i class="fa-regular fa-heart heart-icon"></i>
+            <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">

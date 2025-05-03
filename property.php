@@ -55,11 +55,13 @@ $previewImages = array_slice($allImages, 0, 3);
         <div class="house-properties-container">
         <div class="property-feature property-title">
             <p><?= htmlspecialchars($propertyDetails['property_type'] ?? 'N/A') ?></p>,
-            
-            <p><?= htmlspecialchars($propertyDetails['listing_type'] ?? 'N/A') ?></p>  
+            <p><?= htmlspecialchars($propertyDetails['listing_type'] ?? 'N/A') ?></p> 
         </div>
 
         <div class="photo-grid">
+        <div class="display-flex save-property">
+           <button>Save</button>
+        </div>
             <div class="big-photo">
                 <?php if (!empty($previewImages[0])): ?>
                     <img src="<?= htmlspecialchars($previewImages[0]['image_url']) ?>" alt="Main Image">
@@ -101,6 +103,8 @@ $previewImages = array_slice($allImages, 0, 3);
             
             <p> <i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
         </div>
+
+        
 
         <?php if (strtolower($propertyDetails['broad_category']) === 'residential'): ?>
             <div class="property-features amenities">

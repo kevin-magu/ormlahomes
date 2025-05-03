@@ -24,12 +24,13 @@ function renderPropertyCard($property, $images) {
             <div class="property-card">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">
+                    <i class="fa-regular fa-heart heart-icon"></i>
                         <div class="swiper-wrapper">
                             <?php while ($image = $images->fetch_assoc()): ?>
                                 <div class="swiper-slide">
                                     <div class="image-slide"
                                          style="background-image: url('<?= htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
-                                        <i class="fa-regular fa-heart"></i>
+                                    
                                     </div>
                                 </div>
                             <?php endwhile; ?>
