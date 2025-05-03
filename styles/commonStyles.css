@@ -283,18 +283,22 @@ nav ul a{
 /* Heart icon */
 .heart-icon {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 25px;
-    color: white;
-    transform: scale(1.4);
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
     cursor: pointer;
-    z-index: 999; /* Make sure it sits on top */
+    z-index: 10;
+    color: white; /* Default color */
+    transition: color 0.3s ease;
 }
 
-.heart-icon:hover{
-    transform: scale(1.5);
-    cursor: pointer;
+.heart-icon:hover {
+    color: white; /* Hover effect */
+}
+
+/* Optional: Style for favorited state */
+.heart-icon.fa-regular {
+    color: white;
 }
 
 .listing-type{

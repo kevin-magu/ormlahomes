@@ -66,16 +66,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function handleFavorite(event, id) {
-  event.stopPropagation();
-  event.preventDefault();
-  alert("Favorite clicked for property ID: " + id);
-  // TODO: Add your logic here
-}
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all heart icons
+  const heartIcons = document.querySelectorAll('.heart-icon');
 
-function editListing(event, id) {
-  event.stopPropagation();
-  event.preventDefault();
-  alert("Edit clicked for property ID: " + id);
-  // TODO: Add your edit redirect or modal logic here
-}
+  heartIcons.forEach(icon => {
+      icon.addEventListener('click', (event) => {
+          // Prevent the click from propagating to the parent <a> tag
+          event.preventDefault();
+          event.stopPropagation();
+
+          // Get the property ID from the data attribute
+          const propertyId = icon.getAttribute('data-property-id');
+
+          // Toggle the heart icon's appearance (e.g., filled vs. unfilled)
+          icon.classList.toggle('fa-regular');
+          icon.classList.toggle('fa-solid');
+
+          // Implement favorite functionality (e.g., send to server)
+          toggleFavorite(propertyId, icon);
+      });
+  });
+
+});

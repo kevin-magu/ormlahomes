@@ -99,23 +99,23 @@ $previewImages = array_slice($allImages, 0, 3);
 
         <div class="price-features">
             
-            <p> <i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
+            <p> <i class="fa-regular fa-location-dot"></i> <?= htmlspecialchars($propertyDetails['location'] ?? 'N/A') ?></p>  
         </div>
 
         <?php if (strtolower($propertyDetails['broad_category']) === 'residential'): ?>
             <div class="property-features amenities">
                 <div class="property-feature">
-                    <i class="fa-solid fa-bed"></i>
+                    <i class="fa-regular fa-bed"></i>
                     <p>Bedrooms</p>
                     <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? '__') ?></p>
                 </div>
                 <div class="property-feature">
-                    <i class="fa-solid fa-bath"></i>
+                    <i class="fa-regular fa-bath"></i>
                     <p>Bathrooms</p>
                     <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? '__') ?></p>                
                 </div>
                 <div class="property-feature">
-                    <i class="fa-solid fa-warehouse"></i>
+                    <i class="fa-regular fa-warehouse"></i>
                     <p>Garages</p>
                     <p><?= htmlspecialchars($propertyDetails['garage'] ?? '__') ?></p>
                 </div>

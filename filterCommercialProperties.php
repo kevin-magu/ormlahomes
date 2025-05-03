@@ -29,7 +29,7 @@ function renderPropertyCard($property, $images) {
                                 <div class="swiper-slide">
                                     <div class="image-slide"
                                          style="background-image: url('<?= htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
-                                        <i class="fa-solid fa-heart"></i>
+                                        <i class="fa-regular fa-heart"></i>
                                     </div>
                                 </div>
                             <?php endwhile; ?>
@@ -46,7 +46,7 @@ function renderPropertyCard($property, $images) {
                     <p><?= htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
                 </div>
                 <p>Ksh <?= number_format((int)$property['price']); ?></p>
-                <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <p><i class="fa-regular fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
             </div>
         </a>
     </div>

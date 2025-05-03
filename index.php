@@ -40,7 +40,7 @@
             <section class="justify-centre">
                     <div class="swiper mySwiper" style="position: relative;">
                     <!-- Heart icon moved outside swiper-wrapper -->
-                    <i class="fa-solid fa-heart heart-icon"></i>
+                    <i class="fa-regular fa-heart heart-icon"></i>
 
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>
@@ -77,8 +77,8 @@
                             </div>
                         <?php endif; ?>
                         <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
-                        <p><i class="fa-solid fa-location-dot"></i>
-                            <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <p><i class="fa-regular fa-location-dot"></i>
+                        <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                             
                     </div>
                 </a>
@@ -159,7 +159,7 @@
         <p class="title margin-bottom30">FEATURED</p>
         <div class="amenities margin-bottom30">
             <p>Luxury Modern Villa</p>
-            <p><i class="fa-solid fa-location-dot"></i> Kitengela-Namanga Rd</p>
+            <p><i class="fa-regular fa-location-dot"></i> Kitengela-Namanga Rd</p>
             <p>KES 20,000,000</p>
         </div>
         <div class="container">
@@ -191,7 +191,7 @@
                     <p class="name">--- <?php echo htmlspecialchars($row['name']); ?></p>
                     <p class="stars justify-centre">
                         <?php for ($i = 0; $i < $row['rating']; $i++): ?>
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
                         <?php endfor; ?>
                     </p>
                 </div>
