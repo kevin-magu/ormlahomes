@@ -15,7 +15,7 @@ if (!$conn instanceof mysqli || $conn->connect_error) {
         'success' => false,
         'message' => 'Database connection failed: ' . ($conn->connect_error ?? 'Unknown error')
     ]);
-    error_log('MySQLi connection failed: ' . ($conn->connect_error ?? 'Unknown error'), 3, './errors.log');
+    error_log('MySQLi connection failed: ' . ($conn->connect_error ?? 'Unknown error'), 3, './error_log.txt');
     exit;
 }
 
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'success' => false,
                 'message' => 'Database query preparation failed.'
             ]);
-            error_log('Prepare failed: ' . $conn->error, 3, './errors.log');
+            error_log('Prepare failed: ' . $conn->error, 3, './error_log.txt');
             exit;
         }
 
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'success' => false,
                 'message' => 'This property is already in your favorites.'
             ]);
-            error_log('Insert failed: ' . $stmt->error, 3, './errors.log');
+            error_log('Insert failed: ' . $stmt->error, 3, './error_log.txtg');
         }
         $stmt->close();
     } elseif ($action === 'remove') {
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'success' => false,
                 'message' => 'Database query preparation failed.'
             ]);
-            error_log('Prepare failed: ' . $conn->error, 3, './errors.log');
+            error_log('Prepare failed: ' . $conn->error, 3, './error_log.txt');
             exit;
         }
 

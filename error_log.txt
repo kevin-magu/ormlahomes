@@ -32,3 +32,4 @@
 2025-05-01 23:25:07 - Unknown column 'yeaBuilt' in 'field list'
 2025-05-01 23:25:15 - Field 'price_per_month' doesn't have a default value
 2025-05-01 23:25:23 - Field 'price_per_month' doesn't have a default value
+2025-05-04 17:45:26 - Missing or empty field: listingType

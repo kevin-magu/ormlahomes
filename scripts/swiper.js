@@ -49,7 +49,6 @@ function updateFavoriteIcon(propertyId, iconElement) {
   })
     .then(res => {
       if (res.status === 401) {
-        // Don't show message for unauthenticated users on page load
         iconElement.classList.remove('fa-solid', 'favorited');
         iconElement.classList.add('fa-regular');
         return;
@@ -69,7 +68,6 @@ function updateFavoriteIcon(propertyId, iconElement) {
     })
     .catch(err => {
       console.error('Favorite status check failed:', err);
-      // Default to fa-regular on error
       iconElement.classList.remove('fa-solid', 'favorited');
       iconElement.classList.add('fa-regular');
     });
@@ -122,13 +120,10 @@ function reinitializeHeartIcons() {
     const clonedIcon = icon.cloneNode(true);
     icon.parentNode.replaceChild(clonedIcon, icon);
 
-    // Default to fa-regular
     clonedIcon.classList.remove('fa-solid', 'favorited');
     clonedIcon.classList.add('fa-regular');
 
     const propertyId = parseInt(clonedIcon.getAttribute('data-property-id'));
-
-    // Only check favorite status if the user is logged in
     if (propertyId && !isNaN(propertyId) && typeof isLoggedIn !== 'undefined' && isLoggedIn) {
       updateFavoriteIcon(propertyId, clonedIcon);
     }
@@ -163,4 +158,9 @@ window.reinitializeHeartIcons = reinitializeHeartIcons;
 document.addEventListener("DOMContentLoaded", () => {
   reinitializeAllSwipers();
   reinitializeHeartIcons();
+
+  // Ensure we check the favorite status if the page is redirected with a flag
+  if (window.location.search.includes('refreshed=true') || window.location.search.includes('ts=')) {
+    reinitializeHeartIcons(); // Refresh the state immediately
+  }
 });

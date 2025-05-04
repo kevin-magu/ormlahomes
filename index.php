@@ -1,20 +1,22 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <script>
-        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
-    </script>
+   
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/index.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script>
+        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+    </script>
 </head>
 <body>
 
-    <?php include './includes/navbar.php'; ?>
+    <?php include './includes/navbar.php'; ; ?>
 
     <!-- Banner Section -->
     <section class="section1 justify-centre">
@@ -82,6 +84,7 @@
                             <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
                             <p><i class="fa-solid fa-location-dot"></i>
                             <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <?php echo htmlspecialchars($property['id'], ENT_QUOTES, 'UTF-8'); ?></p>
                         </div>
                     </a>
                 </div>
@@ -218,5 +221,21 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/swiper.js"></script>
     <script src="./scripts/index.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Get the referrer URL (previous page)
+    const referrer = document.referrer;
+    // Get the current page's origin (e.g., http://localhost/orlmahomes)
+    const currentOrigin = window.location.origin;
+
+    // Check if there's a referrer and it's not from the same origin
+    if (referrer && !referrer.startsWith(currentOrigin)) {
+        // Force a cache-free reload with a timestamp query parameter
+        const timestamp = Date.now();
+        const newUrl = `${window.location.pathname}?t=${timestamp}${window.location.hash}`;
+        window.location.assign(newUrl);
+    }
+});
+    </script>
 </body>
 </html>
