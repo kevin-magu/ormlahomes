@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Redirect to the homepage or dashboard after a successful login
                 setTimeout(() => {
-                    window.location.replace('./index?ts=' + new Date().getTime());
+                    window.location.href = window.location.href;
                      // Adjust destination as needed
                 }, 1000);
             }

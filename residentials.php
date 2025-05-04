@@ -1,6 +1,6 @@
 <?php
 include './includes/connection.php';
-include './includes/navbar.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +20,21 @@ include './includes/navbar.php';
             padding: 4px 8px;
         }
     </style>
+    
 </head>
 <body>
+
+<?php include './includes/navbar.php'; ?>
+<script>
+        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+        console.log("User login status:", isLoggedIn);
+</script>
 <div class="page-container">
+
 <div class="sticky-top">
     <p class="justify-centre all-pages-title margin-top30">Buy or Rent a Home Your Family Will Love.</p>
 <div class="filter-container justify-centre margin-top30 dipslay-flex">
+
     <div class="p-filter-container disp justify-centre dipslay-flex" id="propertyTypes">
         <p data-type="all">All</p>
         <p data-type="Apartment">Apartment</p>
@@ -63,6 +72,8 @@ include './includes/navbar.php';
     </div> 
 </div>
 </div>
+<div id="userResponse" class="response-box hidden"></div>
+
 
 <div class="property-cards-container justify-centre margin-top30" id="propertyResults">
     
@@ -73,7 +84,7 @@ include './includes/navbar.php';
                     <div class="swiper mySwiper" style="position: relative;">
                     <!-- Heart icon moved outside swiper-wrapper -->
                     <i class="fa-regular fa-heart heart-icon" 
-                    data-property-id="<?= $property['id']; ?>"></i>
+                data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
 
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>
@@ -102,9 +113,12 @@ include './includes/navbar.php';
     
         ob_start(); ?>
         <div class="cards-container">
-            <?php $token = base64_encode("property_" . $property['id']); ?>
-            <a href="property?ref=<?= urlencode($token) ?>">
-                <div class="property-card">
+            <div class="property-card" style="position: relative;">
+                <i class="fa-regular fa-heart heart-icon"
+                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+                
+                <?php $token = base64_encode("property_" . $property['id']); ?>
+                <a href="property?ref=<?= urlencode($token) ?>">
                     <?php echo renderImageSlider($images); ?>
                     <h3><?= htmlspecialchars($property['property_type']) ?></h3>
                     <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
@@ -115,11 +129,12 @@ include './includes/navbar.php';
                     
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
                     <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         <?php return ob_get_clean();
     }
+    
     
 
     $stmt = $conn->prepare("SELECT * FROM properties WHERE broad_category = 'residential'");
@@ -141,5 +156,7 @@ while ($property = $result->fetch_assoc()) {
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./scripts/swiper.js"></script>
 <script src="./scripts/residentials.js"></script>
+
+
 </body>
 </html>

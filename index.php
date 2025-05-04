@@ -70,7 +70,7 @@
                 <i class="fa-regular fa-heart heart-icon" 
                 data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
 
-                    <a href="property?ref=<?= urlencode($token) ?>">
+                <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                         <div class="property-card-inner">
                             <?php renderImageSlider($images); ?>
                             <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
