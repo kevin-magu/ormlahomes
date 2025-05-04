@@ -29,7 +29,7 @@
             resident reviews, and local insights to find what is right for you.
         </p>
     </section>
-
+    <div id="userResponse" class="response-box hidden"></div>
     <?php
         include 'includes/connection.php';
         error_reporting(E_ALL);
@@ -38,26 +38,21 @@
         function renderImageSlider($images) {
             ?>
             <section class="justify-centre">
-                    <div class="swiper mySwiper" style="position: relative;">
-                    <!-- Heart icon moved outside swiper-wrapper -->
-                    <i class="fa-heart fa-regular heart-icon" data-property-id="<?= $property['id']; ?>"></i>
-
+                <div class="swiper mySwiper" style="position: relative;">
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>
                             <div class="swiper-slide">
                                 <div class="image-slide"
-                                    style="background-image: url('<?php echo htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
+                                     style="background-image: url('<?php echo htmlspecialchars($image['image_url'], ENT_QUOTES, 'UTF-8'); ?>');">
                                 </div>
                             </div>
                         <?php endwhile; ?>
                     </div>
-                        
                     <div class="swiper-button-prev next-buttons"></div>
                     <div class="swiper-button-next next-buttons"></div>
                     <div class="swiper-pagination"></div>
                 </div>
             </section>
-
             <?php
         }
 
@@ -65,23 +60,26 @@
             $token = base64_encode("property_" . $property['id']);
             ?>
             <div class="cards-container">
-            <a href="property?ref=<?= urlencode($token) ?>">
-                    <div class="property-card">
-                        <?php renderImageSlider($images); ?>
-                        <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                        <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
-                        <?php if (!$isRental): ?>
-                            <div class="display-flex homesize">
-                                <p class="card-square"></p>
-                                <p><?php echo htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
-                            </div>
-                        <?php endif; ?>
-                        <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
-                        <p><i class="fa-solid fa-location-dot"></i>
-                        <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            
-                    </div>
-                </a>
+                <div class="property-card" style="position: relative;">
+                    <i class="fa-regular fa-heart heart-icon" 
+                       data-property-id="<?= $property['id']; ?>"></i>
+                    <a href="property?ref=<?= urlencode($token) ?>">
+                        <div class="property-card-inner">
+                            <?php renderImageSlider($images); ?>
+                            <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
+                            <?php if (!$isRental): ?>
+                                <div class="display-flex homesize">
+                                    <p class="card-square"></p>
+                                    <p><?php echo htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
+                                </div>
+                            <?php endif; ?>
+                            <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
+                            <p><i class="fa-solid fa-location-dot"></i>
+                            <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                    </a>
+                </div>
             </div>
             <?php
         }
@@ -112,7 +110,7 @@
             <?php renderProperties($conn, 'For sale', 12); ?>
         </div>
         <div class="justify-centre">
-        <a href="./residentials"><button>View more listings</button></a>
+            <a href="./residentials"><button>View more listings</button></a>
         </div>
     </section>
 

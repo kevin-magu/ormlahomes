@@ -1,60 +1,160 @@
 <?php
-// Include the database connection file
+// Include the MySQLi database connection file
 include('./includes/connection.php');
 
 // Start session to access $_SESSION
 session_start();
 
-// Redirect to login if not logged in
+// Set JSON content type
+header('Content-Type: application/json');
+
+// Verify MySQLi connection
+if (!$conn instanceof mysqli || $conn->connect_error) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Database connection failed: ' . ($conn->connect_error ?? 'Unknown error')
+    ]);
+    error_log('MySQLi connection failed: ' . ($conn->connect_error ?? 'Unknown error'), 3, './errors.log');
+    exit;
+}
+
+// Check user authentication
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ./login');
+    http_response_code(401);
+    echo json_encode([
+        'success' => false,
+        'message' => 'You must be logged in to perform this action.'
+    ]);
     exit;
 }
 
-$userId = $_SESSION['user_id']; // Safe to access now
+$userId = $_SESSION['user_id'];
 
-// Handle GET request: Check if property is favorited
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['property_id'])) {
-        $propertyId = intval($_GET['property_id']);
-
-        // Check if the property is favorited by the user
-        $stmt = $conn->prepare('SELECT * FROM favorites WHERE user_id = ? AND property_id = ?');
-        $stmt->execute([$userId, $propertyId]);
-        $favorite = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Return whether it's favorited or not
-        echo json_encode(['favorited' => $favorite ? true : false]);
-    } else {
-        echo json_encode(['error' => 'Property ID is required']);
+    if (!isset($_GET['property_id']) || !is_numeric($_GET['property_id'])) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Valid property ID is required.'
+        ]);
+        exit;
     }
+
+    $propertyId = intval($_GET['property_id']);
+    if ($propertyId <= 0) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid property ID.'
+        ]);
+        exit;
+    }
+
+    $stmt = $conn->prepare('SELECT * FROM favorites WHERE user_id = ? AND property_id = ?');
+    if (!$stmt) {
+        http_response_code(500);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Database query preparation failed.'
+        ]);
+        error_log('Prepare failed: ' . $conn->error, 3, './errors.log');
+        exit;
+    }
+
+    $stmt->bind_param('ii', $userId, $propertyId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $favorite = $result->fetch_assoc();
+
+    echo json_encode([
+        'success' => true,
+        'favorited' => $favorite ? true : false,
+        'message' => $favorite ? 'Property is in your favorites.' : 'Property is not favorited.'
+    ]);
+    $stmt->close();
     exit;
 }
 
-// Handle POST request: Add or remove favorite
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
-    if (isset($data['property_id'], $data['action'])) {
-        $propertyId = intval($data['property_id']);
-        $action = $data['action'];
+    if (!isset($data['property_id'], $data['action']) || !is_numeric($data['property_id'])) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Valid property ID and action are required.'
+        ]);
+        exit;
+    }
 
-        if ($action === 'add') {
-            $stmt = $conn->prepare('INSERT INTO favorites (user_id, property_id) VALUES (?, ?)');
-            $stmt->execute([$userId, $propertyId]);
-            echo json_encode(['favorited' => true]);
-        } elseif ($action === 'remove') {
-            $stmt = $conn->prepare('DELETE FROM favorites WHERE user_id = ? AND property_id = ?');
-            $stmt->execute([$userId, $propertyId]);
-            echo json_encode(['favorited' => false]);
-        } else {
-            echo json_encode(['error' => 'Invalid action']);
+    $propertyId = intval($data['property_id']);
+    $action = $data['action'];
+
+    if ($action === 'add') {
+        $stmt = $conn->prepare('INSERT INTO favorites (user_id, property_id) VALUES (?, ?)');
+        if (!$stmt) {
+            http_response_code(500);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Database query preparation failed.'
+            ]);
+            error_log('Prepare failed: ' . $conn->error, 3, './errors.log');
+            exit;
         }
+
+        $stmt->bind_param('ii', $userId, $propertyId);
+        if ($stmt->execute()) {
+            echo json_encode([
+                'success' => true,
+                'favorited' => true,
+                'propertyId' => $propertyId,
+                'message' => 'Property added to your favorites.'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'This property is already in your favorites.'
+            ]);
+            error_log('Insert failed: ' . $stmt->error, 3, './errors.log');
+        }
+        $stmt->close();
+    } elseif ($action === 'remove') {
+        $stmt = $conn->prepare('DELETE FROM favorites WHERE user_id = ? AND property_id = ?');
+        if (!$stmt) {
+            http_response_code(500);
+            echo json_encode([
+                'success' => false,
+                'message' => 'Database query preparation failed.'
+            ]);
+            error_log('Prepare failed: ' . $conn->error, 3, './errors.log');
+            exit;
+        }
+
+        $stmt->bind_param('ii', $userId, $propertyId);
+        $stmt->execute();
+        echo json_encode([
+            'success' => true,
+            'favorited' => false,
+            'propertyId' => $propertyId,
+            'message' => 'Property removed from your favorites.'
+        ]);
+        $stmt->close();
     } else {
-        echo json_encode(['error' => 'Property ID and action are required']);
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid action.'
+        ]);
     }
     exit;
 }
 
-// Default response for unsupported methods
-echo json_encode(['error' => 'Unsupported request method']);
+// Default fallback for unsupported methods
+http_response_code(405);
+echo json_encode([
+    'success' => false,
+    'message' => 'Unsupported request method.'
+]);
+exit;
+?>
