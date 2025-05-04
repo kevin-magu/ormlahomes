@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/index.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+</head>
+<body>
+    <?php include './includes/navbar.php'; ?>
     <script>
         const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
     </script>
-</head>
-<body>
-
-    <?php include './includes/navbar.php'; ; ?>
-
     <!-- Banner Section -->
     <section class="section1 justify-centre">
         <div class="banner">

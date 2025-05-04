@@ -1,6 +1,12 @@
 <?php
 session_start();
+if(isset($_SESSION['user_id'])){
+    echo "user is logged in ";
+}else{
+    echo "user is not logged in ";
+}
 ?>
+
 
 <!-- fonts MONTSERRAT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,6 +15,9 @@ session_start();
 
 <!-- icons -->
 <script src="https://kit.fontawesome.com/e4c074505f.js" crossorigin="anonymous"></script>
+
+        
+
 
 <!-- Navbar -->
 <nav id="page-top">
