@@ -65,8 +65,9 @@
 
             <div class="cards-container">
                 <div class="property-card" style="position: relative;">
-                    <i class="fa-regular fa-heart heart-icon" 
-                       data-property-id="<?= $property['id']; ?>"></i>
+                <i class="fa-regular fa-heart heart-icon" 
+                data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+
                     <a href="property?ref=<?= urlencode($token) ?>">
                         <div class="property-card-inner">
                             <?php renderImageSlider($images); ?>

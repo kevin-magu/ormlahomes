@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             'success' => false,
             'message' => 'Database query preparation failed.'
         ]);
-        error_log('Prepare failed: ' . $conn->error, 3, './errors.log');
+        error_log('Prepare failed: ' . $conn->error, 3, './error_log.txt');
         exit;
     }
 
