@@ -1,12 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['user_id'])){
-    echo "user is logged in ";
-}else{
-    echo "user is not logged in ";
-}
 ?>
-
 
 <!-- fonts MONTSERRAT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,9 +9,6 @@ if(isset($_SESSION['user_id'])){
 
 <!-- icons -->
 <script src="https://kit.fontawesome.com/e4c074505f.js" crossorigin="anonymous"></script>
-
-        
-
 
 <!-- Navbar -->
 <nav id="page-top">
@@ -42,8 +33,11 @@ if(isset($_SESSION['user_id'])){
 </nav>
 
 <script>
-// Check login status using token
 document.addEventListener("DOMContentLoaded", function () {
+    // ✅ Define global login status
+    window.isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+    console.log("window.isLoggedIn =", window.isLoggedIn);
+
     const token = localStorage.getItem('token');
     const authLinks = document.getElementById('auth-links');
 
@@ -64,12 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Token valid, show Profile only (no logout here)
+                // Token valid, show Profile
                 authLinks.innerHTML = `
                     <a href="/orlmahomes/profile"><li><i class="fa-solid fa-user"></i> Profile</li></a>
                 `;
             } else {
-                // Token invalid, remove it and show Login
+                // Token invalid
                 localStorage.removeItem('token');
                 authLinks.innerHTML = `
                     <a href="/orlmahomes/login"><li><i class="fa-solid fa-sign-in-alt"></i> Login</li></a>
@@ -85,9 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Highlight current nav link
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll("#nav-links a");
-
     navLinks.forEach(link => {
         if (currentPath === link.getAttribute("href")) {
             link.classList.add("active");

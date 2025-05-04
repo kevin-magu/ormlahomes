@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +13,7 @@
 </head>
 <body>
     <?php include './includes/navbar.php'; ?>
-    <script>
-        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
-    </script>
+    
     <!-- Banner Section -->
     <section class="section1 justify-centre">
         <div class="banner">
