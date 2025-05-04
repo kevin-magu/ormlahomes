@@ -1,6 +1,6 @@
 <?php
 include './includes/connection.php';
-
+include './includes/navbar.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +23,6 @@ include './includes/connection.php';
     
 </head>
 <body>
-
-<?php include './includes/navbar.php'; ?>
 <script>
         const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
         console.log("User login status:", isLoggedIn);
