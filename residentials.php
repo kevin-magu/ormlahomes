@@ -72,7 +72,8 @@ include './includes/navbar.php';
         <section class="justify-centre">
                     <div class="swiper mySwiper" style="position: relative;">
                     <!-- Heart icon moved outside swiper-wrapper -->
-                    <i class="fa-regular fa-heart heart-icon"></i>
+                    <i class="fa-regular fa-heart heart-icon" 
+                    data-property-id="<?= $property['id']; ?>"></i>
 
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>

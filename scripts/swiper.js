@@ -127,7 +127,9 @@ function reinitializeHeartIcons() {
     clonedIcon.classList.add('fa-regular');
 
     const propertyId = parseInt(clonedIcon.getAttribute('data-property-id'));
-    if (propertyId && !isNaN(propertyId)) {
+
+    // Only check favorite status if the user is logged in
+    if (propertyId && !isNaN(propertyId) && typeof isLoggedIn !== 'undefined' && isLoggedIn) {
       updateFavoriteIcon(propertyId, clonedIcon);
     }
 

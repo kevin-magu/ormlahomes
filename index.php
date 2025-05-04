@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-
+    <script>
+        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+    </script>
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/index.css" />
@@ -60,7 +62,7 @@
             $token = base64_encode("property_" . $property['id']);
             ?>
 
-            
+
             <div class="cards-container">
                 <div class="property-card" style="position: relative;">
                     <i class="fa-regular fa-heart heart-icon" 
