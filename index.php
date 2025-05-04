@@ -59,6 +59,8 @@
         function renderPropertyCard($property, $images, $isRental = false) {
             $token = base64_encode("property_" . $property['id']);
             ?>
+
+            
             <div class="cards-container">
                 <div class="property-card" style="position: relative;">
                     <i class="fa-regular fa-heart heart-icon" 
