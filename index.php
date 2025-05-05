@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-   
     <!-- External Stylesheets -->
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/index.css" />
@@ -13,7 +12,7 @@
 </head>
 <body>
     <?php include './includes/navbar.php'; ?>
-    
+
     <!-- Banner Section -->
     <section class="section1 justify-centre">
         <div class="banner">
@@ -213,25 +212,12 @@
     <?php include './includes/footer.php' ?>
     
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        window.isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+    </script>
     <script src="./scripts/swiper.js"></script>
     <script src="./scripts/index.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-    // Get the referrer URL (previous page)
-    const referrer = document.referrer;
-    // Get the current page's origin (e.g., http://localhost/orlmahomes)
-    const currentOrigin = window.location.origin;
-
-    // Check if there's a referrer and it's not from the same origin
-    if (referrer && !referrer.startsWith(currentOrigin)) {
-        // Force a cache-free reload with a timestamp query parameter
-        const timestamp = Date.now();
-        const newUrl = `${window.location.pathname}?t=${timestamp}${window.location.hash}`;
-        window.location.assign(newUrl);
-    }
-});
-    </script>
+    
 </body>
 </html>

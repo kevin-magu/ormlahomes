@@ -13,9 +13,14 @@ function initializeSwiper(swiperContainer) {
     navigation: { nextEl: nextButton, prevEl: prevButton },
     pagination: { el: paginationEl, clickable: true },
     on: {
-      slideChange() { updateButtonVisibility(this); },
-      reachEnd() { updateButtonVisibility(this); },
-      reachBeginning() { updateButtonVisibility(this); },
+      init() {
+        updateButtonVisibility(this);
+        reinitializeHeartIcons(); // Ensure icons are initialized after swiper renders
+      },
+      slideChange() {
+        updateButtonVisibility(this);
+        reinitializeHeartIcons(); // Re-run in case new slides have new icons
+      },
     },
   });
 
@@ -152,15 +157,20 @@ function showResponseMessage(message, duration = 6000) {
   }, duration);
 }
 
+// Expose functions globally
 window.reinitializeAllSwipers = reinitializeAllSwipers;
 window.reinitializeHeartIcons = reinitializeHeartIcons;
 
 document.addEventListener("DOMContentLoaded", () => {
   reinitializeAllSwipers();
-  reinitializeHeartIcons();
 
-  // Ensure we check the favorite status if the page is redirected with a flag
+  // Set a small delay to catch late-rendered icons
+  setTimeout(() => {
+    reinitializeHeartIcons();
+  }, 300);
+
+  // Optional: force icon reinit after URL flags
   if (window.location.search.includes('refreshed=true') || window.location.search.includes('ts=')) {
-    reinitializeHeartIcons(); // Refresh the state immediately
+    reinitializeHeartIcons();
   }
 });

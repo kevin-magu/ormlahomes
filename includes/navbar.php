@@ -35,7 +35,7 @@ session_start();
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     // ✅ Define global login status
-    window.isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
+    
     console.log("window.isLoggedIn =", window.isLoggedIn);
 
     const token = localStorage.getItem('token');
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     } else {
         // Validate token
-        fetch('/orlmahomes/validate_token.php', {
+        fetch('/orlmahomes/validate_token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
