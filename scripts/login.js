@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data.success) {
                 // Store the token in localStorage
                 localStorage.setItem("token", data.token);
-
+                window.isLoggedIn = true;
+                localStorage.setItem('isLoggedIn', 'true');
                 // Optionally store the username if available
                 localStorage.setItem("userName", email); // You can store the user's actual name if returned from backend
 

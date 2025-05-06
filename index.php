@@ -212,12 +212,9 @@
     <?php include './includes/footer.php' ?>
     
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        window.isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
-    </script>
     <script src="./scripts/swiper.js"></script>
-    <script src="./scripts/index.js"></script>
     
 </body>
 </html>
