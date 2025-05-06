@@ -32,7 +32,6 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
     <form id="editForm" method="POST" action="updateProperty.php" enctype="multipart/form-data">
         <input type="hidden" name="property_id" value="<?= $property['id'] ?>">
 
-        <!-- Existing Images -->
         <div class="existing-images margin-top50">
             <?php foreach ($images as $img): ?>
                 <div class="image-wrapper">
@@ -46,6 +45,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
             <span>Upload new images (optional)</span>
             <input type="file" name="images[]" id="fileInput" accept="image/*" multiple>
         </div>
+        <div id="preview" class="preview-area"></div>
 
         <!-- Property Fields -->
         <input type="text" name="title" class="property-input" placeholder="Title" value="<?= $property['title'] ?>" required>
