@@ -98,9 +98,11 @@ if (isset($_SESSION['user_id'])) {
                             <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
                             <p><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                             <p>
-                              <i class="fa-solid fa-pen-to-square editIcon" placeholder="Edit your listing"
-                                 data-id="<?php echo $property['id']; ?>"></i>
+                            <p>
+                            <i class="fa-solid fa-pen-to-square editIcon" data-id="<?php echo $property['id']; ?>" title="Edit your listing"></i>
                             </p>
+
+
 
                             
                         </div>
@@ -141,15 +143,20 @@ if (isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/swiper.js"></script>
     <script>
-        document.querySelectorAll('.editIcon').forEach(icon => {
-          icon.addEventListener('click', function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            console.log('Edit clicked for property ID:', this.dataset.id);
-            // Optionally: Redirect to an edit page or open a modal
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('.editIcon').forEach(function (icon) {
+            icon.addEventListener('click', function (event) {
+              event.preventDefault();
+              event.stopPropagation();
+              const propertyId = this.dataset.id;
+              if (propertyId) {
+                window.location.href = `edit-property.php?id=${propertyId}`;
+              }
+            });
           });
-        });
+          });
     </script>
+
 
 </body>
 </html>

@@ -1,0 +1,7 @@
+.existing-images{
+    display: flex;
+    gap: 20px;
+}
+.existing-images img{
+    border-radius: 4px;
+}

@@ -1,0 +1,112 @@
+<?php
+include './includes/navbar.php';
+include './includes/connection.php';
+
+$propertyId = $_GET['id'];
+$result = mysqli_query($conn, "SELECT * FROM properties WHERE id = '$propertyId'");
+$property = mysqli_fetch_assoc($result);
+
+// Get all images for the property
+$imageQuery = mysqli_query($conn, "SELECT * FROM property_images WHERE property_id = '$propertyId'");
+$images = [];
+while ($row = mysqli_fetch_assoc($imageQuery)) {
+    $images[] = $row['image_url'];
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./styles/commonStyles.css">
+    <link rel="stylesheet" href="./styles/upload.css">
+    <link rel="stylesheet" href="./styles/edit-property.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Property</title>
+</head>
+<body>
+
+<p class="justify-centre all-pages-title margin-top30">Edit your property listing</p>
+
+<div class="form-container display-flex justify-centre">
+    <form id="editForm" method="POST" action="updateProperty.php" enctype="multipart/form-data">
+        <input type="hidden" name="property_id" value="<?= $property['id'] ?>">
+
+        <!-- Existing Images -->
+        <div class="existing-images margin-top50">
+            <?php foreach ($images as $img): ?>
+                <div class="image-wrapper">
+                    <img src="<?= $img ?>" width="150">
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- New Images Upload -->
+        <div class="form-group drop-zone margin-top50 display-flex justify-centre" id="dropZone">
+            <span>Upload new images (optional)</span>
+            <input type="file" name="images[]" id="fileInput" accept="image/*" multiple>
+        </div>
+
+        <!-- Property Fields -->
+        <input type="text" name="title" class="property-input" placeholder="Title" value="<?= $property['title'] ?>" required>
+        
+        <div class="select-container display-flex">
+            <select name="listingType" required>
+                <option value="">Listing Type</option>
+                <option value="For Sale" <?= $property['listing_type'] === 'For Sale' ? 'selected' : '' ?>>For Sale</option>
+                <option value="Rental" <?= $property['listing_type'] === 'Rental' ? 'selected' : '' ?>>Rental</option>
+            </select>
+
+            <select name="mainCategory" required>
+                <option value="">Category</option>
+                <?php
+                $categories = ['residential', 'commercial', 'industrial', 'lands'];
+                foreach ($categories as $cat) {
+                    echo "<option value='$cat'" . ($property['broad_category'] === $cat ? ' selected' : '') . ">" . ucfirst($cat) . "</option>";
+                }
+                ?>
+            </select>
+
+            <select name="subcategory" required>
+                <?php
+                $sub = $property['property_type'];
+                $allSubs = ['Apartment','Condo','Duplex','Vacation Home','Townhouse','office_space','retail_units','malls','restaurants_hotels','mixed_use','warehouse','factories','manufacturing_plants','distribution_centers','storage_facilities','vacant_lot','agricultural_land','development_land'];
+                foreach ($allSubs as $s) {
+                    echo "<option value='$s'" . ($sub === $s ? ' selected' : '') . ">" . ucfirst(str_replace('_', ' ', $s)) . "</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <input type="text" name="location" class="property-input" placeholder="Location" value="<?= $property['location'] ?>" required>
+        <input type="text" name="mapLink" class="property-input" placeholder="Google Map Link" value="<?= $property['map_link'] ?>">
+        <input type="text" name="cost" class="property-input" placeholder="Sale Price" value="<?= $property['price'] ?>" required>
+        <input type="text" name="rentPerMonth" class="property-input" placeholder="Rent per Month" value="<?= $property['rent_per_month'] ?>">
+        <input type="text" name="propertySize" class="property-input" placeholder="Property Size" value="<?= $property['propertySize'] ?>" required>
+
+        <input type="text" name="bedrooms" class="property-input" placeholder="Bedrooms" value="<?= $property['bedrooms'] ?>" required>
+        <input type="text" name="bathrooms" class="property-input" placeholder="Bathrooms" value="<?= $property['bathrooms'] ?>" required>
+        <input type="text" name="garages" class="property-input" placeholder="Parking Spaces" value="<?= $property['garage'] ?>">
+        <input type="text" name="yearBuilt" class="property-input" placeholder="Year Built" value="<?= $property['yearBuilt'] ?>">
+        <input type="text" name="condition" class="property-input" placeholder="Condition" value="<?= $property['property_condition'] ?>">
+        <input type="text" name="floor" class="property-input" placeholder="Floor Level" value="<?= $property['floor'] ?>">
+        <input type="text" name="amenities" class="property-input" placeholder="Amenities" value="<?= $property['amenities'] ?>">
+        <input type="text" name="nearby" class="property-input" placeholder="Nearby" value="<?= $property['other_property_amenities'] ?>">
+
+        <textarea name="propertyDescription" class="property-input" maxlength="700" required><?= $property['description'] ?></textarea>
+        <div id="charCounter"><?= strlen($property['description']) ?> / 700</div>
+
+        <div class="button-container display-flex margin-top50">
+            <button type="submit">Update Property</button>
+            <button type="submit" style="background-color: red; font-weight: bold;">Delete Property</button>
+            <a href="#">Report a Problem</a>
+            <a href="#">Request Help</a>
+        </div>
+    </form>
+</div>
+
+<?php include './includes/footer.php'; ?>
+
+<script src="./scripts/houseSale.js"></script>
+</body>
+</html>
