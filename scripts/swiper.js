@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Define global login status
   
-  console.log("window.isLoggedIn =", window.isLoggedIn);
+  
 
   const token = localStorage.getItem('token');
   const authLinks = document.getElementById('auth-links');
@@ -152,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
       body: JSON.stringify({ property_id: propertyId, action }),
     })
       .then(res => {
-        console.log('Raw response', res)
         if (res.status === 401) {
           showResponseMessage('Please log in to favorite properties.');
           return;
@@ -177,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showResponseMessage('Something went wrong.');
       });
   }
-  
+  const isLoggedIn = window.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true';
   function reinitializeHeartIcons() {
     const heartIcons = document.querySelectorAll('.heart-icon');
   
@@ -188,7 +187,8 @@ document.addEventListener("DOMContentLoaded", function () {
       clonedIcon.classList.remove('fa-solid', 'favorited');
       clonedIcon.classList.add('fa-regular');
       
-      const isLoggedIn = window.isLoggedIn || localStorage.getItem('isLoggedIn') === 'true';
+      
+      
 
       const propertyId = parseInt(clonedIcon.getAttribute('data-property-id'));
       if (propertyId && !isNaN(propertyId) && isLoggedIn) {
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-  
+  console.log("window.isLoggedIn =" ,isLoggedIn);
   function showResponseMessage(message, duration = 6000) {
     const responseBox = document.getElementById('userResponse');
     if (!responseBox) return;
