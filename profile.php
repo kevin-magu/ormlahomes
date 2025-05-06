@@ -45,7 +45,7 @@ if (isset($_SESSION['user_id'])) {
 <div id="userResponse" class="response-box hidden"></div>
     <div class="main-content-container margin-top50">
         <p class="username">Welcome, <?php echo $username; ?></p>
-        <p>MANAGE YOUR LISTING HERE</p>
+        <p>MANAGE YOUR LISTINGS HERE</p>
         <p>TOTAL: <?php echo $propertyCount; ?></p>
 
         <div class="listings property-cards-container">
