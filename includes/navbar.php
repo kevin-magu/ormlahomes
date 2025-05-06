@@ -27,7 +27,7 @@ session_start();
         <!-- Login/Profile Links will be controlled by JS -->
         <span id="auth-links"></span>
 
-        <a href="/orlmahomes/favourite"><li><i class="fa-solid fa-house"></i></li></a>
+        <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i></li></a>
         <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i></li></a>
     </ul>
 </nav>

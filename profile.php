@@ -82,10 +82,10 @@ if (isset($_SESSION['user_id'])) {
                 <div class="cards-container">
                 <a href="property?ref=<?= urlencode($token) ?>">
                         <div class="property-card">
-                        <i class="fa-regular fa-heart heart-icon"
-                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+                            <i class="fa-regular fa-heart heart-icon"
+                            data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
 
-                    <?php $token = base64_encode("property_" . $property['id']); ?>
+                            <?php $token = base64_encode("property_" . $property['id']); ?>
                             <?php renderImageSlider($images); ?>
                             <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
                             <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
@@ -96,9 +96,13 @@ if (isset($_SESSION['user_id'])) {
                                 </div>
                             <?php endif; ?>
                             <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
-                            <p><i class="fa-solid fa-location-dot"></i>
-                                <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
-                                
+                            <p><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            <p>
+                              <i class="fa-solid fa-pen-to-square editIcon" placeholder="Edit your listing"
+                                 data-id="<?php echo $property['id']; ?>"></i>
+                            </p>
+
+                            
                         </div>
                     </a>
                 </div>
@@ -136,5 +140,16 @@ if (isset($_SESSION['user_id'])) {
     </div>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/swiper.js"></script>
+    <script>
+        document.querySelectorAll('.editIcon').forEach(icon => {
+          icon.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('Edit clicked for property ID:', this.dataset.id);
+            // Optionally: Redirect to an edit page or open a modal
+          });
+        });
+    </script>
+
 </body>
 </html>

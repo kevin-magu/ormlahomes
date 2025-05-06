@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     event.stopPropagation();
   }
+
   
   function updateFavoriteIcon(propertyId, iconElement) {
     if (!propertyId || isNaN(propertyId) || propertyId <= 0) {

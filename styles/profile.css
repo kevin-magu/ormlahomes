@@ -13,3 +13,10 @@
     display: flex;
     flex-wrap: wrap;
 }
+.fa-pen-to-square{
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    font-size: 24px;
+    z-index: 999;
+}
