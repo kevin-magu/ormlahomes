@@ -22,10 +22,6 @@ include './includes/navbar.php';
     
 </head>
 <body>
-<script>
-        const isLoggedIn = <?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>;
-        console.log("User login status:", isLoggedIn);
-</script>
 <div class="page-container">
 
 <div class="sticky-top">
@@ -115,7 +111,7 @@ include './includes/navbar.php';
                    data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
                 
                 <?php $token = base64_encode("property_" . $property['id']); ?>
-                <a href="property?ref=<?= urlencode($token) ?>">
+                <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                     <?php echo renderImageSlider($images); ?>
                     <h3><?= htmlspecialchars($property['property_type']) ?></h3>
                     <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>

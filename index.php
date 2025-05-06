@@ -79,7 +79,7 @@
                             <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
                             <p><i class="fa-solid fa-location-dot"></i>
                             <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            <?php echo htmlspecialchars($property['id'], ENT_QUOTES, 'UTF-8'); ?></p>
+                           
                         </div>
                     </a>
                 </div>

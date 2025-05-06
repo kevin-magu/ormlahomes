@@ -62,7 +62,7 @@ include './includes/navbar.php';
     </div> 
 </div>
 </div>
-
+<div id="userResponse" class="response-box hidden"></div>
 <div class="property-cards-container justify-centre margin-top30" id="propertyResults">
     
     <?php
@@ -71,8 +71,6 @@ include './includes/navbar.php';
          <section class="justify-centre">
                     <div class="swiper mySwiper" style="position: relative;">
                     <!-- Heart icon moved outside swiper-wrapper -->
-                    <i class="fa-regular fa-heart heart-icon"></i>
-
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>
                             <div class="swiper-slide">
@@ -100,9 +98,12 @@ include './includes/navbar.php';
     
         ob_start(); ?>
         <div class="cards-container">
-            <?php $token = base64_encode("property_" . $property['id']); ?>
             <a href="property?ref=<?= urlencode($token) ?>">
                 <div class="property-card">
+                <i class="fa-regular fa-heart heart-icon"
+                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+
+                    <?php $token = base64_encode("property_" . $property['id']); ?>
                     <?php echo renderImageSlider($images); ?>
                     <h3><?= htmlspecialchars($property['property_type']) ?></h3>
                     <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>

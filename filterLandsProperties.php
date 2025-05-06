@@ -32,12 +32,13 @@ function renderPropertyCard($property, $images) {
     ?>
     <div class="cards-container">
         <div class="property-card">
-            <!-- Heart icon outside the <a> tag with data-property-id -->
-            <i class="fa-regular fa-heart heart-icon"></i>
+        <i class="fa-regular fa-heart heart-icon"
+                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+
+                    <?php $token = base64_encode("property_" . $property['id']); ?>
             <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
                 <div class="swiper mySwiper" style="position: relative;">
-                    <i class="fa-regular fa-heart heart-icon" style="position: absolute;"></i>
                         <div class="swiper-wrapper">
                             <?php while ($image = $images->fetch_assoc()): ?>
                                 <div class="swiper-slide">

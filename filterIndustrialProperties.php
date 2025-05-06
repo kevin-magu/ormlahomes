@@ -22,7 +22,10 @@ function renderPropertyCard($property, $images) {
     <div class="cards-container">
         <div class="property-card" style="position: relative;">
             <!-- Heart icon outside the <a> tag with positioning -->
-            <i class="fa-regular fa-heart heart-icon"></i>
+            <i class="fa-regular fa-heart heart-icon"
+                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+
+                    <?php $token = base64_encode("property_" . $property['id']); ?>
             <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">

@@ -42,8 +42,9 @@ if (isset($_SESSION['user_id'])) {
     <title>Profile</title>
 </head>  
 <body>
+<div id="userResponse" class="response-box hidden"></div>
     <div class="main-content-container margin-top50">
-        <p class="username">Welcome <?php echo $username; ?></p>
+        <p class="username">Welcome, <?php echo $username; ?></p>
         <p>MANAGE YOUR LISTING HERE</p>
         <p>TOTAL: <?php echo $propertyCount; ?></p>
 
@@ -57,9 +58,6 @@ if (isset($_SESSION['user_id'])) {
                 ?>
                 <section class="justify-centre">
                     <div class="swiper mySwiper" style="position: relative;">
-                    <!-- Heart icon moved outside swiper-wrapper -->
-                    <i class="fa-regular fa-heart heart-icon"></i>
-
                     <div class="swiper-wrapper">
                         <?php while ($image = $images->fetch_assoc()): ?>
                             <div class="swiper-slide">
@@ -84,6 +82,10 @@ if (isset($_SESSION['user_id'])) {
                 <div class="cards-container">
                 <a href="property?ref=<?= urlencode($token) ?>">
                         <div class="property-card">
+                        <i class="fa-regular fa-heart heart-icon"
+                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
+
+                    <?php $token = base64_encode("property_" . $property['id']); ?>
                             <?php renderImageSlider($images); ?>
                             <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
                             <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
@@ -132,6 +134,7 @@ if (isset($_SESSION['user_id'])) {
             ?>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./scripts/swiper.js"></script>
 </body>
 </html>
