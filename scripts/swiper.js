@@ -2,58 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Define global login status
-  
-  
-
-  const token = localStorage.getItem('token');
-  const authLinks = document.getElementById('auth-links');
-
-  if (!token) {
-      // If no token, show Login link
-      authLinks.innerHTML = `
-          <a href="/orlmahomes/login"><li><i class="fa-solid fa-sign-in-alt"></i> Login</li></a>
-      `;
-  } else {
-      // Validate token
-      fetch('/orlmahomes/validate_token', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + token
-          }
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              // Token valid, show Profile
-              authLinks.innerHTML = `
-                  <a href="/orlmahomes/profile"><li><i class="fa-solid fa-user"></i> Profile</li></a>
-              `;
-          } else {
-              // Token invalid
-              localStorage.removeItem('token');
-              authLinks.innerHTML = `
-                  <a href="/orlmahomes/login"><li><i class="fa-solid fa-sign-in-alt"></i> Login</li></a>
-              `;
-          }
-      })
-      .catch(error => {
-          console.error('Error:', error);
-          localStorage.removeItem('token');
-          authLinks.innerHTML = `
-              <a href="/orlmahomes/login"><li><i class="fa-solid fa-sign-in-alt"></i> Login</li></a>
-          `;
-      });
-  }
-
-  // Highlight current nav link
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll("#nav-links a");
-  navLinks.forEach(link => {
-      if (currentPath === link.getAttribute("href")) {
-          link.classList.add("active");
-      }
-  });
 
 
 
