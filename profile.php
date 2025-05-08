@@ -150,7 +150,7 @@ if (isset($_SESSION['user_id'])) {
               event.stopPropagation();
               const propertyId = this.dataset.id;
               if (propertyId) {
-                window.location.href = `edit-property.php?id=${propertyId}`;
+                window.location.href = `editProperty.php?id=${propertyId}`;
               }
             });
           });

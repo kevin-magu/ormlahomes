@@ -107,7 +107,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 
         <div class="button-container display-flex margin-top50">
             <button type="submit">Update Property</button>
-            <button type="submit" style="background-color: red; font-weight: bold;">Delete Property</button>
+            <button type="" style="background-color: red; font-weight: bold;">Delete Property</button>
             <a href="#">Report a Problem</a>
             <a href="#">Request Help</a>
         </div>
@@ -118,5 +118,6 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 
 <script src="./scripts/houseSale.js"></script>
 <script src="./scripts/deleteImages.js"></script>
+<script src="./scripts/editProperty.js"></script>
 </body>
 </html>

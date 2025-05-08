@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       propertyDescription: document.getElementById('propertyDescription')?.value || '',
       images: []
     };
+    console.log(propertyData)
 
     const files = fileInput?.files || [];
     const imagePromises = [];
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(base64Images => {
         propertyData.images = base64Images;
 
-        return fetch('./edit-processing.php', {
+        return fetch('./editPropertyProcessing', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -65,8 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
           showResponseMessage(data.message || 'Update failed.');
         }
       })
-      .catch(() => {
+      .catch((error) => {
         showResponseMessage('Network error occurred. Try again.');
+        console.error(error)
       });
   });
 });
