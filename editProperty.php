@@ -29,7 +29,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 <p class="justify-centre all-pages-title margin-top30">Edit your property listing</p>
 
 <div class="form-container display-flex justify-centre">
-    <form id="editForm" method="POST" action="updateProperty.php" enctype="multipart/form-data">
+    <form id="editForm"  >
         <input type="hidden" name="property_id" value="<?= $property['id'] ?>">
 
         <div class="existing-images margin-top50">

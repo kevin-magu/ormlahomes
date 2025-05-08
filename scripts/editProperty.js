@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       propertyDescription: document.getElementById('propertyDescription')?.value || '',
       images: []
     };
-    console.log(propertyData)
+    console.log(JSON.stringify(propertyData))
 
     const files = fileInput?.files || [];
     const imagePromises = [];
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(base64Images => {
         propertyData.images = base64Images;
 
-        return fetch('./editPropertyProcessing', {
+        return fetch('./editPropertyProcessingtest', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
