@@ -237,6 +237,7 @@ function showResponseMessage(message, duration = 6000) {
     responseBox.classList.add('hidden');
   }, duration);
 }
+window.showResponseMessage = showResponseMessage;
 
 // ---- Clear Form Fields ----
 function clearFormFields() {
