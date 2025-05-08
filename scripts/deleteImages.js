@@ -3,9 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
         icon.addEventListener('click', function () {
             const imageId = this.getAttribute('data-id');
             const imageUrl = this.getAttribute('data-url');
+            console.log('image Id:', imageId , 'Image url:', imageUrl) 
             if (!confirm('Are you sure you want to delete this image?')) return;
 
-            fetch('delete-images.php', {
+            fetch('./delete-images', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ image_id: imageId, image_url: imageUrl })

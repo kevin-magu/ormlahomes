@@ -41,8 +41,8 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
                     $imageUrl = $row['image_url'];
                     echo '
                     <div class="image-wrapper" data-image-id="' . $imageId . '">
-                        <i class="fa-solid fa-trash delete-image" data-id="' . $imageId . '"></i>
-                        <img src="' . htmlspecialchars($imageUrl) . '" width="150">
+                        <i class="fa-solid fa-trash delete-image" data-id="' . $imageId . '" data-url="'. $imageUrl .'"></i>
+                        <img src="' . htmlspecialchars($imageUrl) . '" width="150">  
                     </div>';
                 }
                 ?>
