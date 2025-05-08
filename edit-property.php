@@ -37,6 +37,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
                 $imageQuery = mysqli_query($conn, "SELECT * FROM property_images WHERE property_id = '$propertyId'");
                 while ($row = mysqli_fetch_assoc($imageQuery)) {
                     $imageId = $row['id'];
+                    echo "<p>{$row['id']}</p>";
                     $imageUrl = $row['image_url'];
                     echo '
                     <div class="image-wrapper" data-image-id="' . $imageId . '">
@@ -59,7 +60,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <input type="text" name="title" class="property-input" placeholder="Title" value="<?= $property['title'] ?>" required>
         
         <div class="select-container display-flex">
-        <select name="listingType" required>
+        <select id="listingType" name="listingType" required>
         <option value="">Listing Type</option>
         <option value="For Sale" <?= $property['listing_type'] === 'For sale' ? 'selected' : '' ?>>For Sale</option>
         <option value="Rental" <?= $property['listing_type'] === 'Rental' ? 'selected' : '' ?>>Rental</option>
@@ -87,22 +88,22 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
             </select>
         </div>
 
-        <input type="text" name="location" class="property-input" placeholder="Location" value="<?= $property['location'] ?>" required>
-        <input type="text" name="mapLink" class="property-input" placeholder="Google Map Link" value="<?= $property['map_link'] ?>">
-        <input type="text" name="cost" class="property-input" placeholder="Sale Price" value="<?= $property['price'] ?>" required>
-        <input type="text" name="rentPerMonth" class="property-input" placeholder="Rent per Month" value="<?= $property['rent_per_month'] ?>">
-        <input type="text" name="propertySize" class="property-input" placeholder="Property Size" value="<?= $property['propertySize'] ?>" required>
+        <input type="text" name="location" id="location" class="property-input" placeholder="Location" value="<?= $property['location'] ?>" required>
+        <input type="text" name="mapLink" id="mapLink" class="property-input" placeholder="Google Map Link" value="<?= $property['map_link'] ?>">
+        <input type="text" name="cost" id="cost" class="property-input" placeholder="Sale Price" value="<?= $property['price'] ?>" required>
+        <input type="text" name="rentPerMonth"  id="rentPerMonth" class="property-input" placeholder="Rent per Month" value="<?= $property['rent_per_month'] ?>">
+        <input type="text" name="propertySize" id="propertySize" class="property-input" placeholder="Property Size" value="<?= $property['propertySize'] ?>" required>
 
-        <input type="text" name="bedrooms" class="property-input" placeholder="Bedrooms" value="<?= $property['bedrooms'] ?>" required>
-        <input type="text" name="bathrooms" class="property-input" placeholder="Bathrooms" value="<?= $property['bathrooms'] ?>" required>
-        <input type="text" name="garages" class="property-input" placeholder="Parking Spaces" value="<?= $property['garage'] ?>">
-        <input type="text" name="yearBuilt" class="property-input" placeholder="Year Built" value="<?= $property['yearBuilt'] ?>">
-        <input type="text" name="condition" class="property-input" placeholder="Condition" value="<?= $property['property_condition'] ?>">
-        <input type="text" name="floor" class="property-input" placeholder="Floor Level" value="<?= $property['floor'] ?>">
-        <input type="text" name="amenities" class="property-input" placeholder="Amenities" value="<?= $property['amenities'] ?>">
-        <input type="text" name="nearby" class="property-input" placeholder="Nearby" value="<?= $property['other_property_amenities'] ?>">
+        <input type="text" name="bedrooms" id="bedrooms" class="property-input" placeholder="Bedrooms" value="<?= $property['bedrooms'] ?>" required>
+        <input type="text" name="bathrooms" id="bathrooms" class="property-input" placeholder="Bathrooms" value="<?= $property['bathrooms'] ?>" required>
+        <input type="text" name="garages" id="garages" class="property-input" placeholder="Parking Spaces" value="<?= $property['garage'] ?>">
+        <input type="text" name="yearBuilt" id="yearBuilt" class="property-input" placeholder="Year Built" value="<?= $property['yearBuilt'] ?>">
+        <input type="text" name="condition" id="propertyCondition" class="property-input" placeholder="Condition" value="<?= $property['property_condition'] ?>">
+        <input type="text" name="floor" id="floor" class="property-input" placeholder="Floor Level" value="<?= $property['floor'] ?>">
+        <input type="text" name="amenities" id="amenitie class="property-input" placeholder="Amenities" value="<?= $property['amenities'] ?>">
+        <input type="text" name="nearby" id="nearby class="property-input" placeholder="Nearby" value="<?= $property['other_property_amenities'] ?>">
 
-        <textarea name="propertyDescription" class="property-input" maxlength="700" required><?= $property['description'] ?></textarea>
+        <textarea name="propertyDescription" id="propertyDescription" class="property-input" maxlength="700" required><?= $property['description'] ?></textarea>
         <div id="charCounter"><?= strlen($property['description']) ?> / 700</div>
 
         <div class="button-container display-flex margin-top50">

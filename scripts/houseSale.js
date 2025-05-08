@@ -105,8 +105,12 @@ function hideAllSubcategories() {
 // Function to show fields based on listing type
 function handleListingType() {
     // Hide Rent per Month and Cost initially
-    rentPerMonthInput.style.display = 'none';
-    costInput.style.display = 'none';
+    if(rentPerMonthInput){
+      rentPerMonthInput.style.display = 'none';
+    }else if(costInput){
+      costInput.style.display = 'none';
+    }
+    
 
     // Show fields based on listing type
     if (listingTypeSelect.value === 'For Sale') {
