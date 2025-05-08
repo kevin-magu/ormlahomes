@@ -35,6 +35,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <div class="existing-images margin-top50">
             <?php foreach ($images as $img): ?>
                 <div class="image-wrapper">
+                    <i class="fa-solid fa-trash"></i>
                     <img src="<?= $img ?>" width="150">
                 </div>
             <?php endforeach; ?>
@@ -51,11 +52,12 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <input type="text" name="title" class="property-input" placeholder="Title" value="<?= $property['title'] ?>" required>
         
         <div class="select-container display-flex">
-            <select name="listingType" required>
-                <option value="">Listing Type</option>
-                <option value="For Sale" <?= $property['listing_type'] === 'For Sale' ? 'selected' : '' ?>>For Sale</option>
-                <option value="Rental" <?= $property['listing_type'] === 'Rental' ? 'selected' : '' ?>>Rental</option>
-            </select>
+        <select name="listingType" required>
+        <option value="">Listing Type</option>
+        <option value="For Sale" <?= $property['listing_type'] === 'For Sale' ? 'selected' : '' ?>>For Sale</option>
+        <option value="Rental" <?= $property['listing_type'] === 'Rental' ? 'selected' : '' ?>>Rental</option>
+        </select>
+
 
             <select name="mainCategory" required>
                 <option value="">Category</option>
