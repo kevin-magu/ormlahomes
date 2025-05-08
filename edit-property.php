@@ -37,7 +37,6 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
                 $imageQuery = mysqli_query($conn, "SELECT * FROM property_images WHERE property_id = '$propertyId'");
                 while ($row = mysqli_fetch_assoc($imageQuery)) {
                     $imageId = $row['id'];
-                    echo "<p>{$row['id']}</p>";
                     $imageUrl = $row['image_url'];
                     echo '
                     <div class="image-wrapper" data-image-id="' . $imageId . '">
