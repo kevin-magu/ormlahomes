@@ -25,7 +25,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
     <title>Edit Property</title>
 </head>
 <body>
-
+<div id="userResponse" class="response-box hidden"></div>
 <p class="justify-centre all-pages-title margin-top30">Edit your property listing</p>
 
 <div class="form-container display-flex justify-centre">
@@ -33,13 +33,20 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <input type="hidden" name="property_id" value="<?= $property['id'] ?>">
 
         <div class="existing-images margin-top50">
-            <?php foreach ($images as $img): ?>
-                <div class="image-wrapper">
-                    <i class="fa-solid fa-trash"></i>
-                    <img src="<?= $img ?>" width="150">
-                </div>
-            <?php endforeach; ?>
+                <?php
+                $imageQuery = mysqli_query($conn, "SELECT * FROM property_images WHERE property_id = '$propertyId'");
+                while ($row = mysqli_fetch_assoc($imageQuery)) {
+                    $imageId = $row['id'];
+                    $imageUrl = $row['image_url'];
+                    echo '
+                    <div class="image-wrapper" data-image-id="' . $imageId . '">
+                        <i class="fa-solid fa-trash delete-image" data-id="' . $imageId . '"></i>
+                        <img src="' . htmlspecialchars($imageUrl) . '" width="150">
+                    </div>';
+                }
+                ?>
         </div>
+
 
         <!-- New Images Upload -->
         <div class="form-group drop-zone margin-top50 display-flex justify-centre" id="dropZone">
@@ -54,7 +61,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <div class="select-container display-flex">
         <select name="listingType" required>
         <option value="">Listing Type</option>
-        <option value="For Sale" <?= $property['listing_type'] === 'For Sale' ? 'selected' : '' ?>>For Sale</option>
+        <option value="For Sale" <?= $property['listing_type'] === 'For sale' ? 'selected' : '' ?>>For Sale</option>
         <option value="Rental" <?= $property['listing_type'] === 'Rental' ? 'selected' : '' ?>>Rental</option>
         </select>
 
@@ -110,5 +117,6 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 <?php include './includes/footer.php'; ?>
 
 <script src="./scripts/houseSale.js"></script>
+<script src="./scripts/deleteImages.js"></script>
 </body>
 </html>

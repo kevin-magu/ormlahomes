@@ -5,6 +5,14 @@
 .existing-images img{
     border-radius: 4px;
 }
+.image-wrapper{
+    position: relative;
+}
 .fa-trash{
     color: red;
+    font-size: 24px;
+    top: 6px;
+    left: 6px;
+    position: absolute;
+    cursor: pointer;
 }
