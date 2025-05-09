@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
           showResponseMessage(data.message || 'Unknown response');
           if (data.success) {
             setTimeout(() => {
-              window.location.href = '/orlmahomes/dashboard'; // change to your actual page
-            }, 1500);
+              window.location.href = './profile'; // change to your actual page
+            }, 2500);
           }
         })
         .catch(error => {
