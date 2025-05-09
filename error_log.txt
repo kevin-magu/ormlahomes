@@ -33,3 +33,43 @@
 2025-05-01 23:25:15 - Field 'price_per_month' doesn't have a default value
 2025-05-01 23:25:23 - Field 'price_per_month' doesn't have a default value
 2025-05-04 17:45:26 - Missing or empty field: listingType
+2025-05-08 22:11:03 - Missing or empty field: title
+2025-05-08 22:27:51 - Missing field: propertyId
+2025-05-08 22:41:15 - Missing field: propertyId
+2025-05-08 22:43:29 - Invalid JSON received
+2025-05-08 22:47:30 - Invalid JSON received
+2025-05-08 22:50:32 - Invalid JSON received
+2025-05-08 22:50:33 - Invalid JSON received
+2025-05-08 22:50:41 - Invalid JSON received
+2025-05-08 22:54:02 - Invalid JSON received
+2025-05-08 22:54:03 - Invalid JSON received
+2025-05-08 22:54:03 - Invalid JSON received
+2025-05-08 22:54:03 - Invalid JSON received
+2025-05-08 22:54:03 - Invalid JSON received
+2025-05-08 22:54:39 - Invalid JSON received
+2025-05-08 22:54:40 - Invalid JSON received
+2025-05-08 22:54:40 - Invalid JSON received
+2025-05-08 22:54:40 - Invalid JSON received
+2025-05-08 23:01:25 - Invalid JSON received
+2025-05-08 23:03:03 - Invalid JSON received: Syntax error
+2025-05-08 23:04:21 - Invalid JSON received: Syntax error
+2025-05-08 23:06:38 - Invalid JSON received: Syntax error
+2025-05-08 23:06:48 - Invalid JSON received: Syntax error
+2025-05-08 23:07:11 - Invalid JSON received: Syntax error
+2025-05-08 23:09:14 - Invalid JSON received: Syntax error | Input: 
+2025-05-08 23:12:50 - Empty request body received
+2025-05-08 23:12:50 - Error: Empty request body | Trace: #0 {main}
+2025-05-08 23:13:37 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-08 23:14:01 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-08 23:14:30 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-08 23:16:41 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-08 23:17:52 - Empty request body received
+2025-05-08 23:17:52 - Error: Empty request body | Trace: #0 {main}
+2025-05-08 23:20:49 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-08 23:23:19 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-09 08:19:00 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-09 08:35:30 - Empty request body received
+2025-05-09 08:35:30 - Error: Empty request body | Trace: #0 {main}
+2025-05-09 08:36:29 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-09 08:47:12 - Error: Title cannot be empty | Trace: #0 {main}
+2025-05-09 11:33:43 - Error: User not authenticated | Trace: #0 {main}

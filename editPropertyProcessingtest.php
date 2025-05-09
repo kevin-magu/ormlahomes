@@ -1,59 +1,82 @@
 <?php
-// Enable full error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Include database connection
+include './includes/connection.php';
 
-// Set content type to plain text for clear output
-header('Content-Type: text/plain');
+// Read the JSON input from the POST request
+$data = json_decode(file_get_contents('php://input'), true);
 
-// Start session if required
-session_start();
-
-echo "========== PHP DEBUG TEST PAGE ==========\n\n";
-
-// Read the raw input sent via fetch (JSON)
-$rawInput = file_get_contents('php://input');
-
-// Show the raw input
-echo "----- Raw JSON Input -----\n";
-if (empty($rawInput)) {
-    echo "[EMPTY] No input received.\n\n";
-} else {
-    echo $rawInput . "\n\n";
+// Function to sanitize and validate input data
+function sanitizeInput($data, $conn) {
+    return $conn->real_escape_string(trim($data));
 }
 
-// Try to decode JSON
-$data = json_decode($rawInput, true);
+// Validate that required fields exist
+$requiredFields = ['property_id', 'title', 'listingType', 'price', 'location', 'bedrooms', 'bathrooms', 'propertySize'];
 
-// Show JSON decoding result
-echo "----- JSON Decode Status -----\n";
-if (json_last_error() !== JSON_ERROR_NONE) {
-    echo "JSON Error: " . json_last_error_msg() . "\n\n";
-    exit;
-} else {
-    echo "JSON decoded successfully.\n\n";
-}
-
-// Show the resulting PHP array
-echo "----- Decoded PHP Array -----\n";
-print_r($data);
-
-// Optional: Access individual fields
-echo "\n----- Selected Fields (if exist) -----\n";
-$fields = [
-    'property_id', 'title', 'listingType', 'mainCategory', 'subcategory',
-    'location', 'mapLink', 'cost', 'rentPerMonth', 'propertySize',
-    'bedrooms', 'bathrooms', 'garages', 'yearBuilt', 'condition',
-    'floor', 'amenities', 'nearby', 'propertyDescription'
-];
-
-foreach ($fields as $field) {
-    if (array_key_exists($field, $data)) {
-        echo "$field: " . $data[$field] . "\n";
-    } else {
-        echo "$field: [MISSING]\n";
+foreach ($requiredFields as $field) {
+    if (empty($data[$field])) {
+        echo json_encode(['success' => false, 'message' => "Missing required field: $field"]);
+        exit;
     }
 }
 
-echo "\n========== END OF DEBUG ==========\n";
+// Sanitize data
+$propertyId = sanitizeInput($data['property_id'], $conn);
+$title = sanitizeInput($data['title'], $conn);
+$listingType = sanitizeInput($data['listingType'], $conn);
+$price = sanitizeInput($data['price'], $conn);
+$location = sanitizeInput($data['location'], $conn);
+$mapLink = isset($data['mapLink']) ? sanitizeInput($data['mapLink'], $conn) : '';
+$bedrooms = sanitizeInput($data['bedrooms'], $conn);
+$bathrooms = sanitizeInput($data['bathrooms'], $conn);
+$garages = isset($data['garages']) ? sanitizeInput($data['garages'], $conn) : '';
+$amenities = isset($data['amenities']) ? sanitizeInput($data['amenities'], $conn) : '';
+$propertySize = sanitizeInput($data['propertySize'], $conn);
+$yearBuilt = isset($data['yearBuilt']) ? sanitizeInput($data['yearBuilt'], $conn) : '';
+$condition = isset($data['condition']) ? sanitizeInput($data['condition'], $conn) : '';
+$floor = isset($data['floor']) ? sanitizeInput($data['floor'], $conn) : '';
+$propertyDescription = isset($data['propertyDescription']) ? sanitizeInput($data['propertyDescription'], $conn) : '';
+$images = isset($data['images']) ? $data['images'] : [];
+
+// SQL query to update property details
+$query = "UPDATE properties SET 
+            title = '$title',
+            listing_type = '$listingType',
+            price = '$price',
+            location = '$location',
+            map_link = '$mapLink',
+            bedrooms = '$bedrooms',
+            bathrooms = '$bathrooms',
+            garage = '$garages',
+            amenities = '$amenities',
+            propertySize = '$propertySize',
+            yearBuilt = '$yearBuilt',
+            property_condition = '$condition',
+            floor = '$floor',
+            description = '$propertyDescription'
+          WHERE id = '$propertyId'";
+
+// Execute the update query
+if ($conn->query($query)) {
+    // Process images if provided
+    if (!empty($images)) {
+        $imageInsertQuery = "DELETE FROM property_images WHERE property_id = '$propertyId'";
+        $conn->query($imageInsertQuery); // Clear existing images for the property
+        
+        // Insert new images into the database
+        foreach ($images as $imageBase64) {
+            $imageData = base64_decode($imageBase64);
+            $imagePath = './uploads/' . uniqid('img_', true) . '.jpg';
+            file_put_contents($imagePath, $imageData);
+            
+            // Insert the image path into the database
+            $insertImageQuery = "INSERT INTO property_images (property_id, image_url) VALUES ('$propertyId', '$imagePath')";
+            $conn->query($insertImageQuery);
+        }
+    }
+
+    echo json_encode(['success' => true, 'message' => 'Property updated successfully']);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Failed to update property']);
+}
 ?>

@@ -1,0 +1,10 @@
+[09-May-2025 09:03:41 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 09:04:01 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 09:04:34 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 09:04:43 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 11:33:43 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 11:34:00 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 11:34:08 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 11:34:40 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 11:35:10 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83
+[09-May-2025 11:35:11 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /var/www/html/orlmahomes/editPropertyProcessing.php on line 83

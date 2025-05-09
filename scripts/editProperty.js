@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
 
     const propertyId = document.querySelector('input[name="property_id"]').value;
-
+  
     const propertyData = {
-      property_id: propertyId,
+      propertyId: propertyId,
       title: document.getElementById('title')?.value || '',
       listingType: document.getElementById('listingType')?.value || '',
       mainCategory: document.getElementById('mainCategory')?.value || '',
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(base64Images => {
         propertyData.images = base64Images;
 
-        return fetch('./editPropertyProcessingtest', {
+        return fetch('./editPropertyProcessing', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

@@ -27,7 +27,8 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 <body>
 <div id="userResponse" class="response-box hidden"></div>
 <p class="justify-centre all-pages-title margin-top30">Edit your property listing</p>
-
+<p style="display: none;" >Hello</p>
+<p></p>
 <div class="form-container display-flex justify-centre">
     <form id="editForm"  >
         <input type="hidden" name="property_id" value="<?= $property['id'] ?>">
@@ -56,7 +57,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <div id="preview" class="preview-area"></div>
 
         <!-- Property Fields -->
-        <input type="text" name="title" class="property-input" placeholder="Title" value="<?= $property['title'] ?>" required>
+        <input type="text" id="title" name="title" class="property-input" placeholder="Title" value="<?= $property['title'] ?>" required>
         
         <div class="select-container display-flex">
         <select id="listingType" name="listingType" required>
@@ -66,7 +67,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         </select>
 
 
-            <select name="mainCategory" required>
+            <select id="mainCategory" name="mainCategory" required>
                 <option value="">Category</option>
                 <?php
                 $categories = ['residential', 'commercial', 'industrial', 'lands'];
@@ -86,7 +87,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
                 ?>
             </select>
         </div>
-
+        <input type="hidden" name="property_id" value="<?php echo  $propertyId ?>" />
         <input type="text" name="location" id="location" class="property-input" placeholder="Location" value="<?= $property['location'] ?>" required>
         <input type="text" name="mapLink" id="mapLink" class="property-input" placeholder="Google Map Link" value="<?= $property['map_link'] ?>">
         <input type="text" name="cost" id="cost" class="property-input" placeholder="Sale Price" value="<?= $property['price'] ?>" required>
@@ -99,8 +100,8 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <input type="text" name="yearBuilt" id="yearBuilt" class="property-input" placeholder="Year Built" value="<?= $property['yearBuilt'] ?>">
         <input type="text" name="condition" id="propertyCondition" class="property-input" placeholder="Condition" value="<?= $property['property_condition'] ?>">
         <input type="text" name="floor" id="floor" class="property-input" placeholder="Floor Level" value="<?= $property['floor'] ?>">
-        <input type="text" name="amenities" id="amenitie class="property-input" placeholder="Amenities" value="<?= $property['amenities'] ?>">
-        <input type="text" name="nearby" id="nearby class="property-input" placeholder="Nearby" value="<?= $property['other_property_amenities'] ?>">
+        <input type="text" name="amenities" id="amenitie" class="property-input" placeholder="Amenities" value="<?= $property['amenities'] ?>">
+        <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby" value="<?= $property['other_property_amenities'] ?>">
 
         <textarea name="propertyDescription" id="propertyDescription" class="property-input" maxlength="700" required><?= $property['description'] ?></textarea>
         <div id="charCounter"><?= strlen($property['description']) ?> / 700</div>
