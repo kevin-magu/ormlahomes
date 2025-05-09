@@ -100,7 +100,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <input type="text" name="yearBuilt" id="yearBuilt" class="property-input" placeholder="Year Built" value="<?= $property['yearBuilt'] ?>">
         <input type="text" name="condition" id="propertyCondition" class="property-input" placeholder="Condition" value="<?= $property['property_condition'] ?>">
         <input type="text" name="floor" id="floor" class="property-input" placeholder="Floor Level" value="<?= $property['floor'] ?>">
-        <input type="text" name="amenities" id="amenitie" class="property-input" placeholder="Amenities" value="<?= $property['amenities'] ?>">
+        <input type="text" name="amenities" id="amenitie" class="property-input" placeholder="Amenities" value="<?= $property['accessibilities'] ?>">
         <input type="text" name="nearby" id="nearby" class="property-input" placeholder="Nearby" value="<?= $property['other_property_amenities'] ?>">
 
         <textarea name="propertyDescription" id="propertyDescription" class="property-input" maxlength="700" required><?= $property['description'] ?></textarea>

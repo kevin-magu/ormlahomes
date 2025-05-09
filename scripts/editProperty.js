@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bathrooms: document.getElementById('bathrooms')?.value || '',
       garages: document.getElementById('garages')?.value || '',
       yearBuilt: document.getElementById('yearBuilt')?.value || '',
-      condition: document.getElementById('propertyCondition')?.value || '',
+      propertyCondition: document.getElementById('propertyCondition')?.value || '',
       floor: document.getElementById('floor')?.value || '',
       amenities: document.getElementById('amenities')?.value || '',
       nearby: document.getElementById('nearby')?.value || '',
