@@ -42,6 +42,8 @@ $adminName = htmlspecialchars($name);
     <div class="dash-container">
         <h2 class="justify-centre margin-top30">ORLMA HOMES DASHBOARD</h2>
         <p class="justify-centre margin-top30">Welcome , <b>  Admin <?= $adminName ?></b></p>
+
+        
     </div>
 </body>
 </html>
