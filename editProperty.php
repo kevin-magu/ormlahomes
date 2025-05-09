@@ -108,7 +108,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 
         <div class="button-container display-flex margin-top50">
             <button type="submit">Update Property</button>
-            <button type="" style="background-color: red; font-weight: bold;">Delete Property</button>
+            <button id="deleteBtn" style="background-color: red; font-weight: bold;">Delete Property</button>
             <a href="#">Report a Problem</a>
             <a href="#">Request Help</a>
         </div>
