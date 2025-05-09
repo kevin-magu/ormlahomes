@@ -69,14 +69,14 @@
                         <div class="property-card-inner">
                             <?php renderImageSlider($images); ?>
                             <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <div class="listing-type"><?= htmlspecialchars($property['listing_type']) ?></div>
+                            <div class="listing-type card-title"><?= htmlspecialchars($property['listing_type']) ?></div>
                             <?php if (!$isRental): ?>
                                 <div class="display-flex homesize">
                                     <p class="card-square"></p>
                                     <p><?php echo htmlspecialchars($property['propertySize'], ENT_QUOTES, 'UTF-8'); ?> SQFT</p>
                                 </div>
                             <?php endif; ?>
-                            <p>Ksh <?php echo number_format((int)$property['price']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
+                            <p>Ksh <?php echo number_format((int)$property['rent_per_month']) ?><?php echo $isRental ? ' /month' : ''; ?></p>
                             <p><i class="fa-solid fa-location-dot"></i>
                             <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                            
@@ -119,7 +119,6 @@
 
     <!-- Rentals Section -->
     <section class="section4 justify-centre margin-top40">
-        <p class="styled-heading">Rentals</p>
         <div class="property-cards-wrapper">
             <?php renderProperties($conn, 'rental', 6, true); ?>
         </div>
@@ -184,7 +183,6 @@
         $result = $conn->query($sql);
     ?>
     <section class="section7">
-        <p class="styled-heading">Clients feedback</p>
         <div class="cards-container display-flex margin-left50 margin-top40">
             <?php while ($row = $result->fetch_assoc()): ?>
                 <div class="rating-card">
@@ -198,7 +196,7 @@
                 </div>
             <?php endwhile; $conn->close(); ?>
             
-            <form id="feedbackForm">
+            <form id="feedbackForm" >
                 <input type="text" name="name" placeholder="Your Name">
                 <input type="text" name="email" placeholder="Email" required />
                 <input type="number" name="rating" placeholder="Rating out of 5" required />

@@ -164,6 +164,11 @@
     display: flex;
     gap: 20px;
   }
+
+  .section7{
+    display: flex;
+    justify-content: center;
+  }
   
   .section7 .rating-card{
     height: fit-content;
@@ -195,12 +200,14 @@
 .section7 .rating-card .stars{
     display: flex;
 }
+
 .section7 form{
     display: flex;
     flex-direction: column;
     gap: 10px;
     background-color: white;
     padding: 10px;
+    display: none;
 }
 #responseMessage{
     width: 200px;
@@ -226,4 +233,161 @@
     background-color: #283561;
     color: white;
 
+}
+
+/*RESPONSIVENESS*/
+
+@media screen and (max-width: 1420px) {
+    .section7{
+        position: relative;
+    }
+    .section7 .styled-heading{
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+    .section7 .rating-card{
+        width: 60%;
+    }
+    .section7 .cards-container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .transparent-card-container{
+        flex-direction: column;
+    }
+    .transparent-card{
+        width: 60%;
+    }
+    .section2 .section2-context{
+        width: 85%;
+    }
+    .section7 .rating-card{
+      width: 50%;
+  }
+  .section7 .cards-container{
+      flex-direction: column;
+      align-items: center;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+    .section1 .banner-context{
+        font-size: 28px;
+    }
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+        grid-auto-rows: 200px; /* default height for small images */
+        gap: 10px;
+      }
+      
+      .photo.large {
+        grid-column: span 5; /* full width */
+        grid-row: span 2;     /* takes 2 rows vertically */
+      }
+
+      .photo:not(.large) {
+        display: none;
+      }
+      .section2 .section2-title{
+        font-size: 24px;
+      }
+      
+      .section2 .section2-context{
+        font-size: 18px;
+      }
+      .transparent-p{
+        font-size: 24px;
+     }
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        display: block;
+      }
+      
+      .section6 img {
+        transition: 0.2s linear;
+      }
+      
+      .section6 img:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+      }
+
+      
+      /* Optional: Add some top margin to the grid */
+      .photo-grid {
+        margin-top: 20px;
+      }
+      
+}
+
+@media screen and (max-width: 768px) {
+  .section1{
+    padding: 20px;
+  }
+  .section1 .banner {
+    height: 200px;
+  }
+  .section1 .banner-context{
+    font-size: 12px;
+  }
+  .section2 .section2-title{
+    font-size: 18px;
+  }
+  .section2 .section2-context{
+    font-size: 14px;
+    width: 85;
+  }
+  .section3{
+    margin-top: -30px;
+  }
+  .section5{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .transparent-p{
+    font-size: 14px;
+  }
+  .transparent-p2{    
+    width: 80%;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 4px;
+  }
+  .transparent-card{
+    width: 87%;
+    font-size: 14px;
+  }
+  .section6{
+    margin-top: 15px;
+
+  }
+  .section6 .title{
+    font-size: 18px;
+  }
+  .section6 .amenities{
+    font-size: 10px;
+    gap: 10px;
+  }
+  .photo-grid{
+    height: 300px;
+  }
+  .photo.large{
+    height: 300px;
+  }
+  .photo.large img {
+    height: 300px;
+  }
+  .section7 .cards-container{
+    margin: 0;
+    width: 100%;
+  }
+  .section7 .rating-card{
+    width: 87%;
+  }
 }

@@ -4,6 +4,18 @@
     box-sizing: border-box;
 }
 
+/* Remove outline for all links, buttons, and icons on focus and active states */
+a, i,button, :focus, :active {
+    outline: none;
+  }
+  
+  /* Optional: Remove tap highlight on mobile devices */
+  a, i,button, input, textarea {
+    -webkit-tap-highlight-color: transparent; /* For Safari/Chrome on iOS */
+    tap-highlight-color: transparent; /* For other browsers */
+  }
+
+
 html,body{
     font-family: "Montserrat", sans-serif;
     background-color: #faf9f8;
@@ -361,7 +373,6 @@ footer{
     padding: 60px;
     gap: 40px;
     color: #283561;
-    
     width: 100%;
 }
 footer .move-up{
@@ -532,4 +543,68 @@ button a{
 
 .property-cards-container{
     gap: 20px;
+}
+
+@media screen and (max-width: 1420px) {
+    footer .row1{
+        flex-direction: column;
+    }
+    footer .row2{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .response-box{
+        font-size: 10px;
+        width: 200px;
+    }
+    .property-card{
+        width: 300px;
+    }
+    .card-square{
+        width: 12px;
+        height: 12px;
+    }
+    .property-card h3{
+        font-size: 16px;
+    }
+    .property-card p{
+        font-size: 14px;
+    }
+    .property-cards-wrapper {
+        gap: 13px;
+    }
+    .section4{
+        margin-top: 10px;
+    }
+    footer{
+        padding: 20px;
+        gap: 10px;
+    }
+    footer .move-up{
+        height: 30px;
+        width: 30px;
+        right: 20px;
+        top: 20px;
+    }
+    footer .column{
+        gap: 10px;
+        font-size: 12px;
+    }
+    footer .row1{
+        gap: 30px;
+    }
+    footer .column4{
+        font-size: 18px;
+    }
+    footer .row2{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    footer .row2 p{
+        font-size: 10px;
+    }
 }

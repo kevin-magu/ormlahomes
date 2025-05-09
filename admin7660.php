@@ -54,6 +54,10 @@ $totalUsers = mysqli_fetch_assoc($totalUsersResult)['users'] ?? 0;
     <div class="dash-container display-flex">
         <h2 class="justify-centre margin-top30">ORLMA HOMES DASHBOARD</h2>
         <p class="justify-centre margin-top30">Welcome , <b>  Admin <?= $adminName ?></b></p>
+        <div class="quick-links margin-top50 display-flex">
+            <a href="./">Main website</a>
+            <a href="adminListings">Admin Listings</a>
+        </div>
 
         <div class="dash-cards-container display-flex justify-centre margin-top50">
             <a href="adminListings">

@@ -83,6 +83,7 @@ $propertyQuery = $conn->query("SELECT * FROM properties");
 <head>
     <link rel="stylesheet" href="./styles/commonStyles.css">
     <link rel="stylesheet" href="./styles/profile.css">
+    <link rel="stylesheet" href="./styles/dashboard.css">
     <script src="https://kit.fontawesome.com/e4c074505f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <meta charset="UTF-8">
@@ -90,6 +91,11 @@ $propertyQuery = $conn->query("SELECT * FROM properties");
     <title>Admin Listings</title>
 </head>
 <body>
+<div class="quick-links margin-top50 display-flex" style="margin-left: 20px;">
+            <a href="./admin7660">Dashboard home</a>
+            <a href="adminListings">Admin Listings</a>
+</div>
+
 <div id="userResponse" class="response-box hidden"></div>
 
 <div class="main-content-container margin-top50">
