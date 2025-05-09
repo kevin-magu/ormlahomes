@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
   
-      fetch('./deleteProperty.php', {
+      fetch('./deleteProperty', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
