@@ -44,11 +44,10 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div id="userResponse" class="response-box hidden"></div>
     <div class="main-content-container margin-top50">
-        <p class="username">Welcome, <?php echo $username; ?></p>
-        <p>MANAGE YOUR LISTINGS HERE</p>
-        <p>TOTAL: <?php echo $propertyCount; ?></p>
+        <p class="username justify-centre display-flex all-pages-title">Welcome, <?php echo $username; ?>. MANAGE YOUR LISTINGS HERE. TOTAL: <?php echo $propertyCount; ?></p>
+        <p></p>
 
-        <div class="listings property-cards-container">
+        <div class="listings property-cards-wrapper">
             <?php
             include 'includes/connection.php';
             error_reporting(E_ALL);

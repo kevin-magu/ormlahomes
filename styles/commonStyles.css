@@ -655,6 +655,9 @@ button a{
     }
 }
 @media screen and (max-width: 520px) {
+    .sticky-top{
+        height: 100px;
+    }
     .p-filter-container{
         width: 300px;
         gap: 25px;
