@@ -11,7 +11,7 @@ session_start();
 <script src="https://kit.fontawesome.com/e4c074505f.js" crossorigin="anonymous"></script>
 
 <!-- Navbar -->
-<nav id="page-top">
+<nav>
     <a href="/orlmahomes" class="nav-logo-container">
         <div class="nav-logo"></div>
         <p class="copany-name">ORLMA HOMES & PROPERTIES</p>

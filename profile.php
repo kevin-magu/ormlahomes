@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div id="userResponse" class="response-box hidden"></div>
     <div class="main-content-container margin-top50">
-        <p class="username justify-centre display-flex all-pages-title">Welcome, <?php echo $username; ?>. MANAGE YOUR LISTINGS HERE. TOTAL: <?php echo $propertyCount; ?></p>
+        <p class="username justify-centre display-flex">Welcome, <?php echo $username; ?>. MANAGE YOUR LISTINGS HERE. TOTAL LISTINGS: <?php echo $propertyCount; ?></p>
         <p></p>
 
         <div class="listings property-cards-wrapper">
@@ -78,8 +78,8 @@ if (isset($_SESSION['user_id'])) {
             function renderPropertyCard($property, $images, $isRental = false) {
                 $token = base64_encode("property_" . $property['id']);
                 ?>
-                <div class="cards-container">
-                <a href="property?ref=<?= urlencode($token) ?>">
+                
+                    <a href="property?ref=<?= urlencode($token) ?>">
                         <div class="property-card">
                             <i class="fa-regular fa-heart heart-icon"
                             data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
@@ -106,7 +106,6 @@ if (isset($_SESSION['user_id'])) {
                             
                         </div>
                     </a>
-                </div>
                 <?php
             }
 

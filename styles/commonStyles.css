@@ -583,9 +583,12 @@ button a{
         flex-direction: column;
         align-items: flex-start;
     }
-    nav{
+
+    
+    nav ul{
         display: none;
     }
+
     .sticky-top{
         top: 0px;
         height: fit-content;
@@ -655,6 +658,21 @@ button a{
     }
 }
 @media screen and (max-width: 520px) {
+    nav{
+        padding: 0;
+        justify-content: left;
+    }
+    nav .nav-logo{
+        margin-left: 5%;
+    }
+    .nav-logo-container{
+        gap: 10px;
+        width: 100%;
+    }
+    nav .copany-name{
+        width: 100%;
+        font-size: 14px;
+    }
     .sticky-top{
         height: 100px;
     }
