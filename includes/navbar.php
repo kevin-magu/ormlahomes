@@ -30,18 +30,33 @@ session_start();
         <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i></li></a>
         <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i></li></a>
     </ul>
+    <div class="menu-bar" id="menuBar">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+    </div>
 </nav>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-  const authLinks = document.getElementById('auth-links');
+    const authLinks = document.getElementById('auth-links');
 
-  if (!token) {
-      // If no token, show Login link
-      authLinks.innerHTML = `
-          <a href="/orlmahomes/login"><li><i class="fa-solid fa-sign-in-alt"></i> Login</li></a>
-      `;
-  } else {
+    const menuBar = document.getElementById('menuBar');
+    const navMenu = document.getElementById('nav-links');
+
+    menuBar.addEventListener('click', () => {
+        menuBar.classList.toggle('active'); 
+        navMenu.classList.toggle('show');   
+    });
+
+
+    if (!token) {
+        // If no token, show Login link
+        authLinks.innerHTML = `
+            <a href="/orlmahomes/login"><li><i class="fa-solid fa-sign-in-alt"></i> Login</li></a>
+        `;
+    } else {
       // Validate token
       fetch('/orlmahomes/validate_token', {
           method: 'POST',
@@ -82,4 +97,6 @@ session_start();
           link.classList.add("active");
       }
   });
+
+})
 </script>

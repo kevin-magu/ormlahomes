@@ -111,8 +111,8 @@
     </section>
 
     <!-- Rentals Section -->
-    <section class="section4 justify-centre margin-top40">
-        <div class="property-cards-wrapper">
+    <section class="section4 justify-centre">
+        <div class="property-cards-wrapper margin-top50">
             <?php renderProperties($conn, 'rental', 6, true); ?>
         </div>
         <div class="justify-centre margin-top50">
