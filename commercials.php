@@ -102,11 +102,9 @@ include './includes/navbar.php';
         ob_start(); ?>
         
         <?php $token = base64_encode("property_" . $property['id']); ?>
+        <a href="property?ref=<?= urlencode($token) ?>"> 
         <div class="property-card">
-        <i class="fa-regular fa-heart heart-icon"
-         data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
-            <a href="property?ref=<?= urlencode($token) ?>">   
-                
+        <i class="fa-regular fa-heart heart-icon" data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
                 <?php $token = base64_encode("property_" . $property['id']); ?>
                     <?php echo renderImageSlider($images); ?>
                     <h3><?= htmlspecialchars($property['property_type']) ?></h3>
@@ -118,8 +116,9 @@ include './includes/navbar.php';
                     
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
                     <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
-            </a>
+            
             </div>
+            </a>
         
         <?php return ob_get_clean();
     }

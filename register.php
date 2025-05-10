@@ -14,7 +14,7 @@ include './includes/navbar.php';
     <title>Register an account</title>
 </head>
 <body>
-<p class="justify-centre buy-page-title margin-top30">Register an account with us.</p>
+<p class="justify-centre all-pages-title margin-top30">Register an account with us.</p>
     <div class="form-container margin-top50 display-flex justify-centre">
         <div class="sections-container display-flex">
             <div class="section-1"></div>

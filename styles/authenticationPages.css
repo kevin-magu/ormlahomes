@@ -17,6 +17,7 @@
     background: url(../images/couple-buying-a-home.jpg);
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 .sections-container .section-2{
     width: 50%;
@@ -52,13 +53,20 @@
 @media screen and (max-width: 768px) {
     .sections-container .section-1, .sections-container .section-2{
         width: 100%;
+        height: 50%;
     }
     .sections-container{
         width: 90%;
         flex-direction: column-reverse;
     }
+    .sections-container{
+        height: 900px;
+    }
+  
 }
+
 @media screen and (max-width: 520px) {
+    
     form p{
         font-size: 14px;
     }

@@ -19,13 +19,11 @@ $listingType = $data['listingType'] ?? '';
 function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
     ?>
+         <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
         <div class="property-card">
             <!-- Heart icon outside the <a> tag -->
-            <i class="fa-regular fa-heart heart-icon"
-                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
-                
+            <i class="fa-regular fa-heart heart-icon" data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
                 <?php $token = base64_encode("property_" . $property['id']); ?>
-            <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
                 <section class="justify-centre">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -50,8 +48,8 @@ function renderPropertyCard($property, $images) {
                 </div>
                 <p>Ksh <?= number_format((int)$property['price']); ?></p>
                 <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
-            </a>
         </div>
+        </a>
     <?php
 }
 
