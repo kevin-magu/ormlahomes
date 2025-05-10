@@ -2,9 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Define global login status
-
-
-
   function initializeSwiper(swiperContainer) {
     if (!swiperContainer) return;
   
@@ -180,6 +177,31 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       reinitializeHeartIcons();
     }, 300);
+
+
+
+    //handle opening of the div 
+    const filterButton = document.querySelector('.deleteBtn-container button');
+    const filterContainer = document.getElementById('propertyTypes');
+    const closeIcon = filterContainer.querySelector('.fa-rectangle-xmark');
+
+    // Open the filter container when Filters button is clicked
+    filterButton.addEventListener('click', function () {
+      filterContainer.style.display = 'flex';
+    });
+
+    // Close the filter container when the close icon is clicked
+    closeIcon.addEventListener('click', function () {
+      filterContainer.style.display = 'none';
+    });
+
+    // Close the filter container when clicking outside it
+    document.addEventListener('click', function (e) {
+      const isClickInside = filterContainer.contains(e.target) || filterButton.contains(e.target);
+      if (!isClickInside) {
+        filterContainer.style.display = 'none';
+      }
+    });
 });
 
 //end of js

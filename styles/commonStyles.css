@@ -365,6 +365,25 @@ nav ul a{
   display: flex;
 }
 
+/* Style all dots */
+.swiper-pagination-bullet {
+    background-color: #ccc;
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    margin: 0 6px;
+    transition: background-color 0.3s;
+    border-radius: 50%;
+  }
+  
+  /* Style the active (current) dot */
+  .swiper-pagination-bullet-active {
+    background-color: #000; /* Change to your brand color */
+    width: 14px;
+    height: 14px;
+  }
+  
+
 footer{
     background-color: white;
     display: flex;
@@ -467,16 +486,27 @@ footer .row2 a{
 
 .p-filter-container{
     gap: 40px;
+    width: 440px;
+    position: absolute;
+    top: 30px;
     font-weight: 500;
     color: #911d4e;
     background-color: white;
-    border-radius: 40px;
+    border-radius: 8px;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
-    display: flex;
+    display: none;
+    flex-direction: column;
     align-items: center;
     padding: 15px;
     font-size: 14px;
     transform: scale();
+}
+.fa-rectangle-xmark{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
 }
 .p-filter-container p{
     width: fit-content;

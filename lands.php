@@ -24,8 +24,10 @@ include './includes/navbar.php';
 <div class="page-container">
 <div class="sticky-top">
     <p class="justify-centre all-pages-title margin-top30">Explore Prime Land Opportunities here.</p>
+    <div class="deleteBtn-container justify-centre margin-top30"><button><i class="fa-solid fa-filter"></i> Filters</button></div>
 <div class="filter-container justify-centre margin-top30 dipslay-flex">
     <div class="p-filter-container disp justify-centre dipslay-flex" id="propertyTypes">
+    <i class="fa-solid fa-rectangle-xmark" style="color: #ff0000;"></i>
         <p data-type="all">All</p>
         <p data-type="Vacant lot">Vacant lot</p>
         <p data-type="Agricultural land">Agricultural land</p>
