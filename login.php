@@ -27,7 +27,7 @@ include './includes/navbar.php';
                     <input type="text" id="loginPassword" name="password" placeholder="Your Password">
                     <button id="submitBtn" type="submit">Login</button>
                     <p>Don't have an account? <a href="./register">Register here</a></p>
-                    <div id="loginResult"></div>
+                    <p id="loginResult"></p>
                 </form>
             </div>
         </div>

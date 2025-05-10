@@ -114,10 +114,19 @@ textarea{
     select,option{
       width: 60%;
     }
+    .button-container{
+      gap: 10px;
+    }
+    .button-container a{
+      font-size: 12px;
+    }
 }
 @media screen and (max-width: 520px) {
   textarea{
     height: 300px;
+  }
+  input{
+    font-size: 10px;
   }
   select{
     width: 80%;

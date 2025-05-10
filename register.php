@@ -6,7 +6,7 @@ include './includes/navbar.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./styles/commonStyles.css" />\
+    <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/authenticationPages.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

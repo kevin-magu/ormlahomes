@@ -38,3 +38,29 @@
     outline: none;
 }
 
+@media screen and (max-width: 1420px) {
+  
+}
+
+@media screen and (max-width: 1024px) {
+    .sections-container{
+        width: 80%;
+    }
+      
+}
+
+@media screen and (max-width: 768px) {
+    .sections-container .section-1, .sections-container .section-2{
+        width: 100%;
+    }
+    .sections-container{
+        width: 90%;
+        flex-direction: column-reverse;
+    }
+}
+@media screen and (max-width: 520px) {
+    form p{
+        font-size: 14px;
+    }
+}
+
