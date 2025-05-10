@@ -663,15 +663,17 @@ button a{
         justify-content: left;
     }
     nav .nav-logo{
-        margin-left: 5%;
+        margin-left: 3%;
+        height: 60px;
+        height: 60px;
     }
     .nav-logo-container{
-        gap: 10px;
+        gap: 4px;
         width: 100%;
     }
     nav .copany-name{
         width: 100%;
-        font-size: 14px;
+        font-size: 12px;
     }
     .sticky-top{
         height: 100px;

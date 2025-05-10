@@ -104,6 +104,6 @@
 
     <?php include './includes/footer.php'; ?>
 
-    <script src="./scripts/houseale.js"></script>
+    <script src="./scripts/housesale.js"></script>
 </body>
 </html>
