@@ -242,8 +242,6 @@ nav ul a{
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-    height: auto;
-    width: 100%; /* Ensure full width */
 }
 .property-cards-wrapper a{
     text-decoration: none;
@@ -255,6 +253,9 @@ nav ul a{
 
 .cards-container a{
     text-decoration: none;
+}
+.property-cards-wrapper a{
+    width: 100%;
 }
 
 
@@ -268,6 +269,7 @@ nav ul a{
     color: #283561;
     position: relative;
 }
+
 
 
 .property-card h3 {
@@ -598,8 +600,11 @@ button a{
         width: 200px;
     }
     .property-card{
-        width: 300px;
-    }
+        width: 70%;
+      }
+      .image-card{
+        height: 400px;
+      }
     .card-square{
         width: 12px;
         height: 12px;
@@ -643,3 +648,12 @@ button a{
         font-size: 10px;
     }
 }
+@media screen and (max-width: 520px) {
+    .property-card{
+      width: 90%;
+      border-radius: 14px;
+    }
+    .image-slide{
+      height: 300px;
+    }
+  }

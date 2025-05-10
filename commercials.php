@@ -102,8 +102,8 @@ include './includes/navbar.php';
         ob_start(); ?>
         
         <?php $token = base64_encode("property_" . $property['id']); ?>
-            <a href="property?ref=<?= urlencode($token) ?>">
-                <div class="property-card">
+        <div class="property-card">
+            <a href="property?ref=<?= urlencode($token) ?>">   
                 <i class="fa-regular fa-heart heart-icon"
                    data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
                 
@@ -118,8 +118,8 @@ include './includes/navbar.php';
                     
                     <p>Ksh <?php echo number_format((int)$property['price'])?></p>
                     <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
-                </div>
             </a>
+            </div>
         
         <?php return ob_get_clean();
     }

@@ -58,9 +58,6 @@
         function renderPropertyCard($property, $images, $isRental = false) {
             $token = base64_encode("property_" . $property['id']);
             ?>
-
-
-            
                 <div class="property-card" style="position: relative;">
                 <i class="fa-regular fa-heart heart-icon" 
                 data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
@@ -111,7 +108,7 @@
         <div class="property-cards-wrapper margin-top40">
             <?php renderProperties($conn, 'For sale', 12); ?>
         </div>
-        <div class="justify-centre">
+        <div class="justify-centre margin-top50">
             <a href="./residentials"><button>View more listings</button></a>
         </div>
     </section>
@@ -121,7 +118,7 @@
         <div class="property-cards-wrapper">
             <?php renderProperties($conn, 'rental', 6, true); ?>
         </div>
-        <div class="justify-centre">
+        <div class="justify-centre margin-top50">
             <a href="./residentials"><button>View more rentals</button></a>
         </div>
     </section>

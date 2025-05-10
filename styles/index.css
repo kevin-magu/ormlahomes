@@ -148,7 +148,7 @@
   }
   .section6 img:hover{
     cursor: pointer;
-    transform: translateY(-5px);
+    transform: translateY(-2px);
   }
   
   .photo.large img {
@@ -342,9 +342,7 @@
     font-size: 14px;
     width: 85;
   }
-  .property-card{
-    width: 70%;
-  }
+  
   .section3{
     margin-top: -30px;
   }
@@ -395,12 +393,4 @@
   }
 }
 
-@media screen and (max-width: 520px) {
-  .property-card{
-    width: 90%;
-    border-radius: 14px;
-  }
-  .image-slide{
-    height: 300px;
-  }
-}
+
