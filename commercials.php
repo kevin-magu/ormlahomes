@@ -66,8 +66,8 @@ include './includes/navbar.php';
 </div>
 </div>
 <div id="userResponse" class="response-box hidden"></div>
-<div class="property-cards-container justify-centre margin-top30" id="propertyResults">
-    
+
+<div class="property-cards-wrapper justify-centre" id="propertyResults">
     <?php
     function renderImageSlider($images) {
         ob_start(); ?>
@@ -100,7 +100,8 @@ include './includes/navbar.php';
         $images = $imgStmt->get_result();
     
         ob_start(); ?>
-        <div class="cards-container">
+        
+        <?php $token = base64_encode("property_" . $property['id']); ?>
             <a href="property?ref=<?= urlencode($token) ?>">
                 <div class="property-card">
                 <i class="fa-regular fa-heart heart-icon"
@@ -119,7 +120,7 @@ include './includes/navbar.php';
                     <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
                 </div>
             </a>
-        </div>
+        
         <?php return ob_get_clean();
     }
     

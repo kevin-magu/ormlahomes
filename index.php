@@ -108,7 +108,7 @@
 
     <!-- Sales Section -->
     <section class="section3 justify-centre">
-        <div class="property-cards-wrapper">
+        <div class="property-cards-wrapper margin-top40">
             <?php renderProperties($conn, 'For sale', 12); ?>
         </div>
         <div class="justify-centre">
