@@ -21,7 +21,7 @@
     </section>
 
     <!-- Explore Listings Section -->
-    <section class="section2 justify-centre">
+    <section class="section2 justify-centre margin-top30">
         <p class="section2-title">Explore listings</p>
         <p class="section2-context subtitle-size">
             Take a deep dive and browse homes for sale, original apartment photos,
@@ -56,13 +56,10 @@
         }
 
         function renderPropertyCard($property, $images, $isRental = false) {
-            $token = base64_encode("property_" . $property['id']);
-            ?>
-                <div class="property-card" style="position: relative;">
-                <i class="fa-regular fa-heart heart-icon" 
-                data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
-
+            $token = base64_encode("property_" . $property['id']);?>
                 <a href="property?ref=<?= urlencode($token) ?>" style="text-decoration: none; color: inherit;">
+                    <div class="property-card">
+                        <i class="fa-regular fa-heart heart-icon" data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
                         <div class="property-card-inner">
                             <?php renderImageSlider($images); ?>
                             <h3><?php echo htmlspecialchars($property['property_type'], ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -78,8 +75,8 @@
                             <?php echo htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
                            
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             <?php
         }
 

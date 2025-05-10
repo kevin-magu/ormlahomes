@@ -593,6 +593,9 @@ button a{
 }
 
 @media screen and (max-width: 768px) {
+    .all-pages-title{
+        font-size: 18px;
+    }
     .response-box{
         font-size: 10px;
         width: 200px;
@@ -652,6 +655,9 @@ button a{
     }
 }
 @media screen and (max-width: 520px) {
+    .all-pages-title{
+        font-size: 14px;
+    }
     .property-card{
       width: 90%;
       border-radius: 14px;
