@@ -254,9 +254,7 @@ nav ul a{
 .cards-container a{
     text-decoration: none;
 }
-.property-cards-wrapper a{
-    width: 100%;
-}
+
 
 
 /* Property Card Styling */
@@ -605,6 +603,11 @@ button a{
       .image-card{
         height: 400px;
       }
+      .property-cards-wrapper a{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
     .card-square{
         width: 12px;
         height: 12px;

@@ -103,9 +103,9 @@ include './includes/navbar.php';
         
         <?php $token = base64_encode("property_" . $property['id']); ?>
         <div class="property-card">
+        <i class="fa-regular fa-heart heart-icon"
+         data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
             <a href="property?ref=<?= urlencode($token) ?>">   
-                <i class="fa-regular fa-heart heart-icon"
-                   data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
                 
                 <?php $token = base64_encode("property_" . $property['id']); ?>
                     <?php echo renderImageSlider($images); ?>
