@@ -2,9 +2,11 @@ body{
     position: relative;
 }
 
-.property-cards-container{
+.property-cards-wrapper{
     display: flex;
     flex-wrap: wrap;
+    max-width: 100%;
     height: fit-content;
     flex: 1;
 }
+

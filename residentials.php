@@ -70,7 +70,7 @@ include './includes/navbar.php';
 <div id="userResponse" class="response-box hidden"></div>
 
 
-<div class="property-cards-container justify-centre margin-top30" id="propertyResults">
+<div class="property-cards-wrapper" id="propertyResults">
     
     <?php
     function renderImageSlider($images) {
@@ -107,7 +107,6 @@ include './includes/navbar.php';
         $images = $imgStmt->get_result();
     
         ob_start(); ?>
-        <div class="cards-container">
             <div class="property-card" style="position: relative;">
                 <i class="fa-regular fa-heart heart-icon"
                    data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
@@ -126,23 +125,23 @@ include './includes/navbar.php';
                     <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location']) ?></p>
                 </a>
             </div>
-        </div>
         <?php return ob_get_clean();
     }
     
     
 
     $stmt = $conn->prepare("SELECT * FROM properties WHERE broad_category = 'residential'");
-$stmt->execute();
-$result = $stmt->get_result();
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-while ($property = $result->fetch_assoc()) {
-    echo renderPropertyCard($property, $conn);
-}
+    while ($property = $result->fetch_assoc()) {
+        echo renderPropertyCard($property, $conn);
+    }
 
 
     $conn = null;
     ?>
+
 </div>
 
 

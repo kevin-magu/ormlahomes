@@ -60,7 +60,7 @@
             ?>
 
 
-            <div class="cards-container">
+            
                 <div class="property-card" style="position: relative;">
                 <i class="fa-regular fa-heart heart-icon" 
                 data-property-id="<?php echo htmlspecialchars((int) $property['id'], ENT_QUOTES, 'UTF-8'); ?>"></i>
@@ -83,7 +83,6 @@
                         </div>
                     </a>
                 </div>
-            </div>
             <?php
         }
 

@@ -19,7 +19,6 @@ $listingType = $data['listingType'] ?? '';
 function renderPropertyCard($property, $images) {
     $token = base64_encode("property_" . $property['id']);
     ?>
-    <div class="cards-container">
         <div class="property-card">
             <!-- Heart icon outside the <a> tag -->
             <i class="fa-regular fa-heart heart-icon"
@@ -53,7 +52,6 @@ function renderPropertyCard($property, $images) {
                 <p><i class="fa-solid fa-location-dot"></i> <?= htmlspecialchars($property['location'], ENT_QUOTES, 'UTF-8'); ?></p>
             </a>
         </div>
-    </div>
     <?php
 }
 

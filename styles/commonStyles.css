@@ -571,10 +571,6 @@ button a{
     color: white;
 }
 
-.property-cards-container{
-    gap: 20px;
-}
-
 @media screen and (max-width: 1420px) {
     footer .row1{
         flex-direction: column;
@@ -582,6 +578,16 @@ button a{
     footer .row2{
         flex-direction: column;
         align-items: flex-start;
+    }
+    nav{
+        display: none;
+    }
+    .sticky-top{
+        top: 0px;
+        height: fit-content;
+    }
+    .property-cards-wrapper{
+        margin-top: 0px;
     }
 }
 
