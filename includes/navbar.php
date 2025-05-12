@@ -56,6 +56,16 @@ session_start();
             menuBar.classList.remove('active');
         }
     });
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+    const isClickInsideMenu = navMenu.contains(e.target);
+    const isClickOnMenuIcon = menuBar.contains(e.target);
+
+    if (!isClickInsideMenu && !isClickOnMenuIcon) {
+        navMenu.classList.remove('show');
+        menuBar.classList.remove('active');
+    }
+    })
 
 
     if (!token) {

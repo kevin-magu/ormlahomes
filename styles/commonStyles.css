@@ -5,12 +5,12 @@
 }
 
 /* Remove outline for all links, buttons, and icons on focus and active states */
-a, i,button, :focus, :active {
+a, i,.menu-bar,button, :focus, :active {
     outline: none;
   }
   
   /* Optional: Remove tap highlight on mobile devices */
-  a, i,button, input, textarea {
+  a, i,.menu-bar,button, input, textarea {
     -webkit-tap-highlight-color: transparent; /* For Safari/Chrome on iOS */
     tap-highlight-color: transparent; /* For other browsers */
   }
@@ -84,14 +84,6 @@ body {
     display: none;
 }
 
-
-/*.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 90vh;
-    flex-wrap: wrap;
-}*/
-
 .justify-centre{
     display: flex;
     justify-content: center;
@@ -138,13 +130,6 @@ body {
     align-items: center;
 }
 
-button{
-    width: fit-content;
-    padding: 8px;
-    border-radius: 5px;
-    cursor: pointer;
-
-}
 .section-title-size{
     font-size: 42px;
 }
@@ -225,13 +210,14 @@ nav ul.show{
     position: absolute;
     width: 400px;
     height: 90vh;
-    top: 90px;
+    top: 74px;
     left: 0;
     justify-content: space-between;
     padding-top: 20px;
     animation: slideInFromLeft 0.4s ease forwards;
     z-index: 1999;
 }
+
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);
@@ -261,6 +247,13 @@ nav ul a{
     color: #911d4e; /* Or your highlight color */
     font-weight: bold;
     border-bottom: 2px solid #911d4e; /* Optional underline */
+}
+
+.p-filter-container p.selected {
+    background-color: #222;
+    color: #fff;
+    border-radius: 4px;
+    padding: 4px 8px;
 }
 
 
@@ -606,10 +599,9 @@ button a{
 @media screen and (max-width: 1510px) {
     nav ul{
         display: none;
-    }
-    
+    } 
 
-    nav ul li {
+    nav ul.show li {
         color: white;
         margin-left: 20%;
         padding: 10px;
@@ -732,12 +724,16 @@ button a{
 @media screen and (max-width: 520px) {
     nav ul.show{
         width: 100%;
-        height: 93vh;
+        height: 84vh;
     }
     nav{
         padding: 0;
         justify-content: left;
     }
+    nav ul.show li{
+        margin-left: 3%;
+    }
+
     nav .nav-logo{
         margin-left: 3%;
         height: 60px;
@@ -751,8 +747,8 @@ button a{
         width: 100%;
         font-size: 12px;
     }
-    .sticky-top{
-        height: 100px;
+    .filter-button-container{
+        margin-top: 10px;
     }
     .p-filter-container{
         width: 300px;
@@ -760,6 +756,8 @@ button a{
     }
     .all-pages-title{
         font-size: 14px;
+        margin-top: 0;
+        font-weight: 600;
     }
     .property-card{
       width: 90%;
@@ -770,5 +768,12 @@ button a{
     }
     .property-cards-wrapper{
         gap: 5px;
+    }
+    button{
+        transform: scale(0.7);
+    }
+    .sticky-top{
+        height: 160px;
+        gap: 2px;
     }
   }

@@ -1,6 +1,5 @@
 <?php
 include './includes/connection.php';
-include './includes/navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,20 +11,13 @@ include './includes/navbar.php';
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/buy.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <style>
-        .p-filter-container p.selected {
-            background-color: #222;
-            color: #fff;
-            border-radius: 4px;
-            padding: 4px 8px;
-        }
-    </style>
 </head>
 <body>
 <div class="page-container">
     <div class="sticky-top">
+        <?php include './includes/navbar.php';?>
         <p class="justify-centre all-pages-title margin-top30">Find the Best Place to Set Up Your Warehouse.</p>
-        <div class="deleteBtn-container justify-centre margin-top30">
+        <div class="filter-button-container justify-centre margin-top30">
             <button><i class="fa-solid fa-filter"></i> Filters</button>
         </div>
         <div class="filter-container justify-centre margin-top30 dipslay-flex">
