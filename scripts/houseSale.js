@@ -113,7 +113,7 @@ function handleListingType() {
     
 
     // Show fields based on listing type
-    if (listingTypeSelect.value === 'For Sale') {
+    if (listingTypeSelect.value === 'For sale') {
         costInput.style.display = 'block';  // Show cost for sale
     } else if (listingTypeSelect.value === 'Rental') {
         rentPerMonthInput.style.display = 'block';  // Show rent per month for rental

@@ -123,9 +123,13 @@ textarea{
   textarea{
     height: 300px;
   }
-  input{
-    font-size: 10px;
-  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  textarea {
+    font-size: 14px;
+ }
   select{
     width: 80%;
   }

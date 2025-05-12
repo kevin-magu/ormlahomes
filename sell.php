@@ -26,7 +26,7 @@
             <div class="select-container display-flex">
                 <select id="listingType" name="listingType" class="listingtype" required>
                     <option value="">Listing Type</option>
-                    <option value="For Sale">For Sale</option>
+                    <option value="For sale">For sale</option>
                     <option value="Rental">Rental</option>
                 </select>
 

@@ -1,5 +1,4 @@
 <?php
-include './includes/navbar.php';
 include './includes/connection.php';
 
 $propertyId = $_GET['id'];
@@ -25,6 +24,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
     <title>Edit Property</title>
 </head>
 <body>
+<?php include './includes/navbar.php'; ?>
 <div id="userResponse" class="response-box hidden"></div>
 <p class="justify-centre all-pages-title margin-top30">Edit your property listing</p>
 <p style="display: none;" >Hello</p>
@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
 
         <!-- New Images Upload -->
         <div class="form-group drop-zone margin-top50 display-flex justify-centre" id="dropZone">
-            <span>Upload new images (optional)</span>
+            <span>Drag & drop images of your property here or click to select (max 5MB each).</span>
             <input type="file" name="images[]" id="fileInput" accept="image/*" multiple>
         </div>
         <div id="preview" class="preview-area"></div>
@@ -62,30 +62,51 @@ while ($row = mysqli_fetch_assoc($imageQuery)) {
         <div class="select-container display-flex">
         <select id="listingType" name="listingType" required>
         <option value="">Listing Type</option>
-        <option value="For Sale" <?= $property['listing_type'] === 'For sale' ? 'selected' : '' ?>>For Sale</option>
+        <option value="For sale" <?= $property['listing_type'] === 'For sale' ? 'selected' : '' ?>>For sale</option>
         <option value="Rental" <?= $property['listing_type'] === 'Rental' ? 'selected' : '' ?>>Rental</option>
         </select>
+        
+        <select id="mainCategory" name="mainCategory" required>
+    <option value="">Category</option>
+    <?php
+    $categories = ['residential', 'commercial', 'industrial', 'lands'];
+    foreach ($categories as $cat) {
+        echo "<option value='$cat'" . ($property['broad_category'] === $cat ? ' selected' : '') . ">" . ucfirst($cat) . "</option>";
+    }
+    ?>
+</select>
 
+<!-- Subcategory Selects (with PHP to preselect $property['listing_type']) -->
+<select id="residentialOptions" name="subcategory" class="subcategory" style="display:none;">
+    <option value="Apartment" <?= $property['listing_type'] === 'Apartment' ? 'selected' : '' ?>>Apartment</option>
+    <option value="Condo" <?= $property['listing_type'] === 'Condo' ? 'selected' : '' ?>>Condo</option>
+    <option value="Duplex" <?= $property['listing_type'] === 'Duplex' ? 'selected' : '' ?>>Duplex</option>
+    <option value="Vacation Home" <?= $property['listing_type'] === 'Vacation Home' ? 'selected' : '' ?>>Vacation Home</option>
+    <option value="Townhouse" <?= $property['listing_type'] === 'Townhouse' ? 'selected' : '' ?>>Townhouse</option>
+</select>
 
-            <select id="mainCategory" name="mainCategory" required>
-                <option value="">Category</option>
-                <?php
-                $categories = ['residential', 'commercial', 'industrial', 'lands'];
-                foreach ($categories as $cat) {
-                    echo "<option value='$cat'" . ($property['broad_category'] === $cat ? ' selected' : '') . ">" . ucfirst($cat) . "</option>";
-                }
-                ?>
-            </select>
+<select id="commercialOptions" name="subcategory" class="subcategory" style="display:none;">
+    <option value="office_space" <?= $property['listing_type'] === 'office_space' ? 'selected' : '' ?>>Office Space</option>
+    <option value="retail_units" <?= $property['listing_type'] === 'retail_units' ? 'selected' : '' ?>>Retail Units</option>
+    <option value="malls" <?= $property['listing_type'] === 'malls' ? 'selected' : '' ?>>Malls</option>
+    <option value="restaurants_hotels" <?= $property['listing_type'] === 'restaurants_hotels' ? 'selected' : '' ?>>Restaurants & Hotels</option>
+    <option value="mixed_use" <?= $property['listing_type'] === 'mixed_use' ? 'selected' : '' ?>>Mixed Use</option>
+</select>
 
-            <select name="subcategory" required>
-                <?php
-                $sub = $property['property_type'];
-                $allSubs = ['Apartment','Condo','Duplex','Vacation Home','Townhouse','office_space','retail_units','malls','restaurants_hotels','mixed_use','warehouse','factories','manufacturing_plants','distribution_centers','storage_facilities','vacant_lot','agricultural_land','development_land'];
-                foreach ($allSubs as $s) {
-                    echo "<option value='$s'" . ($sub === $s ? ' selected' : '') . ">" . ucfirst(str_replace('_', ' ', $s)) . "</option>";
-                }
-                ?>
-            </select>
+<select id="industrialOptions" name="subcategory" class="subcategory" style="display:none;">
+    <option value="warehouse" <?= $property['listing_type'] === 'warehouse' ? 'selected' : '' ?>>Warehouse</option>
+    <option value="factories" <?= $property['listing_type'] === 'factories' ? 'selected' : '' ?>>Factories</option>
+    <option value="manufacturing_plants" <?= $property['listing_type'] === 'manufacturing_plants' ? 'selected' : '' ?>>Manufacturing Plants</option>
+    <option value="distribution_centers" <?= $property['listing_type'] === 'distribution_centers' ? 'selected' : '' ?>>Distribution Centers</option>
+    <option value="storage_facilities" <?= $property['listing_type'] === 'storage_facilities' ? 'selected' : '' ?>>Storage Facilities</option>
+</select>
+
+<select id="landsOptions" name="subcategory" class="subcategory" style="display:none;">
+    <option value="vacant_lot" <?= $property['listing_type'] === 'Vacant Lot' ? 'selected' : '' ?>>Vacant Lot</option>
+    <option value="agricultural_land" <?= $property['listing_type'] === 'agricultural_land' ? 'selected' : '' ?>>Agricultural Land</option>
+    <option value="development_land" <?= $property['listing_type'] === 'development_land' ? 'selected' : '' ?>>Development Land</option>
+</select>
+
         </div>
         <input type="hidden" name="property_id" value="<?php echo  $propertyId ?>" />
         <input type="text" name="location" id="location" class="property-input" placeholder="Location" value="<?= $property['location'] ?>" required>
