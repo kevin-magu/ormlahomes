@@ -13,7 +13,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -29,53 +28,6 @@ body {
     padding: 0 20px;
 }
 
-/* Header Styles */
-.header {
-    background: var(--white);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 15px 0;
-}
-
-.logo h1 {
-    font-size: 28px;
-    color: var(--primary-color);
-}
-
-.logo span {
-    color: var(--dark-color);
-}
-
-.logo p {
-    font-size: 14px;
-    color: var(--secondary-color);
-}
-
-.navbar ul {
-    display: flex;
-    list-style: none;
-}
-
-.navbar ul li a {
-    text-decoration: none;
-    color: var(--secondary-color);
-    padding: 10px 15px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.navbar ul li a:hover,
-.navbar ul li a.active {
-    color: var(--primary-color);
-}
-
-.mobile-menu {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-}
 
 /* Hero Section */
 .about-hero {
@@ -106,6 +58,7 @@ body {
 .about-content {
     flex: 1;
     padding-right: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .about-content h2 {
@@ -258,95 +211,9 @@ body {
     color: var(--white);
 }
 
-/* Footer */
-.footer {
-    background: var(--dark-color);
-    color: var(--white);
-    padding: 60px 0 20px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-logo h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: var(--white);
-}
-
-.footer-logo span {
-    color: var(--primary-color);
-}
-
-.footer-links h4,
-.footer-contact h4 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-}
-
-.footer-links ul {
-    list-style: none;
-}
-
-.footer-links ul li {
-    margin-bottom: 10px;
-}
-
-.footer-links ul li a {
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links ul li a:hover {
-    color: var(--primary-color);
-}
-
-.footer-contact p {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.social-icons {
-    display: flex;
-    gap: 15px;
-}
-
-.social-icons a {
-    color: var(--white);
-    font-size: 18px;
-    transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: var(--primary-color);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .navbar {
-        display: none;
-    }
-
-    .mobile-menu {
-        display: block;
-    }
-
     .about-hero h1 {
         font-size: 36px;
     }
