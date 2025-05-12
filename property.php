@@ -47,13 +47,14 @@ $previewImages = array_slice($allImages, 0, 3);
     <title>Property</title>
     <link rel="stylesheet" href="./styles/commonStyles.css" />
     <link rel="stylesheet" href="./styles/property.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <?php include './includes/navbar.php'; ?>
 
     <div class="main-content-container display-flex justify-centre">
         <div class="house-properties-container">
-        <div class="property-feature property-title">
+        <div class="property-feature all-pages-title">
             <p><?= htmlspecialchars($propertyDetails['property_type'] ?? 'N/A') ?></p>,
             <p><?= htmlspecialchars($propertyDetails['listing_type'] ?? 'N/A') ?></p> 
         </div>
@@ -109,17 +110,17 @@ $previewImages = array_slice($allImages, 0, 3);
         <?php if (strtolower($propertyDetails['broad_category']) === 'residential'): ?>
             <div class="property-features amenities">
                 <div class="property-feature">
-                    <i class="fa-regular fa-bed"></i>
+                    <i class="fa-solid fa-bed"></i>
                     <p>Bedrooms</p>
                     <p><?= htmlspecialchars($propertyDetails['bedrooms'] ?? '__') ?></p>
                 </div>
                 <div class="property-feature">
-                    <i class="fa-regular fa-bath"></i>
+                    <i class="fa-solid fa-bath"></i>
                     <p>Bathrooms</p>
                     <p><?= htmlspecialchars($propertyDetails['bathrooms'] ?? '__') ?></p>                
                 </div>
                 <div class="property-feature">
-                    <i class="fa-regular fa-warehouse"></i>
+                    <i class="fa-solid fa-warehouse"></i>
                     <p>Garages</p>
                     <p><?= htmlspecialchars($propertyDetails['garage'] ?? '__') ?></p>
                 </div>
@@ -132,18 +133,20 @@ $previewImages = array_slice($allImages, 0, 3);
 
 
         <div class="property-features">
-            <p>Nearby Essentials: <?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>
+            <p><strong>Nearby Essentials:</strong> <?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>
         </div>
         <div class="property-features">
             <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? '__') ?></p>
         </div>
-        <div class="property-features">
+        <div class="">
             <button>Tour in person</button>
             <button>Tour via video chat</button>
             <button>Email / Call</button>
         </div>
         </div>
     </div>
+
+
 <?php include './includes/footer.php' ?>
 <script src="./scripts/property.js"></script>
 </body>
