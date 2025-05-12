@@ -52,7 +52,7 @@ include './includes/connection.php';
     });
 
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 1510) {
+        if (window.innerWidth > 1540) {
             navMenu.classList.remove('show');
             menuBar.classList.remove('active');
         }

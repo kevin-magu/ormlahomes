@@ -62,5 +62,11 @@
    select,option{
      font-size: 14px;
    }
+   .button-container{
+    gap: 4px;
+  }
+  .button-container a{
+    font-size: 12px;
+  }
  }
  

@@ -206,16 +206,17 @@ nav ul{
 nav ul.show{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     background-color: #283561;
     position: absolute;
     width: 400px;
     height: 90vh;
     top: 74px;
     left: 0;
-    justify-content: space-between;
+    gap: 10px;
     padding-top: 20px;
     animation: slideInFromLeft 0.4s ease forwards;
-    z-index: 1999;
+    z-index: 999;
 }
 
 @keyframes slideInFromLeft {
@@ -556,7 +557,6 @@ footer .row2 a{
     outline: none;
     cursor: pointer;
 }
-
   
 button {
     background-color: #911d4e;
@@ -586,7 +586,7 @@ button a{
     text-decoration: none;
     color: white;
 }
-@media screen and (max-width: 1510px) {
+@media screen and (max-width: 1540px) {
     nav ul{
         display: none;
     } 
@@ -761,10 +761,8 @@ button a{
         gap: 5px;
     }
     button{
-        transform: scale(0.7);
-    }
-    button:active {
-        transform: scale(0.6);
+        font-size: 10px;
+        padding: 10px 14px;
     }
     .sticky-top{
         height: 160px;

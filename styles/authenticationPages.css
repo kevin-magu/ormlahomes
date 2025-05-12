@@ -70,10 +70,11 @@
         font-size: 14px;
     }
     button{
-        transform: scale(0.7);
+        font-size: 10px;
+        padding: 10px 14px;
     }
-    button:active {
-        transform: scale(0.66);
+    .sticky-top{
+        height: 160px;
+        gap: 2px;
     }
 }
-
