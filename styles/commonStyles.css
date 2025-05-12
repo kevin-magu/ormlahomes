@@ -500,7 +500,7 @@ footer .row2 a{
 }
 
 .all-pages-title{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 24px;
     color: #911d4e;
 }
@@ -557,18 +557,6 @@ footer .row2 a{
     cursor: pointer;
 }
 
-.filter-container button{
-    padding: 10px;
-    border-radius: 40px;
-    background-color: white;
-    border: 1px #911d4e solid;
-    color: #911d4e;
-    cursor: pointer;
-}
-.filter-container button:hover{
-    background-color: #911d4e;
-    color: white;
-}
   
 button {
     background-color: #911d4e;
@@ -756,6 +744,7 @@ button a{
         width: 300px;
         gap: 25px;
     }
+    
     .all-pages-title{
         font-size: 14px;
         margin-top: 0;
@@ -775,7 +764,7 @@ button a{
         transform: scale(0.7);
     }
     button:active {
-        transform: scale(0.66);
+        transform: scale(0.6);
     }
     .sticky-top{
         height: 160px;

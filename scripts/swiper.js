@@ -117,6 +117,11 @@ document.addEventListener("DOMContentLoaded", function () {
           iconElement.classList.add('fa-regular');
         }
       })
+
+      .then(() => {
+        updateFavoriteCount(); // Refresh navbar count
+      })
+    
       .catch(err => {
         console.error('Favorite toggle failed:', err);
         showResponseMessage('Something went wrong.');
