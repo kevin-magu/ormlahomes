@@ -50,6 +50,13 @@ session_start();
         navMenu.classList.toggle('show');   
     });
 
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1420) {
+            navMenu.classList.remove('show');
+            menuBar.classList.remove('active');
+        }
+    });
+
 
     if (!token) {
         // If no token, show Login link

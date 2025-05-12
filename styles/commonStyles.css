@@ -220,6 +220,24 @@ nav ul{
 }
 nav ul.show{
     display: flex;
+    flex-direction: column;
+    background-color: #283561;
+    position: absolute;
+    width: 400px;
+    height: 90vh;
+    top: 90px;
+    left: 0;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transform: translateX(-100%);
+    pointer-events: none;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    z-index: 999;
+}
+nav ul.show li{
+    color: white;
+    margin-left: 20%;
 }
 nav ul a{
     margin-right: 30px;
@@ -589,6 +607,19 @@ button a{
     
     nav ul{
         display: none;
+    }
+
+    nav ul li {
+        color: white;
+        margin-left: 20%;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    nav ul li:hover {
+        background-color: #40518f;
+        cursor: pointer;
     }
 
     .menu-bar {
