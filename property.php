@@ -139,7 +139,7 @@ $previewImages = array_slice($allImages, 0, 3);
         </div>
         <div class="property-buttons display-flex">
             <button>Email</button>
-            <button>Call</button>
+            <button><a href="tel:+254796257269">Call</a></button>
         </div>
         </div>
     </div>
