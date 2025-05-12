@@ -163,16 +163,15 @@
     border-radius: 8px;
   }
 
-  .save-property {
-    top: 10px;
-    left: 10px;
-    font-size: 16px;
-  }
+ 
 }
 
 @media (max-width: 768px) {
   .house-properties-container{
-    gap: 16px;
+    gap: 22px;
+  }
+  .main-content-container{
+    font-size: 14px;
   }
   .property-features{
     flex-direction: column;

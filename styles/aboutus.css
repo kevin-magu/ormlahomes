@@ -215,7 +215,7 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .about-hero h1 {
-        font-size: 36px;
+        font-size: 24px;
     }
 
     .about-content,
