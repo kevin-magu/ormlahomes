@@ -138,8 +138,8 @@ $previewImages = array_slice($allImages, 0, 3);
             <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? '__') ?></p>
         </div>
         <div class="property-buttons display-flex">
-            <button>Tour in person</button>
-            <button>Email / Call</button>
+            <button>Email</button>
+            <button>Call</button>
         </div>
         </div>
     </div>
