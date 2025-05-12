@@ -1,5 +1,16 @@
 <?php
+include './includes/connection.php';
 session_start();
+$favCount = 0;
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $query = "SELECT COUNT(*) AS total FROM favorites WHERE user_id = $user_id";
+    $result = mysqli_query($conn, $query);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $favCount = $row['total'];
+    }
+}
 ?>
 
 <!-- fonts MONTSERRAT -->
@@ -23,7 +34,7 @@ session_start();
         <a href="/orlmahomes/lands"><li>Lands</li></a>
         <a href="/orlmahomes/sell"><li>Sell with us</li></a>
         <a href="/orlmahomes/about-us"><li>About us</li></a>
-        <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i> Favourites</li></a>
+        <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i> Favourites: <?php echo $favCount; ?></li></a>
         <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i> Call us</li></a>
         <!-- Login/Profile Links will be controlled by JS -->
         <span id="auth-links"></span>
