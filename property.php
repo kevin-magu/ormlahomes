@@ -134,9 +134,10 @@ $previewImages = array_slice($allImages, 0, 3);
             <p><strong>Nearby Essentials:</strong> <?= htmlspecialchars($propertyDetails['accessibilities'] ?? '__') ?></p>
         </div>
         <div class="property-features">
+            <strong>Description</strong>
             <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? '__') ?></p>
         </div>
-        <div class="">
+        <div class="property-buttons display-flex">
             <button>Tour in person</button>
             <button>Email / Call</button>
         </div>

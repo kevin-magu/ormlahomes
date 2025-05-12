@@ -170,6 +170,9 @@
   .house-properties-container{
     gap: 22px;
   }
+  .property-buttons{
+    gap: 20px;
+  }
   .main-content-container{
     font-size: 14px;
   }
