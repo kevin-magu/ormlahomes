@@ -23,7 +23,7 @@ include './includes/connection.php';
         <a href="/orlmahomes/industrial"><li>Industrial</li></a>
         <a href="/orlmahomes/lands"><li>Lands</li></a>
         <a href="/orlmahomes/sell"><li>Sell with us</li></a>
-        <a href="/orlmahomes/about-us"><li>About us</li></a>
+        <a href="/orlmahomes/aboutus"><li>About us</li></a>
         <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i> Favourites <span id="fav-count"></span></li></a>
         <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i> Call us</li></a>
         <!-- Login/Profile Links will be controlled by JS -->
