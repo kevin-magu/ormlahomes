@@ -1,5 +1,4 @@
 .main-content-container{
-    padding-left: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -18,5 +17,12 @@
     right: 10px;
     bottom: 50px;
     font-size: 24px;
-    z-index: 999;
+}
+@media screen and (max-width: 768px) {
+    .username{
+        font-size: 14px;
+        text-align: center;
+        font-weight: 600;
+    }
+    
 }

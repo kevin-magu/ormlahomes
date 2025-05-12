@@ -1,6 +1,4 @@
-<?php
-include './includes/connection.php';
-?>
+<?php include './includes/connection.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +10,6 @@ include './includes/connection.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 <body>
-<div class="page-container">
 <div class="sticky-top">
 <?php include './includes/navbar.php';?>
     <p class="justify-centre all-pages-title margin-top30">Find the perfect space to setup your business.</p>
@@ -130,7 +127,7 @@ while ($property = $result->fetch_assoc()) {
 
 
 <?php include './includes/footer.php' ?>
-</div>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./scripts/swiper.js"></script>
 <script src="./scripts/commercials.js"></script>

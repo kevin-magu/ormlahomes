@@ -66,9 +66,14 @@
 }
 
 @media screen and (max-width: 520px) {
-    
     form p{
         font-size: 14px;
+    }
+    button{
+        transform: scale(0.7);
+    }
+    button:active {
+        transform: scale(0.66);
     }
 }
 

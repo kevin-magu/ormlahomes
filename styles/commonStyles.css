@@ -494,7 +494,6 @@ footer .row2 a{
 /*buy a home page*/
 .sticky-top{
     position: sticky;
-    top: 90px;
     z-index: 50;
     background-color: #faf9f8;
     padding-bottom: 20px;
@@ -509,12 +508,15 @@ footer .row2 a{
 .filter-container{
     gap: 40px;
 }
+.filter-container {
+    position: relative;
+}
 
 .p-filter-container{
     gap: 40px;
     width: 440px;
     position: absolute;
-    top: 30px;
+    top: -100px;
     font-weight: 500;
     color: #911d4e;
     background-color: white;
@@ -525,7 +527,7 @@ footer .row2 a{
     align-items: center;
     padding: 15px;
     font-size: 14px;
-    transform: scale();
+    z-index: 51;
 }
 .fa-rectangle-xmark{
     position: absolute;
@@ -771,6 +773,9 @@ button a{
     }
     button{
         transform: scale(0.7);
+    }
+    button:active {
+        transform: scale(0.66);
     }
     .sticky-top{
         height: 160px;

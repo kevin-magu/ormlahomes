@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
       reinitializeHeartIcons();
     }, 300);
 
-    const filterButton = document.querySelector('.deleteBtn-container button');
+    const filterButton = document.querySelector('.filter-button-container button');
     const filterContainer = document.getElementById('propertyTypes');
 
     if (filterButton && filterContainer) {
