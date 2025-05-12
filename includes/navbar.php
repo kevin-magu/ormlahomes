@@ -23,12 +23,12 @@ session_start();
         <a href="/orlmahomes/lands"><li>Lands</li></a>
         <a href="/orlmahomes/sell"><li>Sell with us</li></a>
         <a href="/orlmahomes/about-us"><li>About us</li></a>
-
+        <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i> Favourites</li></a>
+        <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i> Call us</li></a>
         <!-- Login/Profile Links will be controlled by JS -->
         <span id="auth-links"></span>
 
-        <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i></li></a>
-        <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i></li></a>
+        
     </ul>
     <div class="menu-bar" id="menuBar">
         <div class="line line1"></div>
@@ -51,7 +51,7 @@ session_start();
     });
 
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 1420) {
+        if (window.innerWidth > 1510) {
             navMenu.classList.remove('show');
             menuBar.classList.remove('active');
         }

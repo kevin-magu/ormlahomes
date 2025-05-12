@@ -229,12 +229,20 @@ nav ul.show{
     left: 0;
     justify-content: space-between;
     padding-top: 20px;
-    padding-bottom: 20px;
-    transform: translateX(-100%);
-    pointer-events: none;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    z-index: 999;
+    animation: slideInFromLeft 0.4s ease forwards;
+    z-index: 1999;
 }
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 nav ul.show li{
     color: white;
     margin-left: 20%;
@@ -595,19 +603,11 @@ button a{
     text-decoration: none;
     color: white;
 }
-
-@media screen and (max-width: 1420px) {
-    footer .row1{
-        flex-direction: column;
-    }
-    footer .row2{
-        flex-direction: column;
-        align-items: flex-start;
-    }    
-    
+@media screen and (max-width: 1510px) {
     nav ul{
         display: none;
     }
+    
 
     nav ul li {
         color: white;
@@ -650,7 +650,16 @@ button a{
     .menu-bar.active .line3 {
         transform: rotate(-45deg) translate(5px, -5px);
     }
-    
+}
+
+@media screen and (max-width: 1420px) {
+    footer .row1{
+        flex-direction: column;
+    }
+    footer .row2{
+        flex-direction: column;
+        align-items: flex-start;
+    }    
 
     .sticky-top{
         top: 0px;
@@ -667,9 +676,9 @@ button a{
         width: 200px;
     }
     .property-card{
-        width: 70%;
+        width: 90%;
       }
-      .image-card{
+      .image-slide{
         height: 400px;
       }
       .property-cards-wrapper a{
@@ -721,6 +730,10 @@ button a{
     }
 }
 @media screen and (max-width: 520px) {
+    nav ul.show{
+        width: 100%;
+        height: 93vh;
+    }
     nav{
         padding: 0;
         justify-content: left;
