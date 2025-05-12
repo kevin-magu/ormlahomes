@@ -42,7 +42,7 @@ if (isset($_SESSION['user_id'])) {
 </head>  
 <body>
 <div id="userResponse" class="response-box hidden"></div>
-    <div class="main-content-container">
+    <div class="main-content-container margin-top50">
         <p class="username justify-centre display-flex">Welcome, <?php echo $username; ?>. Manage your lisiting here. Total listings: <?php echo $propertyCount; ?></p>
         <p></p>
 
