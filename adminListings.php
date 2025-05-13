@@ -20,7 +20,6 @@ if ($category !== 'ADMIN') {
     header('Location: login.php');
     exit;
 }
-
 function renderImageSlider($images) {
     ?>
     <section class="justify-centre">
@@ -51,7 +50,7 @@ function renderPropertyCard($property, $conn) {
     $imageQuery->execute();
     $images = $imageQuery->get_result();
     ?>
-    <div class="cards-container">
+    
     <a href="property?ref=<?= urlencode($token) ?>">
         <div class="property-card">
             <i class="fa-regular fa-heart heart-icon" data-property-id="<?= (int)$propertyId ?>"></i>
@@ -69,7 +68,6 @@ function renderPropertyCard($property, $conn) {
             </p>
         </div>
     </a>
-    </div>
     <?php
     $imageQuery->close();
 }
@@ -91,19 +89,12 @@ $propertyQuery = $conn->query("SELECT * FROM properties");
     <title>Admin Listings</title>
 </head>
 <body>
-<div class="quick-links margin-top50 display-flex" style="margin-left: 20px;">
-            <a href="./admin7660">Dashboard home</a>
-            <a href="adminListings">Admin Listings</a>
-</div>
 
 <div id="userResponse" class="response-box hidden"></div>
 
 <div class="main-content-container margin-top50">
-    <p class="username">Welcome, Admin <?= htmlspecialchars($adminName) ?></p>
-    <p>ALL LISTINGS ON PLATFORM</p>
-    <p>TOTAL: <?= $propertyQuery->num_rows ?></p>
-
-    <div class="listings property-cards-container">
+    <p class="justify-centre all-pages-title margin-top30"><a href="./admin7660"><-- Back</a><?= htmlspecialchars($adminName) ?> Welcome, Admin </p>
+    <div class="listings property-cards-wrapper">
         <?php while ($property = $propertyQuery->fetch_assoc()) {
             renderPropertyCard($property, $conn);
         } ?>

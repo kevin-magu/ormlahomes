@@ -165,7 +165,7 @@ $totalUsers = mysqli_fetch_assoc($totalUsersResult)['users'] ?? 0;
                     <h3>Add Property</h3>
                     <p>Create new listing</p>
                 </a>
-                <a href="users.php" class="action-card">
+                <a href="" class="action-card">
                     <i class="fas fa-user-cog"></i>
                     <h3>Manage Users</h3>
                     <p>View all users</p>
