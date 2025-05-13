@@ -138,7 +138,11 @@ $previewImages = array_slice($allImages, 0, 3);
             <p class="property-description"><?= htmlspecialchars($propertyDetails['description'] ?? '__') ?></p>
         </div>
         <div class="property-buttons display-flex">
-            <button>Email</button>
+        <button id="emailEnquiry" class="email-button">
+            <i class="fas fa-envelope"></i> Email Enquiry
+        </button>
+
+            
             <button><a href="tel:+254796257269">Call</a></button>
         </div>
         </div>
@@ -147,5 +151,36 @@ $previewImages = array_slice($allImages, 0, 3);
 
 <?php include './includes/footer.php' ?>
 <script src="./scripts/property.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+document.getElementById('emailEnquiry').addEventListener('click', async function () {
+    try {
+        const canvas = await html2canvas(document.body, { useCORS: true, allowTaint: true });
+        const screenshot = canvas.toDataURL('image/png');
+
+        // Create and trigger the download
+        const link = document.createElement('a');
+        link.download = 'property-enquiry.png';
+        link.href = screenshot;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Open email client after screenshot
+        setTimeout(() => {
+            const subject = 'Property Enquiry from Orlma Homes Website';
+            const body = `Dear Orlma Homes,%0D%0A%0D%0AI am interested in the following property.%0D%0A%0D%0A[Please attach the screenshot of the property you just downloaded and add your message here.]%0D%0A%0D%0ARegards,%0D%0A`;
+            const mailtoLink = `mailto:zuluyankee2003@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            window.location.href = mailtoLink;
+        }, 5000);
+
+    } catch (error) {
+        console.error('Screenshot failed:', error);
+        window.location.href = 'mailto:zuluyankee2003@gmail.com?subject=Property Enquiry';
+    }
+});
+
+</script>
+
 </body>
 </html>

@@ -25,7 +25,7 @@ include './includes/connection.php';
         <a href="/orlmahomes/sell"><li>Sell with us</li></a>
         
         <a href="/orlmahomes/favorite-properties"><li><i class="fa-solid fa-house"></i> Favourites <span id="fav-count"></span></li></a>
-        <a href="/orlmahomes/call-us"><li><i class="fa-solid fa-phone"></i> Call us</li></a>
+        <a href="tel:+254796257269"><li><i class="fa-solid fa-phone"></i> Call us</li></a>
         <!-- Login/Profile Links will be controlled by JS -->
         <span id="auth-links"></span>
         <a href="/orlmahomes/aboutus"><li>About us</li></a>

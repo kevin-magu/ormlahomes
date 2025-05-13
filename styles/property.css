@@ -123,6 +123,10 @@
     color: #a52a5f;
 }
 
+.property-buttons{
+  gap: 20px;
+}
+
 @media screen and (max-width: 1540px) {
   .house-properties-container{
     width: 70%;
