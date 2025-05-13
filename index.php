@@ -103,7 +103,7 @@
     <!-- Sales Section -->
     <section class="section3 justify-centre">
         <div class="property-cards-wrapper margin-top40">
-            <?php renderProperties($conn, 'For sale', 12); ?>
+            <?php renderProperties($conn, 'For sale', 13); ?>
         </div>
         <div class="justify-centre margin-top50">
             <a href="./residentials"><button>View more listings</button></a>

@@ -100,6 +100,7 @@
             <h2>Ready to Find Your Dream Property?</h2>
             <p>Contact us today for expert advice and personalized service.</p>
             <a href="tel:+254796257269" class="cta-button">Get in Touch</a>
+            <p>Email: enquire@orlmahomes.com</p>
         </div>
     </section>
 
